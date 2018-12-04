@@ -1,19 +1,81 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { StaticQuery, graphql, Link } from 'gatsby'
 
-import Layout from '../components/layout'
-import Image from '../components/image'
+const query = graphql`{
+  gatsbyKijijiJson {
+    cities {
+      id
+      name_french
+    }
+    ad_types {
+      id
+    }
+  }
+}`;
 
-const IndexPage = () => (
-  <Layout>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: '300px', marginBottom: '1.45rem' }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+class IndexPage extends React.Component {
+  constructor(props) {
+    super(props)
+
+    const defaultState = {
+      city: 'quebec',
+      ad_type: 'rent',
+    }
+
+    this.state = defaultState;
+
+    this.nextLink = this.nextLink.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  render() {
+    return (
+      <StaticQuery
+        query={query}
+        render={data => (
+          <form onChange={this.onChange}>
+            <div>
+            {data.gatsbyKijijiJson.cities.map(c => (
+              <label>
+                <input
+                  key={c.id}
+                  type="radio"
+                  name="city"
+                  value={c.id}
+                  checked={this.state.city === c.id}
+                />
+                {c.name_french}
+              </label>
+            ))}
+            </div>
+            <div>
+            {data.gatsbyKijijiJson.ad_types.map(a => (
+              <label>
+                <input
+                  key={a.id}
+                  type="radio"
+                  name="ad_type"
+                  value={a.id}
+                  checked={this.state.ad_type === a.id}
+                />
+                {a.id}
+              </label>
+            ))
+            }</div>
+            <Link to={this.nextLink()}>Allons-y !</Link>
+          </form>
+        )}
+      />
+    )
+  }
+
+  nextLink() {
+    return `/${this.state.city}/${this.state.ad_type}`;
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+}
 
 export default IndexPage
