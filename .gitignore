@@ -67,3 +67,10 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+
+# Application secrets
+secrets.json
+
+# Dynamically generated API files
+static/api/
+!static/api/.gitkeep
