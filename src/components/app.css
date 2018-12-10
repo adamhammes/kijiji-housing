@@ -1,0 +1,10 @@
+html, body {
+    margin: 0;
+}
+html,
+body,
+#___gatsby,
+#___gatsby > [role="group"],
+.leaflet-container {
+    height: 100%;
+}

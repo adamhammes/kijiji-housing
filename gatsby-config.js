@@ -32,6 +32,7 @@ module.exports = {
         path: './out.json',
       }, 
     },
+    'gatsby-plugin-react-leaflet',
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
