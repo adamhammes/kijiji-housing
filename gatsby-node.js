@@ -32,21 +32,6 @@ exports.onPreBootstrap = (_, pluginOptions, cb) => {
       console.error(err);
     }
     fs.writeFileSync('static/api/all.json', data.Body);
-
-    const scraped_data = JSON.parse(data.Body);
-
-    for (const city of scraped_data.cities) {
-      for (const ad_type of scraped_data.ad_types) {
-        const fileName = `${API_PATH}/${city.id}-${ad_type.id}.json`;
-        const data = {
-          city,
-          ad_type,
-          offers: scraped_data.offers[city.id][ad_type.id],
-        }
-
-        fs.writeFileSync(fileName, JSON.stringify(data));
-      }
-    }
     cb();
   });
 }
