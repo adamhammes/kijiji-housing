@@ -69,7 +69,7 @@ yarn-error.log
 .yarn-integrity
 
 # Application secrets
-secrets.json
+secrets.sh
 
 # Dynamically generated API files
 static/api/

@@ -3,14 +3,14 @@ const path = require(`path`);
 
 const aws = require("aws-sdk");
 
-const secrets = require("./secrets.json");
-
 const API_PATH = "./static/api";
 
 exports.onPreBootstrap = (_, pluginOptions, cb) => {
+  const { _AWS_ACCESS_KEY_ID, _AWS_SECRET_ACCESS_KEY } = process.env;
+
   aws.config.update({
-    accessKeyId: secrets.AWS_ACCESS_KEY_ID,
-    secretAccessKey: secrets.AWS_SECRET_ACCESS_KEY,
+    accessKeyId: _AWS_ACCESS_KEY_ID,
+    secretAccessKey: _AWS_SECRET_ACCESS_KEY,
     region: "us-east-2",
   });
 
