@@ -5,7 +5,7 @@ const aws = require("aws-sdk");
 
 const API_PATH = "./static/api";
 
-exports.onPreBootstrap = (_, pluginOptions, cb) => {
+exports.onPreInit = (_, pluginOptions, cb) => {
   const { _AWS_ACCESS_KEY_ID, _AWS_SECRET_ACCESS_KEY } = process.env;
 
   aws.config.update({

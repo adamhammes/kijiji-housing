@@ -29,7 +29,7 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        path: "./out.json",
+        path: "./static/api/all.json",
       },
     },
     "gatsby-plugin-react-leaflet",

@@ -3,7 +3,7 @@ import { StaticQuery, graphql, Link } from "gatsby";
 
 const query = graphql`
   {
-    gatsbyKijijiJson {
+    apiJson {
       cities {
         id
         name_french
@@ -37,7 +37,7 @@ class IndexPage extends React.Component {
         render={data => (
           <form onChange={this.onChange}>
             <div>
-              {data.gatsbyKijijiJson.cities.map(c => (
+              {data.apiJson.cities.map(c => (
                 <label key={c.id}>
                   <input
                     key={c.id}
@@ -51,7 +51,7 @@ class IndexPage extends React.Component {
               ))}
             </div>
             <div>
-              {data.gatsbyKijijiJson.ad_types.map(a => (
+              {data.apiJson.ad_types.map(a => (
                 <label key={a.id}>
                   <input
                     key={a.id}
