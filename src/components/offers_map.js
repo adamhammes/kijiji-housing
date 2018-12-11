@@ -31,7 +31,9 @@ if (typeof window !== "undefined") {
 const OfferPopup = ({ offer }) => (
   <Popup maxHeight={250}>
     <h3>
-      <a href={offer.url}>{offer.headline}</a>
+      <a target="_blank" href={offer.url}>
+        {offer.headline}
+      </a>
     </h3>
     <strong>
       {formatRooms(offer.num_rooms)} | {formatPrice(offer.price)}
