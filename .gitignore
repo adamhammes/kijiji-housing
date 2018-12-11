@@ -72,5 +72,5 @@ yarn-error.log
 secrets.sh
 
 # Dynamically generated API files
-static/api/
+static/api/*
 !static/api/.gitkeep
