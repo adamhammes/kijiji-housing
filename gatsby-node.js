@@ -1,40 +1,40 @@
-const fs = require('fs');
+const fs = require("fs");
 const path = require(`path`);
 
-const aws = require('aws-sdk');
+const aws = require("aws-sdk");
 
-const secrets = require('./secrets.json');
+const secrets = require("./secrets.json");
 
-const API_PATH = './static/api'
+const API_PATH = "./static/api";
 
 exports.onPreBootstrap = (_, pluginOptions, cb) => {
   aws.config.update({
     accessKeyId: secrets.AWS_ACCESS_KEY_ID,
     secretAccessKey: secrets.AWS_SECRET_ACCESS_KEY,
-    region: 'us-east-2',
+    region: "us-east-2",
   });
 
   const s3 = new aws.S3();
 
   const downloadOptions = {
-    Bucket: 'kijiji-apartments',
-    Key: 'v2/latest/out.json',
+    Bucket: "kijiji-apartments",
+    Key: "v2/latest/out.json",
   };
 
   if (fs.existsSync(`${API_PATH}/all.json`)) {
-    cb()
+    cb();
     return;
   }
 
-  console.log('Downloading latest scraped data...');
+  console.log("Downloading latest scraped data...");
   s3.getObject(downloadOptions, (err, data) => {
     if (err) {
       console.error(err);
     }
-    fs.writeFileSync('static/api/all.json', data.Body);
+    fs.writeFileSync("static/api/all.json", data.Body);
     cb();
   });
-}
+};
 
 exports.createPages = ({ actions }) => {
   const { createPage } = actions;
@@ -50,10 +50,9 @@ exports.createPages = ({ actions }) => {
         context: {
           city,
           ad_type,
-          offers: scraped_data.offers[city.id][ad_type.id]
-        }
-      })
+          offers: scraped_data.offers[city.id][ad_type.id],
+        },
+      });
     }
   }
-
-}
+};

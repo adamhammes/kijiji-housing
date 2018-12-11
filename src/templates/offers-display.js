@@ -1,16 +1,16 @@
-import React from 'react'
+import React from "react";
 
-import OffersMap from '../components/offers_map';
-import '../components/app.css';
+import OffersMap from "../components/offers_map";
+import "../components/app.css";
 
 export default class OffersDisplay extends React.Component {
   render() {
     const { city, offers } = this.props.pageContext;
 
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return null;
     }
 
-    return <OffersMap city={city} offers={offers} />
+    return <OffersMap city={city} offers={offers} />;
   }
 }
