@@ -3,6 +3,8 @@ import MarkerClusterGroup from 'react-leaflet-markercluster';
 
 import React from 'react'
 
+import { formatPrice, formatRooms } from '../lib/lib';
+
 import '../components/app.css';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet.markercluster/dist/MarkerCluster.css'
@@ -48,15 +50,23 @@ export default class OffersDisplay extends React.Component {
         >
           {offers.map(offer => (
             <Marker position={[offer.latitude, offer.longitude]} key={offer.id}>
-              <Popup maxHeight={250}>
-                <h3><a href={offer.url}>{offer.headline}</a></h3>
-                <strong>{offer.num_rooms} | {offer.price}</strong>
-                <div dangerouslySetInnerHTML={{ __html: offer.description }}></div>
-              </Popup>
+              {this.renderPopup(offer)}
             </Marker>
           ))}
         </MarkerClusterGroup>
       </Map>
     )
+  }
+
+  renderPopup(offer) {
+    return (
+      <Popup maxHeight={250}>
+        <h3><a href={offer.url}>{offer.headline}</a></h3>
+        <strong>
+          {formatRooms(offer.num_rooms)} | {formatPrice(offer.price)}
+        </strong>
+        <div dangerouslySetInnerHTML={{ __html: offer.description }}></div>
+      </Popup>
+    );
   }
 }
