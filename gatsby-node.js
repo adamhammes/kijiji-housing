@@ -5,6 +5,21 @@ const aws = require("aws-sdk");
 
 const API_PATH = "./static/api";
 
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === "build-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /react-leaflet/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    });
+  }
+};
+
 exports.onPreInit = (_, pluginOptions, cb) => {
   const { _AWS_ACCESS_KEY_ID, _AWS_SECRET_ACCESS_KEY } = process.env;
 

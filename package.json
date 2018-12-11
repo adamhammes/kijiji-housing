@@ -9,7 +9,6 @@
     "gatsby-plugin-manifest": "^2.0.9",
     "gatsby-plugin-offline": "^2.0.16",
     "gatsby-plugin-react-helmet": "^3.0.2",
-    "gatsby-plugin-react-leaflet": "^2.0.0-alpha.3",
     "gatsby-plugin-sharp": "^2.0.12",
     "gatsby-source-filesystem": "^2.0.8",
     "gatsby-transformer-json": "^2.1.6",
