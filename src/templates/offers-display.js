@@ -35,7 +35,7 @@ export default class OffersDisplay extends React.Component {
     }
 
     return (
-      <Map center={position} zoom={15} maxZoom={20}>
+      <Map center={position} zoom={11} minZoom={9} maxZoom={17}>
         <TileLayer
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url={mapUrl}
