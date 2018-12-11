@@ -36,13 +36,13 @@ class IndexPage extends React.Component {
           <form onChange={this.onChange}>
             <div>
             {data.gatsbyKijijiJson.cities.map(c => (
-              <label>
+              <label key={c.id}>
                 <input
                   key={c.id}
                   type="radio"
                   name="city"
                   value={c.id}
-                  checked={this.state.city === c.id}
+                  defaultChecked={this.state.city === c.id}
                 />
                 {c.name_french}
               </label>
@@ -50,13 +50,13 @@ class IndexPage extends React.Component {
             </div>
             <div>
             {data.gatsbyKijijiJson.ad_types.map(a => (
-              <label>
+              <label key={a.id}>
                 <input
                   key={a.id}
                   type="radio"
                   name="ad_type"
                   value={a.id}
-                  checked={this.state.ad_type === a.id}
+                  defaultChecked={this.state.ad_type === a.id}
                 />
                 {a.id}
               </label>

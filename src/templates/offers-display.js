@@ -5,7 +5,7 @@ import '../components/app.css';
 
 export default class OffersDisplay extends React.Component {
   render() {
-    const { city, offers } = this.props.pathContext;
+    const { city, offers } = this.props.pageContext;
 
     if (typeof window === 'undefined') {
       return null;
