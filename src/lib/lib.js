@@ -1,9 +1,11 @@
-const formatPrice = raw_price => {
-  const dollars = Math.floor(raw_price / 100);
-  const cents = raw_price % 100;
-  const padded_cents = cents.toString().padEnd(2, "0");
+const formatPrice = rawPrice => {
+  const formatter = new Intl.NumberFormat("fr-CA", {
+    style: "currency",
+    currency: "CAD",
+    minimumFractionDigits: 0,
+  });
 
-  return `${dollars},${padded_cents} $`;
+  return formatter.format(rawPrice / 100);
 };
 
 const formatRooms = raw_rooms => {
