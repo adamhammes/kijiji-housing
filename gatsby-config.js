@@ -38,6 +38,10 @@ module.exports = {
         headers: {
           "/*.js": ["cache-control: public, max-age=31536000, immutable"],
           "/*.css": ["cache-control: public, max-age=31536000, immutable"],
+          "/api/*.json": ["cache-control: public, max-age=31536000, immutable"],
+          "/api/all.json": [
+            "cache-control: public, max-age=0, must-revalidate",
+          ],
           "/sw.js": ["cache-control: public, max-age=0, must-revalidate"],
         },
       },
