@@ -58,14 +58,47 @@ exports.createPages = ({ actions }) => {
   for (const city of scraped_data.cities) {
     for (const ad_type of scraped_data.ad_types) {
       const slug = `${city.id}/${ad_type.id}`;
+      const scrapeId = scraped_data.date_collected;
+
+      const offers = scraped_data.offers[city.id][ad_type.id].map(offer => {
+        const keys = [
+          "url",
+          "headline",
+          "id",
+          "date",
+          "price",
+          "is_furnished",
+          "allows_animals",
+          "latitude",
+          "longitude",
+          "num_rooms",
+        ];
+
+        const strippedObject = {};
+
+        keys.forEach(key => (strippedObject[key] = offer[key]));
+
+        return strippedObject;
+      });
+
+      const descriptions = {};
+      scraped_data.offers[city.id][ad_type.id].forEach(
+        offer => (descriptions[offer.id] = offer.description)
+      );
+
+      fs.writeFileSync(
+        `${API_PATH}/${scrapeId}_${city.id}-${ad_type.id}-descriptions.json`,
+        JSON.stringify(descriptions)
+      );
 
       createPage({
         path: slug,
         component: path.resolve(`./src/templates/offers-display.js`),
         context: {
+          scrapeId,
           city,
           ad_type,
-          offers: scraped_data.offers[city.id][ad_type.id],
+          offers,
         },
       });
     }
