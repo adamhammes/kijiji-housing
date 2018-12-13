@@ -51,12 +51,12 @@ export default class OffersDisplay extends React.Component {
   }
 
   render() {
-    const { city, offers } = this.props.pageContext;
+    const { city, offers, ad_type } = this.props.pageContext;
 
     if (typeof window === "undefined") {
       return null;
     }
 
-    return <OffersMap city={city} offers={offers} />;
+    return <OffersMap city={city} offers={offers} ad_type={ad_type} />;
   }
 }

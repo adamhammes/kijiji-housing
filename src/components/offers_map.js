@@ -28,7 +28,7 @@ if (typeof window !== "undefined") {
   });
 }
 
-const OfferPopup = ({ offer }) => (
+const OfferPopup = ({ offer, ad_type }) => (
   <Popup maxHeight={250}>
     <h3>
       <a href={offer.url} target="_blank" rel="noopener noreferrer">
@@ -36,13 +36,14 @@ const OfferPopup = ({ offer }) => (
       </a>
     </h3>
     <strong>
-      {formatRooms(offer.num_rooms)} | {formatPrice(offer.price)}
+      {ad_type.id === "rent" ? formatRooms(offer.num_rooms) + " | " : null}
+      {formatPrice(offer.price)}
     </strong>
     <div dangerouslySetInnerHTML={{ __html: offer.description }} />
   </Popup>
 );
 
-const OffersMap = ({ city, offers }) => {
+const OffersMap = ({ ad_type, city, offers }) => {
   if (typeof window === "undefined") {
     return null;
   }
@@ -66,7 +67,7 @@ const OffersMap = ({ city, offers }) => {
       >
         {offers.map(offer => (
           <Marker position={[offer.latitude, offer.longitude]} key={offer.id}>
-            <OfferPopup offer={offer} />
+            <OfferPopup offer={offer} ad_type={ad_type} />
           </Marker>
         ))}
       </MarkerClusterGroup>
