@@ -23,6 +23,10 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
 exports.onPreInit = (_, pluginOptions, cb) => {
   const { _AWS_ACCESS_KEY_ID, _AWS_SECRET_ACCESS_KEY } = process.env;
 
+  if (!_AWS_ACCESS_KEY_ID || !_AWS_SECRET_ACCESS_KEY) {
+    throw new Error("Missing environment variables");
+  }
+
   aws.config.update({
     accessKeyId: _AWS_ACCESS_KEY_ID,
     secretAccessKey: _AWS_SECRET_ACCESS_KEY,
