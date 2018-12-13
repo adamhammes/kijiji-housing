@@ -35,7 +35,7 @@
     "clear_api": "rm -f public/api/*.json static/api/*.json"
   },
   "devDependencies": {
-    "aws-sdk": "^2.373.0",
+    "aws-sdk": "^2.375.0",
     "gatsby-plugin-netlify": "^2.0.6",
     "prettier": "^1.15.2"
   },
