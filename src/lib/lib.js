@@ -1,10 +1,10 @@
-const formatPrice = rawPrice => {
-  const formatter = new Intl.NumberFormat("fr-CA", {
-    style: "currency",
-    currency: "CAD",
-    minimumFractionDigits: 0,
-  });
+const formatter = new Intl.NumberFormat("fr-CA", {
+  style: "currency",
+  currency: "CAD",
+  minimumFractionDigits: 0,
+});
 
+const formatPrice = rawPrice => {
   return formatter.format(rawPrice / 100);
 };
 
