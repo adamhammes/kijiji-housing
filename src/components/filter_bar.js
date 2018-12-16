@@ -30,10 +30,11 @@ export default class FilterBar extends React.Component {
   }
 
   onChange(event) {
-    const price = parseInt(event.target.value);
+    const rawValue = event.target.value;
+    const price = parseInt(rawValue) || 0;
     const { onUpdate, offers } = this.props;
 
-    this.setState({ minPrice: price }, () => {
+    this.setState({ minPrice: rawValue }, () => {
       onUpdate(offers.filter(offer => offer.price > price * 100));
     });
   }
