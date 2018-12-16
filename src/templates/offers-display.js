@@ -1,7 +1,9 @@
 import React from "react";
 
+import FilterBar from "../components/filter_bar";
 import OffersMap from "../components/offers_map";
 import "../components/app.css";
+import "./offers-display.css";
 
 export default class OffersDisplay extends React.Component {
   constructor(props) {
@@ -15,8 +17,11 @@ export default class OffersDisplay extends React.Component {
 
     this.state = {
       allOffers,
-      displayedOffers: Object.keys(allOffers),
+      displayedOffers: Object.values(allOffers),
+      descriptionsLoaded: false,
     };
+
+    this.onFilterUpdate = this.onFilterUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -42,7 +47,10 @@ export default class OffersDisplay extends React.Component {
             (offersWithDescription[id].description = description)
         );
 
-        this.setState({ allOffers: offersWithDescription });
+        this.setState({
+          allOffers: offersWithDescription,
+          descriptionsLoaded: true,
+        });
       });
   }
 
@@ -50,13 +58,31 @@ export default class OffersDisplay extends React.Component {
     this.isMounted_ = false;
   }
 
+  onFilterUpdate(offers) {
+    console.log(offers.length);
+    this.setState({ displayedOffers: offers });
+  }
+
   render() {
-    const { city, offers, ad_type } = this.props.pageContext;
+    const { city, ad_type } = this.props.pageContext;
 
     if (typeof window === "undefined") {
       return null;
     }
 
-    return <OffersMap city={city} offers={offers} ad_type={ad_type} />;
+    return (
+      <div className="offers-display">
+        <FilterBar
+          offers={Object.values(this.state.allOffers)}
+          onUpdate={this.onFilterUpdate}
+        />
+        <OffersMap
+          city={city}
+          offers={this.state.displayedOffers}
+          ad_type={ad_type}
+          descriptionsLoaded={this.state.descriptionsLoaded}
+        />
+      </div>
+    );
   }
 }

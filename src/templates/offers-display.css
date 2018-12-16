@@ -1,0 +1,33 @@
+.offers-display {
+  height: 100%;
+  position: relative;
+}
+
+.leaflet-container {
+  flex: 1;
+}
+
+.filter-bar {
+  flex-basis: 25%;
+  position: absolute;
+  top: 2em;
+  left: 2em;
+  bottom: 2em;
+  width: 25%;
+  padding: 1em;
+
+  z-index: 1000;
+  background: white;
+}
+
+.price-container {
+  display: flex;
+}
+
+.price-container span {
+  margin: 0 0.5em;
+}
+
+.price-container input {
+  max-width: 4em;
+}
