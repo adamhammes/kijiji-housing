@@ -23,6 +23,11 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
 };
 
 exports.onPreInit = (_, pluginOptions, cb) => {
+  if (fs.existsSync(`${API_PATH}/all.json`)) {
+    cb();
+    return;
+  }
+
   const { _AWS_ACCESS_KEY_ID, _AWS_SECRET_ACCESS_KEY } = process.env;
 
   if (!_AWS_ACCESS_KEY_ID || !_AWS_SECRET_ACCESS_KEY) {
@@ -41,11 +46,6 @@ exports.onPreInit = (_, pluginOptions, cb) => {
     Bucket: "kijiji-apartments",
     Key: "v2/latest/out.json",
   };
-
-  if (fs.existsSync(`${API_PATH}/all.json`)) {
-    cb();
-    return;
-  }
 
   console.log("Downloading latest scraped data...");
   s3.getObject(downloadOptions, (err, data) => {
