@@ -1,13 +1,13 @@
-import { Map, TileLayer, Marker, Popup } from "react-leaflet";
-import MarkerClusterGroup from "react-leaflet-markercluster";
-
+import "leaflet";
+import "leaflet.markercluster";
 import React from "react";
-
-import { formatPrice, formatRooms } from "../lib/lib";
+import ReactDOM from "react-dom";
 
 import "leaflet/dist/leaflet.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+
+import genPopupContent from "./popup";
 
 const accessToken =
   "pk.eyJ1IjoiYWRhbWhhbW1lcyIsImEiOiJjamQxczNrajQyd25kMndvNWR6cGdqYWl2In0.30k-mIhdJr0otiiSv8mQ-w";
@@ -18,8 +18,10 @@ const attribution =
 const mapUrl =
   "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}";
 
+let L;
 if (typeof window !== "undefined") {
   delete window.L.Icon.Default.prototype._getIconUrl;
+  L = window.L;
 
   window.L.Icon.Default.mergeOptions({
     iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
@@ -28,54 +30,65 @@ if (typeof window !== "undefined") {
   });
 }
 
-const OfferPopup = ({ offer, ad_type }) => (
-  <Popup maxHeight={250}>
-    <h3>
-      <a href={offer.url} target="_blank" rel="noopener noreferrer">
-        {offer.headline}
-      </a>
-    </h3>
-    <strong>
-      {ad_type.id === "rent" ? formatRooms(offer.num_rooms) + " | " : null}
-      {formatPrice(offer.price)}
-    </strong>
-    <div dangerouslySetInnerHTML={{ __html: offer.description }} />
-  </Popup>
-);
-
 class OffersMap extends React.Component {
-  render() {
-    if (typeof window === "undefined") {
-      return null;
+  constructor(props) {
+    super(props);
+
+    this.markerCache = new Map();
+
+    this.markerForOffer = this.markerForOffer.bind(this);
+  }
+
+  componentDidMount() {
+    const { city } = this.props;
+
+    const parent = ReactDOM.findDOMNode(this);
+
+    this.map = L.map(parent).setView([city.latitude, city.longitude], 11);
+
+    L.tileLayer(mapUrl, {
+      attribution,
+      maxZoom: 17,
+      id: "mapbox.streets",
+      accessToken,
+    }).addTo(this.map);
+
+    this.markerCluster = L.markerClusterGroup({
+      disableClusteringAtZoom: 15,
+      spiderfyOnMaxZoom: false,
+    });
+
+    this.map.addLayer(this.markerCluster);
+
+    this.props.offers.forEach(this.markerForOffer);
+  }
+
+  markerForOffer(offer) {
+    if (!this.markerCache.has(offer.id) && this.props.descriptionsLoaded) {
+      const marker = L.marker([offer.latitude, offer.longitude]);
+
+      const popupContent = genPopupContent(offer);
+      const popup = L.popup({
+        maxHeight: 250,
+      }).setContent(popupContent);
+
+      marker.bindPopup(popup);
+
+      this.markerCache.set(offer.id, marker);
     }
 
-    const { city, offers, ad_type } = this.props;
+    return this.markerCache.get(offer.id);
+  }
 
-    return (
-      <Map
-        center={[city.latitude, city.longitude]}
-        zoom={11}
-        minZoom={9}
-        maxZoom={17}
-      >
-        <TileLayer
-          attribution={attribution}
-          url={mapUrl}
-          id="mapbox.streets"
-          accessToken={accessToken}
-        />
-        <MarkerClusterGroup
-          spiderfyOnMaxZoom={false}
-          disableClusteringAtZoom={16}
-        >
-          {offers.map(offer => (
-            <Marker position={[offer.latitude, offer.longitude]} key={offer.id}>
-              <OfferPopup offer={offer} ad_type={ad_type} />
-            </Marker>
-          ))}
-        </MarkerClusterGroup>
-      </Map>
-    );
+  render() {
+    if (this.markerCluster) {
+      this.markerCluster.clearLayers();
+      this.markerCluster.addLayers(
+        Array.from(this.props.offers.map(offer => this.markerForOffer(offer)))
+      );
+    }
+
+    return <div />;
   }
 }
 
