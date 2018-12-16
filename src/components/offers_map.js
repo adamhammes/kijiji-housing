@@ -43,36 +43,40 @@ const OfferPopup = ({ offer, ad_type }) => (
   </Popup>
 );
 
-const OffersMap = ({ ad_type, city, offers }) => {
-  if (typeof window === "undefined") {
-    return null;
-  }
+class OffersMap extends React.Component {
+  render() {
+    if (typeof window === "undefined") {
+      return null;
+    }
 
-  return (
-    <Map
-      center={[city.latitude, city.longitude]}
-      zoom={11}
-      minZoom={9}
-      maxZoom={17}
-    >
-      <TileLayer
-        attribution={attribution}
-        url={mapUrl}
-        id="mapbox.streets"
-        accessToken={accessToken}
-      />
-      <MarkerClusterGroup
-        spiderfyOnMaxZoom={false}
-        disableClusteringAtZoom={16}
+    const { city, offers, ad_type } = this.props;
+
+    return (
+      <Map
+        center={[city.latitude, city.longitude]}
+        zoom={11}
+        minZoom={9}
+        maxZoom={17}
       >
-        {offers.map(offer => (
-          <Marker position={[offer.latitude, offer.longitude]} key={offer.id}>
-            <OfferPopup offer={offer} ad_type={ad_type} />
-          </Marker>
-        ))}
-      </MarkerClusterGroup>
-    </Map>
-  );
-};
+        <TileLayer
+          attribution={attribution}
+          url={mapUrl}
+          id="mapbox.streets"
+          accessToken={accessToken}
+        />
+        <MarkerClusterGroup
+          spiderfyOnMaxZoom={false}
+          disableClusteringAtZoom={16}
+        >
+          {offers.map(offer => (
+            <Marker position={[offer.latitude, offer.longitude]} key={offer.id}>
+              <OfferPopup offer={offer} ad_type={ad_type} />
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
+      </Map>
+    );
+  }
+}
 
 export default OffersMap;
