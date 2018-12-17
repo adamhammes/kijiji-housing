@@ -54,8 +54,6 @@ class OffersMap extends React.Component {
     }).addTo(this.map);
 
     this.markerCluster = L.markerClusterGroup({
-      disableClusteringAtZoom: 15,
-      spiderfyOnMaxZoom: false,
       chunkedLoading: true,
     });
 
