@@ -35,6 +35,7 @@ class OffersMap extends React.Component {
     super(props);
 
     this.markerCache = new Map();
+    this.loadedPopups = new Set();
 
     this.markerForOffer = this.markerForOffer.bind(this);
   }
@@ -63,20 +64,25 @@ class OffersMap extends React.Component {
   }
 
   markerForOffer(offer) {
-    if (!this.markerCache.has(offer.id) && this.props.descriptionsLoaded) {
-      const marker = L.marker([offer.latitude, offer.longitude]);
+    let marker;
+    if (!this.markerCache.has(offer.id)) {
+      marker = L.marker([offer.latitude, offer.longitude]);
+      this.markerCache.set(offer.id, marker);
+    } else {
+      marker = this.markerCache.get(offer.id);
+    }
 
+    if (this.props.descriptionsLoaded && !this.loadedPopups.has(offer.id)) {
       const popupContent = genPopupContent(offer);
       const popup = L.popup({
         maxHeight: 250,
       }).setContent(popupContent);
 
       marker.bindPopup(popup);
-
-      this.markerCache.set(offer.id, marker);
+      this.loadedPopups.add(offer.id);
     }
 
-    return this.markerCache.get(offer.id);
+    return marker;
   }
 
   render() {
