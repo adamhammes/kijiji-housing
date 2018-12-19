@@ -30,16 +30,18 @@ export default class FilterBar extends React.Component {
 
     this.onChange = this.onChange.bind(this);
 
-    this.state = {
+    const defaultState = {
       [filterIdPrefix + "minPrice"]: "",
       [filterIdPrefix + "maxPrice"]: "",
     };
 
     if (this.props.ad_type.id === "rent") {
       roomSizes.forEach(
-        numRooms => (this.state[`${filterIdPrefix}${numRooms}rooms`] = true)
+        numRooms => (defaultState[`${filterIdPrefix}${numRooms}rooms`] = true)
       );
     }
+
+    this.state = defaultState;
   }
 
   render() {
