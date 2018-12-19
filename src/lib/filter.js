@@ -9,7 +9,29 @@ const maxPriceFilter = (offer, filterState) => {
   return offer.price <= maxPrice * 100;
 };
 
-const allFilters = [["minPrice", minPriceFilter], ["maxPrice", maxPriceFilter]];
+const roomsFilter = (offer, filterState) => {
+  const sizes = [1.5, 2.5, 3.5, 4.5, 5.5, 6.5];
+
+  for (let size of sizes) {
+    const sizeIsApplicable = filterState[`${size}rooms`];
+
+    if (sizeIsApplicable && offer.num_rooms == size) {
+      return true;
+    }
+
+    if (sizeIsApplicable && size == 6.5 && offer.num_rooms > size) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+const allFilters = [
+  ["minPrice", minPriceFilter],
+  ["maxPrice", maxPriceFilter],
+  ["1.5rooms", roomsFilter],
+];
 
 const filterOffers = (offers, filterState) => {
   const applicableFilters = allFilters
