@@ -15,11 +15,11 @@ const roomsFilter = (offer, filterState) => {
   for (let size of sizes) {
     const sizeIsApplicable = filterState[`${size}rooms`];
 
-    if (sizeIsApplicable && offer.num_rooms == size) {
+    if (sizeIsApplicable && offer.num_rooms === size) {
       return true;
     }
 
-    if (sizeIsApplicable && size == 6.5 && offer.num_rooms > size) {
+    if (sizeIsApplicable && size === 6.5 && offer.num_rooms > size) {
       return true;
     }
   }
