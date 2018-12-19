@@ -1,25 +1,23 @@
-const minPriceFilter = (offer, rawMinPrice) => {
-  const minPrice = parseInt(rawMinPrice) || 0;
+const minPriceFilter = (offer, filterState) => {
+  const minPrice = parseInt(filterState.minPrice) || 0;
 
   return offer.price >= minPrice * 100;
 };
 
-const maxPriceFilter = (offer, rawMaxPrice) => {
-  const maxPrice = parseInt(rawMaxPrice) || 1000000000;
+const maxPriceFilter = (offer, filterState) => {
+  const maxPrice = parseInt(filterState.maxPrice) || 1000000000;
   return offer.price <= maxPrice * 100;
 };
 
 const allFilters = [["minPrice", minPriceFilter], ["maxPrice", maxPriceFilter]];
 
 const filterOffers = (offers, filterState) => {
-  const applicableFilters = allFilters.filter(
-    ([property, _]) => property in filterState
-  );
+  const applicableFilters = allFilters
+    .filter(([property, _]) => property in filterState)
+    .map(([_, filter]) => filter);
 
   return offers.filter(offer =>
-    applicableFilters.every(([property, filter]) =>
-      filter(offer, filterState[property])
-    )
+    applicableFilters.every(filter => filter(offer, filterState))
   );
 };
 
