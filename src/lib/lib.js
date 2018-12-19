@@ -9,6 +9,10 @@ const formatPrice = rawPrice => {
 };
 
 const formatRooms = raw_rooms => {
+  if (raw_rooms === 6.5) {
+    return "6 1/2 +";
+  }
+
   const integral = Math.floor(raw_rooms);
   const fractional = raw_rooms - integral === 0 ? "" : " 1/2";
 
