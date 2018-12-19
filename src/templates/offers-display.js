@@ -75,6 +75,7 @@ export default class OffersDisplay extends React.Component {
         <FilterBar
           offers={Object.values(this.state.allOffers)}
           onUpdate={this.onFilterUpdate}
+          ad_type={ad_type}
         />
         <OffersMap
           city={city}

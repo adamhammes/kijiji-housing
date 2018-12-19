@@ -2,6 +2,7 @@ import React from "react";
 
 import { objectFromIterable } from "../lib/api";
 import filterOffers from "../lib/filter";
+import { formatRooms } from "../lib/lib";
 
 const filterIdPrefix = "filter-";
 
@@ -21,6 +22,8 @@ const getValueForInput = inputElem => {
   return inputElem.value;
 };
 
+const roomSizes = [1.5, 2.5, 3.5, 4.5, 5.5, 6.5];
+
 export default class FilterBar extends React.Component {
   constructor(props) {
     super(props);
@@ -30,13 +33,13 @@ export default class FilterBar extends React.Component {
     this.state = {
       [filterIdPrefix + "minPrice"]: "",
       [filterIdPrefix + "maxPrice"]: "",
-      [filterIdPrefix + "1.5rooms"]: true,
-      [filterIdPrefix + "2.5rooms"]: true,
-      [filterIdPrefix + "3.5rooms"]: true,
-      [filterIdPrefix + "4.5rooms"]: true,
-      [filterIdPrefix + "5.5rooms"]: true,
-      [filterIdPrefix + "6.5rooms"]: true,
     };
+
+    if (this.props.ad_type.id === "rent") {
+      roomSizes.forEach(
+        numRooms => (this.state[`${filterIdPrefix}${numRooms}rooms`] = true)
+      );
+    }
   }
 
   render() {
@@ -57,62 +60,24 @@ export default class FilterBar extends React.Component {
             onChange={this.onChange}
           />
         </section>
-        <section className="room-container">
-          <label htmlFor={`${filterIdPrefix}1.5rooms`}>
-            <input
-              type="checkbox"
-              id={`${filterIdPrefix}1.5rooms`}
-              checked={this.state[`${filterIdPrefix}1.5rooms`]}
-              onChange={this.onChange}
-            />
-            1.5
-          </label>
-          <label htmlFor={`${filterIdPrefix}2.5rooms`}>
-            <input
-              type="checkbox"
-              id={`${filterIdPrefix}2.5rooms`}
-              checked={this.state[`${filterIdPrefix}2.5rooms`]}
-              onChange={this.onChange}
-            />
-            2.5
-          </label>
-          <label htmlFor={`${filterIdPrefix}3.5rooms`}>
-            <input
-              type="checkbox"
-              id={`${filterIdPrefix}3.5rooms`}
-              checked={this.state[`${filterIdPrefix}3.5rooms`]}
-              onChange={this.onChange}
-            />
-            3.5
-          </label>
-          <label htmlFor={`${filterIdPrefix}4.5rooms`}>
-            <input
-              type="checkbox"
-              id={`${filterIdPrefix}4.5rooms`}
-              checked={this.state[`${filterIdPrefix}4.5rooms`]}
-              onChange={this.onChange}
-            />
-            4.5
-          </label>
-          <label htmlFor={`${filterIdPrefix}5.5rooms`}>
-            <input
-              type="checkbox"
-              id={`${filterIdPrefix}5.5rooms`}
-              checked={this.state[`${filterIdPrefix}5.5rooms`]}
-              onChange={this.onChange}
-            />
-            5.5
-          </label>
-          <label htmlFor={`${filterIdPrefix}6.5rooms`}>
-            <input
-              type="checkbox"
-              id={`${filterIdPrefix}6.5rooms`}
-              checked={this.state[`${filterIdPrefix}6.5rooms`]}
-              onChange={this.onChange}
-            />
-            6.5+
-          </label>
-        </section>
+        {this.props.ad_type.id !== "rent" ? null : (
+          <section className="room-container">
+            {roomSizes.map(numRooms => (
+              <label
+                htmlFor={`${filterIdPrefix}${numRooms}rooms`}
+                key={numRooms}
+              >
+                <input
+                  type="checkbox"
+                  id={`${filterIdPrefix}${numRooms}rooms`}
+                  checked={this.state[`${filterIdPrefix}${numRooms}rooms`]}
+                  onChange={this.onChange}
+                />
+                {formatRooms(numRooms)}
+              </label>
+            ))}
+          </section>
+        )}
       </form>
     );
   }
