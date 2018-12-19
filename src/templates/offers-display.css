@@ -1,6 +1,6 @@
 .offers-display {
   height: 100%;
-  position: relative;
+  display: flex;
 }
 
 .leaflet-container {
@@ -8,16 +8,7 @@
 }
 
 .filter-bar {
-  flex-basis: 25%;
-  position: absolute;
-  top: 2em;
-  left: 2em;
-  bottom: 2em;
-  width: 25%;
-  padding: 1em;
-
-  z-index: 1000;
-  background: white;
+  padding: 2em;
 }
 
 .price-container {
