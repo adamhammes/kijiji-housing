@@ -1,5 +1,7 @@
 import React from "react";
 
+import filterOffers from "../lib/filter";
+
 export default class FilterBar extends React.Component {
   constructor(props) {
     super(props);
@@ -18,24 +20,27 @@ export default class FilterBar extends React.Component {
         <section className="price-container">
           <input
             type="number"
-            id="min-price"
+            id="minPrice"
             value={this.state.minPrice}
             onChange={this.onChange}
           />
           <span>à</span>
-          {/* <input type="number" id="max-price" value={this.state.maxPrice} /> */}
+          <input
+            type="number"
+            id="maxPrice"
+            value={this.state.maxPrice}
+            onChange={this.onChange}
+          />
         </section>
       </form>
     );
   }
 
   onChange(event) {
-    const rawValue = event.target.value;
-    const price = parseInt(rawValue) || 0;
     const { onUpdate, offers } = this.props;
 
-    this.setState({ minPrice: rawValue }, () => {
-      onUpdate(offers.filter(offer => offer.price > price * 100));
+    this.setState({ [event.target.id]: event.target.value }, () => {
+      onUpdate(filterOffers(offers, this.state));
     });
   }
 }
