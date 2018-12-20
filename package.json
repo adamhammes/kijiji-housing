@@ -35,6 +35,8 @@
   "devDependencies": {
     "aws-sdk": "^2.375.0",
     "gatsby-plugin-netlify": "^2.0.6",
+    "gatsby-plugin-sass": "^2.0.7",
+    "node-sass": "^4.11.0",
     "prettier": "^1.15.2"
   },
   "repository": {

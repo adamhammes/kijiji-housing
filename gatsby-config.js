@@ -32,6 +32,7 @@ module.exports = {
         path: "./static/api/all.json",
       },
     },
+    "gatsby-plugin-sass",
     {
       resolve: `gatsby-plugin-netlify`,
       options: {

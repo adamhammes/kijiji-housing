@@ -1,6 +1,17 @@
+$offers-display-desktop-min-size: 1000px;
+$offers-display-desktop-plus: (
+  min-width: $offers-display-desktop-min-size,
+);
+
 .offers-display {
   height: 100%;
+  padding: 1px + 2px;
   display: flex;
+  flex-direction: column-reverse;
+
+  @media #{$offers-display-desktop-plus} {
+    flex-direction: row;
+  }
 }
 
 .leaflet-container {

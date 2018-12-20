@@ -2,8 +2,9 @@ import React from "react";
 
 import FilterBar from "../components/filter_bar";
 import OffersMap from "../components/offers_map";
+
 import "../components/app.css";
-import "./offers-display.css";
+import "./offers-display.scss";
 
 export default class OffersDisplay extends React.Component {
   constructor(props) {
