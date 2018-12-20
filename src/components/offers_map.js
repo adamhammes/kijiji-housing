@@ -46,6 +46,7 @@ class OffersMap extends React.Component {
     const parent = ReactDOM.findDOMNode(this);
 
     this.map = L.map(parent).setView([city.latitude, city.longitude], 11);
+    this.map.zoomControl.setPosition("topright");
 
     L.tileLayer(mapUrl, {
       attribution,

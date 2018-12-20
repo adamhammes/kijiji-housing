@@ -46,41 +46,50 @@ export default class FilterBar extends React.Component {
 
   render() {
     return (
-      <form className="filter-bar">
-        <section className="price-container">
-          <input
-            type="number"
-            id={`${filterIdPrefix}minPrice`}
-            value={this.state[`${filterIdPrefix}minPrice`]}
-            onChange={this.onChange}
-          />
-          <span>à</span>
-          <input
-            type="number"
-            id={`${filterIdPrefix}maxPrice`}
-            value={this.state[`${filterIdPrefix}maxPrice`]}
-            onChange={this.onChange}
-          />
-        </section>
-        {this.props.ad_type.id !== "rent" ? null : (
-          <section className="room-container">
-            {roomSizes.map(numRooms => (
-              <label
-                htmlFor={`${filterIdPrefix}${numRooms}rooms`}
-                key={numRooms}
-              >
-                <input
-                  type="checkbox"
-                  id={`${filterIdPrefix}${numRooms}rooms`}
-                  checked={this.state[`${filterIdPrefix}${numRooms}rooms`]}
-                  onChange={this.onChange}
-                />
-                {formatRooms(numRooms)}
-              </label>
-            ))}
+      <div className="filter-bar-container">
+        <input
+          className="collapse-expand-input"
+          id="collapse-expand"
+          type="checkbox"
+          defaultChecked={true}
+        />
+        <label className="collapse-expand-label" htmlFor="collapse-expand" />
+        <form className="filter-bar">
+          <section className="price-container">
+            <input
+              type="number"
+              id={`${filterIdPrefix}minPrice`}
+              value={this.state[`${filterIdPrefix}minPrice`]}
+              onChange={this.onChange}
+            />
+            <span>à</span>
+            <input
+              type="number"
+              id={`${filterIdPrefix}maxPrice`}
+              value={this.state[`${filterIdPrefix}maxPrice`]}
+              onChange={this.onChange}
+            />
           </section>
-        )}
-      </form>
+          {this.props.ad_type.id !== "rent" ? null : (
+            <section className="room-container">
+              {roomSizes.map(numRooms => (
+                <label
+                  htmlFor={`${filterIdPrefix}${numRooms}rooms`}
+                  key={numRooms}
+                >
+                  <input
+                    type="checkbox"
+                    id={`${filterIdPrefix}${numRooms}rooms`}
+                    checked={this.state[`${filterIdPrefix}${numRooms}rooms`]}
+                    onChange={this.onChange}
+                  />
+                  {formatRooms(numRooms)}
+                </label>
+              ))}
+            </section>
+          )}
+        </form>
+      </div>
     );
   }
 

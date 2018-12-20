@@ -3,9 +3,12 @@ $offers-display-desktop-plus: (
   min-width: $offers-display-desktop-min-size,
 );
 
+$offers-display-desktop-down: (
+  max-width: $offers-display-desktop-min-size - 1,
+);
+
 .offers-display {
   height: 100%;
-  padding: 1px + 2px;
   display: flex;
   flex-direction: column-reverse;
 
@@ -16,6 +19,71 @@ $offers-display-desktop-plus: (
 
 .leaflet-container {
   flex: 1;
+}
+
+.filter-bar-container {
+  position: relative;
+}
+
+.collapse-expand-label {
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  bottom: 100%;
+  left: 0;
+  z-index: 10000;
+  background: white;
+  cursor: pointer;
+
+  @media #{$offers-display-desktop-plus} {
+    left: 100%;
+    top: 0;
+    bottom: unset;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0.5em;
+    top: 0.5em;
+
+    border-left: 0.5em solid transparent;
+    border-right: 0.5em solid transparent;
+    border-top: 0.5em solid black;
+    border-bottom: none;
+    transform: translate(0, 50%);
+
+    @media #{$offers-display-desktop-plus} {
+      border-top: 0.5em solid transparent;
+      border-bottom: 0.5em solid transparent;
+      border-right: 0.5em solid black;
+      border-left: none;
+      transform: translate(50%, 0);
+    }
+  }
+}
+
+.collapse-expand-input:not(:checked) + .collapse-expand-label:before {
+  border-right: 0.5em solid transparent;
+  border-left: 0.5em solid transparent;
+  border-bottom: 0.5em solid black;
+  border-top: none;
+
+  @media #{$offers-display-desktop-plus} {
+    border-top: 0.5em solid transparent;
+    border-bottom: 0.5em solid transparent;
+    border-left: 0.5em solid black;
+    border-right: none;
+  }
+}
+
+.collapse-expand-input {
+  visibility: hidden;
+  position: absolute;
+}
+
+.collapse-expand-input:not(:checked) + .collapse-expand-label + .filter-bar {
+  display: none;
 }
 
 .filter-bar {
