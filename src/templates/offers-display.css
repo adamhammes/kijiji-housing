@@ -27,3 +27,7 @@
   display: flex;
   flex-direction: column;
 }
+
+.filter-bar input[type="checkbox"] {
+  margin-right: 0.4rem;
+}
