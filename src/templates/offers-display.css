@@ -28,6 +28,10 @@
   flex-direction: column;
 }
 
+.room-container label {
+  user-select: none;
+}
+
 .filter-bar input[type="checkbox"] {
   margin-right: 0.4rem;
 }
