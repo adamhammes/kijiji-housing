@@ -1,0 +1,13 @@
+.front-page {
+  padding: 1em;
+}
+
+.options-container {
+  label {
+    display: flex;
+    align-items: center;
+  }
+  input[type="radio"] {
+    margin: 0 0.4em;
+  }
+}
