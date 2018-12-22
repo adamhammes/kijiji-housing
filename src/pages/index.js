@@ -2,7 +2,6 @@ import React from "react";
 import { StaticQuery, graphql, Link } from "gatsby";
 
 import "../components/layout.css";
-import translations from "../translations.json";
 
 import "./front-page.scss";
 
@@ -23,6 +22,7 @@ const query = graphql`
 class IndexPage extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props.pageContext.locale);
 
     const defaultState = {
       city: "quebec",
@@ -38,13 +38,15 @@ class IndexPage extends React.Component {
   }
 
   render() {
+    const { locale } = this.props.pageContext;
+
     return (
       <StaticQuery
         query={query}
         render={data => (
           <div className="front-page">
             <form onChange={this.onChange}>
-              <h2>{translations.frontPage.lookingFor[this.language]}</h2>
+              <h2>{locale.messages.frontPage.lookingFor}</h2>
               <div className="options-container">
                 {data.apiJson.ad_types.map(a => (
                   <label key={a.id}>
@@ -55,11 +57,11 @@ class IndexPage extends React.Component {
                       value={a.id}
                       defaultChecked={this.state.ad_type === a.id}
                     />
-                    {translations.frontPage[a.id][this.language]}
+                    {locale.messages.frontPage[a.id]}
                   </label>
                 ))}
               </div>
-              <h2>{translations.frontPage.in[this.language]}</h2>
+              <h2>{locale.messages.frontPage.in}</h2>
               <div className="options-container">
                 {data.apiJson.cities.map(c => (
                   <label key={c.id}>
@@ -70,12 +72,12 @@ class IndexPage extends React.Component {
                       value={c.id}
                       defaultChecked={this.state.city === c.id}
                     />
-                    {translations.cities[c.id][this.language]}
+                    {locale.messages.cities[c.id]}
                   </label>
                 ))}
               </div>
               <Link to={this.nextLink()}>
-                {translations.frontPage.letsGo[this.language]}
+                {locale.messages.frontPage.letsGo}
               </Link>
             </form>
           </div>
@@ -85,7 +87,8 @@ class IndexPage extends React.Component {
   }
 
   nextLink() {
-    return `/${this.state.city}/${this.state.ad_type}`;
+    const language = this.props.pageContext.locale.language;
+    return `/${language}/${this.state.city}/${this.state.ad_type}`;
   }
 
   onChange(e) {

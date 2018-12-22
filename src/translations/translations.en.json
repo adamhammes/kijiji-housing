@@ -1,0 +1,17 @@
+{
+  "language": "en",
+  "messages": {
+    "cities": {
+      "quebec": "Quebec City",
+      "montreal": "Montreal"
+    },
+    "frontPage": {
+      "lookingFor": "I'm looking to",
+      "rent": "rent",
+      "buy": "buy",
+      "colocation": "cohabitate",
+      "in": "in",
+      "letsGo": "Let's go!"
+    }
+  }
+}

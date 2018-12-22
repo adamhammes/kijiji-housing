@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require(`path`);
 
 const aws = require("aws-sdk");
+const { languages, locales } = require("./src/translations/translations");
 
 const { objectFromIterable, whitelistOffer } = require("./src/lib/api");
 
@@ -58,7 +59,7 @@ exports.onPreInit = (_, pluginOptions, cb) => {
 };
 
 exports.createPages = ({ actions }) => {
-  const { createPage } = actions;
+  const { createPage, createRedirect } = actions;
   const scraped_data = require(`${API_PATH}/all.json`);
 
   for (const city of scraped_data.cities) {
@@ -79,16 +80,47 @@ exports.createPages = ({ actions }) => {
         JSON.stringify(descriptions)
       );
 
-      createPage({
-        path: slug,
-        component: path.resolve(`./src/templates/offers-display.js`),
-        context: {
-          scrapeId,
-          city,
-          ad_type,
-          offers,
-        },
-      });
+      for (const lang of languages) {
+        createPage({
+          path: `/${lang}/${slug}`,
+          component: path.resolve(`./src/templates/offers-display.js`),
+          context: {
+            locale: locales[lang],
+            scrapeId,
+            city,
+            ad_type,
+            offers,
+          },
+        });
+
+        if (lang === "fr") {
+          createRedirect({ fromPath: slug, toPath: `/${lang}/${slug}` });
+        }
+      }
     }
   }
+};
+
+exports.onCreatePage = ({ page, actions }) => {
+  const { createPage, deletePage, createRedirect } = actions;
+
+  return new Promise(resolve => {
+    for (const language of languages) {
+      const newPage = Object.assign({}, page);
+      const locale = locales[language];
+
+      newPage.path = `/${language}${page.path}`;
+      newPage.context = { ...page.context, language, locale };
+
+      createPage(newPage);
+
+      if (language === "fr") {
+        createRedirect({ fromPath: page.path, toPath: newPage.path });
+      }
+    }
+
+    deletePage(page);
+
+    resolve();
+  });
 };

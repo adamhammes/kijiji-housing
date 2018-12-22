@@ -29,6 +29,7 @@
     "develop": "gatsby develop",
     "start": "npm run develop",
     "format": "prettier --write \"src/**/*.js\" gatsby-*.js",
+    "serve": "gatsby serve",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clear_api": "rm -f public/api/*.json static/api/*.json"
   },
