@@ -69,10 +69,6 @@ export default class OffersDisplay extends React.Component {
   render() {
     const { city, ad_type, locale } = this.props.pageContext;
 
-    if (typeof window === "undefined") {
-      return null;
-    }
-
     return (
       <div className="offers-display">
         <FilterBar
