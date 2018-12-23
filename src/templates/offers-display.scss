@@ -88,6 +88,11 @@ $offers-display-desktop-down: (
 
 .filter-bar {
   padding: 2em;
+
+  @media #{$offers-display-desktop-down} {
+    max-height: 250px;
+    overflow-y: hidden;
+  }
 }
 
 .price-container {
