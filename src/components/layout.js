@@ -7,7 +7,7 @@ import Header from "./header";
 import "./layout.css";
 import "./app.css";
 
-const Layout = ({ children }) => (
+const Layout = ({ children, renderHeader = true }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -29,17 +29,10 @@ const Layout = ({ children }) => (
         >
           <html lang="en" />
         </Helmet>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <div
-          style={{
-            margin: "0 auto",
-            maxWidth: 960,
-            padding: "0px 1.0875rem 1.45rem",
-            paddingTop: 0,
-          }}
-        >
-          {children}
-        </div>
+        {renderHeader ? (
+          <Header siteTitle={data.site.siteMetadata.title} />
+        ) : null}
+        {children}
       </>
     )}
   />

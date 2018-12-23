@@ -1,10 +1,10 @@
 import React from "react";
 
+import Layout from "../components/layout";
 import FilterBar from "../components/filter_bar";
 import OffersMap from "../components/offers_map";
 import { formatPrice } from "../lib/lib";
 
-import "../components/app.css";
 import "./offers-display.scss";
 
 export default class OffersDisplay extends React.Component {
@@ -70,20 +70,22 @@ export default class OffersDisplay extends React.Component {
     const { city, ad_type, locale } = this.props.pageContext;
 
     return (
-      <div className="offers-display">
-        <FilterBar
-          offers={Object.values(this.state.allOffers)}
-          onUpdate={this.onFilterUpdate}
-          ad_type={ad_type}
-          locale={locale}
-        />
-        <OffersMap
-          city={city}
-          offers={this.state.displayedOffers}
-          ad_type={ad_type}
-          descriptionsLoaded={this.state.descriptionsLoaded}
-        />
-      </div>
+      <Layout renderHeader={false}>
+        <div className="offers-display">
+          <FilterBar
+            offers={Object.values(this.state.allOffers)}
+            onUpdate={this.onFilterUpdate}
+            ad_type={ad_type}
+            locale={locale}
+          />
+          <OffersMap
+            city={city}
+            offers={this.state.displayedOffers}
+            ad_type={ad_type}
+            descriptionsLoaded={this.state.descriptionsLoaded}
+          />
+        </div>
+      </Layout>
     );
   }
 }
