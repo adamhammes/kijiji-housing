@@ -1,3 +1,5 @@
+const { objectFromIterable } = require("./utils");
+
 const whitelistedKeys = [
   "url",
   "headline",
@@ -36,14 +38,6 @@ const withinDistance = (offer, city) => {
   return distanceBetweenKM(offerCoords, cityCoords) < city.radius;
 };
 
-const objectFromIterable = pairs => {
-  const toReturn = {};
-
-  pairs.forEach(([key, value]) => (toReturn[key] = value));
-
-  return toReturn;
-};
-
 const whitelistOffer = offer => {
   return objectFromIterable(whitelistedKeys.map(key => [key, offer[key]]));
 };
@@ -66,6 +60,5 @@ const splitAndFilter = (rawOffers, city) => {
 };
 
 module.exports = {
-  objectFromIterable,
   splitAndFilter,
 };

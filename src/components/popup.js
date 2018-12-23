@@ -1,4 +1,4 @@
-import { formatRooms } from "../lib/lib";
+import { formatRooms } from "../lib/utils";
 
 const genPopupContent = offer => {
   const parts = [title, byline, description];

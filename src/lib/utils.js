@@ -1,3 +1,11 @@
+const objectFromIterable = pairs => {
+  const toReturn = {};
+
+  pairs.forEach(([key, value]) => (toReturn[key] = value));
+
+  return toReturn;
+};
+
 const formatter = {
   en: new Intl.NumberFormat("en-CA", {
     style: "currency",
@@ -26,4 +34,4 @@ const formatRooms = raw_rooms => {
   return `${integral}${fractional}`;
 };
 
-export { formatPrice, formatRooms };
+module.exports = { objectFromIterable, formatPrice, formatRooms };

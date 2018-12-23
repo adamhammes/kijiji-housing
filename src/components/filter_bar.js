@@ -1,8 +1,7 @@
 import React from "react";
 
-import { objectFromIterable } from "../lib/build_helper";
+import { objectFromIterable, formatRooms } from "../lib/utils";
 import filterOffers from "../lib/filter";
-import { formatRooms } from "../lib/lib";
 
 const filterIdPrefix = "filter-";
 

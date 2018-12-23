@@ -3,7 +3,7 @@ import React from "react";
 import Layout from "../components/layout";
 import FilterBar from "../components/filter_bar";
 import OffersMap from "../components/offers_map";
-import { formatPrice } from "../lib/lib";
+import { formatPrice, objectFromIterable } from "../lib/utils";
 
 import "./offers-display.scss";
 
@@ -11,11 +11,11 @@ export default class OffersDisplay extends React.Component {
   constructor(props) {
     super(props);
 
-    const allOffers = {};
-
     const { offers } = this.props.pageContext;
 
-    offers.forEach(offer => (allOffers[offer.id] = offer));
+    const allOffers = objectFromIterable(
+      offers.map(offer => [offer.id, offer])
+    );
 
     this.state = {
       allOffers,
