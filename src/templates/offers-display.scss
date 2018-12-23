@@ -100,6 +100,9 @@ $offers-display-desktop-down: (
 
 .price-container input {
   max-width: 5.5em;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: lightslategrey;
 }
 
 .room-container {
