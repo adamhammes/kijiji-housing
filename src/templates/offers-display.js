@@ -67,7 +67,7 @@ export default class OffersDisplay extends React.Component {
   }
 
   render() {
-    const { city, ad_type } = this.props.pageContext;
+    const { city, ad_type, locale } = this.props.pageContext;
 
     if (typeof window === "undefined") {
       return null;
@@ -79,6 +79,7 @@ export default class OffersDisplay extends React.Component {
           offers={Object.values(this.state.allOffers)}
           onUpdate={this.onFilterUpdate}
           ad_type={ad_type}
+          locale={locale}
         />
         <OffersMap
           city={city}

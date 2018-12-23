@@ -12,6 +12,13 @@
       "colocation": "cohabitate",
       "in": "in",
       "letsGo": "Let's go!"
+    },
+    "filters": {
+      "priceRange": "Price range",
+      "min": "min",
+      "to": "to",
+      "max": "max",
+      "numberOfRooms": "Number of rooms"
     }
   }
 }

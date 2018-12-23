@@ -12,6 +12,13 @@
       "colocation": "cohabiter",
       "in": "à",
       "letsGo": "Allons-y!"
+    },
+    "filters": {
+      "priceRange": "Gamme de prix",
+      "min": "min",
+      "to": "à",
+      "max": "max",
+      "numberOfRooms": "Nombre de pièces"
     }
   }
 }
