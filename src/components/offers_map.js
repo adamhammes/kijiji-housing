@@ -77,6 +77,7 @@ class OffersMap extends React.Component {
       const popupContent = genPopupContent(offer);
       const popup = L.popup({
         maxHeight: 250,
+        maxWidth: Math.min(300, window.innerWidth - 50),
       }).setContent(popupContent);
 
       marker.bindPopup(popup);
