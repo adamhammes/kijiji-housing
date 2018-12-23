@@ -7,36 +7,38 @@ import Header from "./header";
 import "./layout.css";
 import "./app.css";
 
-const Layout = ({ children, renderHeader = true }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
+const Layout = ({ children, locale, renderHeader = true }) => {
+  return (
+    <StaticQuery
+      query={graphql`
+        query SiteTitleQuery {
+          site {
+            siteMetadata {
+              title
+            }
           }
         }
-      }
-    `}
-    render={data => (
-      <>
-        <Helmet
-          title={data.site.siteMetadata.title}
-          meta={[
-            { name: "description", content: "Sample" },
-            { name: "keywords", content: "sample, something" },
-          ]}
-        >
-          <html lang="en" />
-        </Helmet>
-        {renderHeader ? (
-          <Header siteTitle={data.site.siteMetadata.title} />
-        ) : null}
-        {children}
-      </>
-    )}
-  />
-);
+      `}
+      render={data => (
+        <>
+          <Helmet
+            title={data.site.siteMetadata.title}
+            meta={[
+              { name: "description", content: "Sample" },
+              { name: "keywords", content: "sample, something" },
+            ]}
+          >
+            <html lang={locale.language} />
+          </Helmet>
+          {renderHeader ? (
+            <Header siteTitle={data.site.siteMetadata.title} />
+          ) : null}
+          {children}
+        </>
+      )}
+    />
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

@@ -70,7 +70,7 @@ export default class OffersDisplay extends React.Component {
     const { city, ad_type, locale } = this.props.pageContext;
 
     return (
-      <Layout renderHeader={false}>
+      <Layout locale={locale} renderHeader={false}>
         <div className="offers-display">
           <FilterBar
             offers={Object.values(this.state.allOffers)}

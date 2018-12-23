@@ -43,7 +43,7 @@ class IndexPage extends React.Component {
       <StaticQuery
         query={query}
         render={data => (
-          <Layout>
+          <Layout locale={locale}>
             <div className="front-page">
               <form onChange={this.onChange}>
                 <h2>{locale.messages.frontPage.lookingFor}</h2>
