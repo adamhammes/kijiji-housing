@@ -48,15 +48,20 @@ const whitelistOffer = offer => {
   return objectFromIterable(whitelistedKeys.map(key => [key, offer[key]]));
 };
 
-const splitAndFilter = (rawOffers, city) => {
-  let offers = rawOffers.map(whitelistOffer);
-  offers = offers.filter(offer => withinDistance(offer, city));
+const addressIsAccurate = offer =>
+  parseInt(offer.address_confidence) >= 9 &&
+  offer.address_accuracy === "ROOFTOP";
 
+const splitAndFilter = (rawOffers, city) => {
+  let offers = rawOffers.filter(offer => withinDistance(offer, city));
+  offers = offers.filter(addressIsAccurate);
+
+  console.log(offers.length + " offers exported");
   const descriptionMapping = objectFromIterable(
     offers.map(offer => [offer.id, offer.description])
   );
 
-  console.log(offers.length + "offers exported");
+  offers = offers.map(whitelistOffer);
   return { descriptionMapping, offers };
 };
 
