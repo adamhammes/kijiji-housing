@@ -22,7 +22,6 @@ const query = graphql`
 class IndexPage extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.pageContext.locale);
 
     const defaultState = {
       city: "quebec",
