@@ -1,4 +1,4 @@
-import { formatPrice, formatRooms } from "../lib/lib";
+import { formatRooms } from "../lib/lib";
 
 const genPopupContent = offer => {
   const parts = [title, byline, description];
@@ -19,11 +19,8 @@ const description = offer => {
 };
 
 const byline = offer => {
-  const num_rooms = formatRooms(offer.num_rooms);
-  const price = formatPrice(offer.price);
-
   const bold = document.createElement("b");
-  bold.innerText = `${num_rooms} | ${price}`;
+  bold.innerText = `${formatRooms(offer.num_rooms)} | ${offer.formattedPrice}`;
 
   const p = document.createElement("p");
   p.appendChild(bold);

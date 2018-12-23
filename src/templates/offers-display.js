@@ -2,6 +2,7 @@ import React from "react";
 
 import FilterBar from "../components/filter_bar";
 import OffersMap from "../components/offers_map";
+import { formatPrice } from "../lib/lib";
 
 import "../components/app.css";
 import "./offers-display.scss";
@@ -28,7 +29,7 @@ export default class OffersDisplay extends React.Component {
   componentDidMount() {
     this.isMounted_ = true;
 
-    const { scrapeId, city, ad_type } = this.props.pageContext;
+    const { scrapeId, city, ad_type, locale } = this.props.pageContext;
 
     const descriptionsPath = `/api/${scrapeId}_${city.id}-${
       ad_type.id
@@ -43,10 +44,11 @@ export default class OffersDisplay extends React.Component {
 
         const offersWithDescription = Object.assign({}, this.state.allOffers);
 
-        Object.entries(descriptionsById).forEach(
-          ([id, description]) =>
-            (offersWithDescription[id].description = description)
-        );
+        Object.entries(descriptionsById).forEach(([id, description]) => {
+          const offer = offersWithDescription[id];
+          offer.description = description;
+          offer.formattedPrice = formatPrice(locale.language, offer.price);
+        });
 
         this.setState({
           allOffers: offersWithDescription,

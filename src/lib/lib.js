@@ -1,11 +1,18 @@
-const formatter = new Intl.NumberFormat("fr-CA", {
-  style: "currency",
-  currency: "CAD",
-  minimumFractionDigits: 0,
-});
+const formatter = {
+  en: new Intl.NumberFormat("en-CA", {
+    style: "currency",
+    currency: "CAD",
+    minimumFractionDigits: 0,
+  }),
+  fr: new Intl.NumberFormat("fr-CA", {
+    style: "currency",
+    currency: "CAD",
+    minimumFractionDigits: 0,
+  }),
+};
 
-const formatPrice = rawPrice => {
-  return formatter.format(rawPrice / 100);
+const formatPrice = (language, rawPrice) => {
+  return formatter[language].format(rawPrice / 100);
 };
 
 const formatRooms = raw_rooms => {
