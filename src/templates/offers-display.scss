@@ -30,14 +30,14 @@ $offers-display-desktop-down: (
   width: 2em;
   height: 2em;
   bottom: 100%;
-  left: 0;
+  left: 1em;
   z-index: 10000;
   background: white;
   cursor: pointer;
 
   @media #{$offers-display-desktop-plus} {
     left: 100%;
-    top: 0;
+    top: 1em;
     bottom: unset;
   }
 
