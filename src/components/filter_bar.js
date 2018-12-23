@@ -1,6 +1,6 @@
 import React from "react";
 
-import { objectFromIterable } from "../lib/api";
+import { objectFromIterable } from "../lib/build_helper";
 import filterOffers from "../lib/filter";
 import { formatRooms } from "../lib/lib";
 

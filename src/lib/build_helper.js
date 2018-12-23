@@ -23,7 +23,17 @@ const whitelistOffer = offer => {
   return objectFromIterable(whitelistedKeys.map(key => [key, offer[key]]));
 };
 
+const splitAndFilter = rawOffers => {
+  const descriptionMapping = objectFromIterable(
+    rawOffers.map(offer => [offer.id, offer.description])
+  );
+
+  const offers = rawOffers.map(whitelistOffer);
+
+  return { descriptionMapping, offers };
+};
+
 module.exports = {
   objectFromIterable,
-  whitelistOffer,
+  splitAndFilter,
 };

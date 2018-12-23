@@ -4,7 +4,7 @@ const path = require(`path`);
 const aws = require("aws-sdk");
 const { languages, locales } = require("./src/translations/translations");
 
-const { objectFromIterable, whitelistOffer } = require("./src/lib/api");
+const { splitAndFilter } = require("./src/lib/build_helper");
 
 const API_PATH = "./static/api";
 
@@ -69,15 +69,11 @@ exports.createPages = ({ actions }) => {
       const slug = `${city.id}/${ad_type.id}`;
       const scrapeId = scraped_data.date_collected;
 
-      const offers = rawOffers.map(whitelistOffer);
-
-      const descriptions = objectFromIterable(
-        rawOffers.map(offer => [offer.id, offer.description])
-      );
+      const { offers, descriptionMapping } = splitAndFilter(rawOffers);
 
       fs.writeFileSync(
         `${API_PATH}/${scrapeId}_${city.id}-${ad_type.id}-descriptions.json`,
-        JSON.stringify(descriptions)
+        JSON.stringify(descriptionMapping)
       );
 
       for (const lang of languages) {
