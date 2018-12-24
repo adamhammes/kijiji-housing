@@ -12,8 +12,8 @@ const genPopupContent = (offer, ad_type) => `
     </h3>
     <p>
       <strong>
-        ${formatRooms(offer.num_rooms)} | 
         ${offer.formattedPrice}
+        ${ad_type.id === "rent" ? ` | ${formatRooms(offer.num_rooms)}` : ""}
       </strong>
     </p>
     <p>
