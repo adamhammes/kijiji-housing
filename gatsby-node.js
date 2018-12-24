@@ -66,7 +66,7 @@ exports.createPages = ({ actions }) => {
     for (const ad_type of scraped_data.ad_types) {
       const rawOffers = scraped_data.offers[city.id][ad_type.id];
 
-      const slug = `${city.id}/${ad_type.id}`;
+      const slug = `/${city.id}/${ad_type.id}`;
       const scrapeId = scraped_data.date_collected;
 
       const { offers, descriptionMapping } = splitAndFilter(rawOffers, city);
@@ -78,7 +78,7 @@ exports.createPages = ({ actions }) => {
 
       for (const lang of languages) {
         createPage({
-          path: `/${lang}/${slug}`,
+          path: `/${lang}${slug}`,
           component: path.resolve(`./src/templates/offers-display.js`),
           context: {
             locale: locales[lang],
@@ -90,7 +90,7 @@ exports.createPages = ({ actions }) => {
         });
 
         if (lang === "fr") {
-          createRedirect({ fromPath: slug, toPath: `/${lang}/${slug}` });
+          createRedirect({ fromPath: slug, toPath: `/${lang}${slug}` });
         }
       }
     }
@@ -115,7 +115,11 @@ exports.onCreatePage = ({ page, actions }) => {
       }
     }
 
-    deletePage(page);
+    if (!page.path.startsWith("/404.html")) {
+      deletePage(page);
+    } else {
+      page.context.locale = locales.fr;
+    }
 
     resolve();
   });
