@@ -74,7 +74,7 @@ class OffersMap extends React.Component {
     }
 
     if (this.props.descriptionsLoaded && !this.loadedPopups.has(offer.id)) {
-      const popupContent = genPopupContent(offer);
+      const popupContent = genPopupContent(offer, this.props.ad_type);
       const popup = L.popup({
         maxHeight: 250,
         maxWidth: Math.min(300, window.innerWidth - 50),
