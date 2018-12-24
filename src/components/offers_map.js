@@ -41,6 +41,10 @@ class OffersMap extends React.Component {
     plog("Constructor");
 
     this.markerForOffer = this.markerForOffer.bind(this);
+
+    this.state = {
+      _mounted: false,
+    };
   }
 
   componentDidMount() {
@@ -68,6 +72,8 @@ class OffersMap extends React.Component {
     this.props.offers.forEach(this.markerForOffer);
 
     plog("finished componentDidMount");
+
+    this.setState({ _mounted: true });
   }
 
   markerForOffer(offer) {
@@ -102,7 +108,8 @@ class OffersMap extends React.Component {
   }
 
   render() {
-    if (this.markerCluster) {
+    plog("outside");
+    if (this.state._mounted) {
       plog("enter render");
 
       this.markerCluster.clearLayers();
