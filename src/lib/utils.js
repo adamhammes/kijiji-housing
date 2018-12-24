@@ -34,4 +34,24 @@ const formatRooms = raw_rooms => {
   return `${integral}${fractional}`;
 };
 
-module.exports = { objectFromIterable, formatPrice, formatRooms };
+let _plogTime = -1;
+let _plogLast = -1;
+const plog = message => {
+  if (typeof window === "undefined") return 0;
+
+  if (_plogTime === -1) {
+    _plogTime = Math.round(performance.now());
+  }
+
+  const time = Math.round(performance.now());
+  const formattedTime = time.toString().padStart(3, " ");
+  let deltaMessage = "";
+  if (_plogLast !== -1) {
+    deltaMessage = ` (+${(time - _plogLast).toString().padStart(3, " ")})`;
+  }
+
+  console.log(`[${formattedTime}${deltaMessage}] ${message}`);
+  _plogLast = time;
+};
+
+module.exports = { objectFromIterable, formatPrice, formatRooms, plog };

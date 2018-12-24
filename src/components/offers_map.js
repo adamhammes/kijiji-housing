@@ -8,6 +8,7 @@ import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 
 import genPopupContent from "./popup";
+import { plog } from "../lib/utils";
 
 const accessToken =
   "pk.eyJ1IjoiYWRhbWhhbW1lcyIsImEiOiJjamQxczNrajQyd25kMndvNWR6cGdqYWl2In0.30k-mIhdJr0otiiSv8mQ-w";
@@ -37,11 +38,14 @@ class OffersMap extends React.Component {
     this.markerCache = new Map();
     this.loadedPopups = new Set();
 
+    plog("Constructor");
+
     this.markerForOffer = this.markerForOffer.bind(this);
   }
 
   componentDidMount() {
     const { city } = this.props;
+    plog("enter componentDidMount");
 
     const parent = ReactDOM.findDOMNode(this);
 
@@ -62,6 +66,8 @@ class OffersMap extends React.Component {
     this.map.addLayer(this.markerCluster);
 
     this.props.offers.forEach(this.markerForOffer);
+
+    plog("finished componentDidMount");
   }
 
   markerForOffer(offer) {
@@ -74,6 +80,14 @@ class OffersMap extends React.Component {
     }
 
     if (this.props.descriptionsLoaded && !this.loadedPopups.has(offer.id)) {
+      if (this.loadedPopups.size === 0) {
+        plog("rendering first popup");
+      }
+
+      if (this.loadedPopups.size === this.props.offers.length - 1) {
+        plog("rendering last popup");
+      }
+
       const popupContent = genPopupContent(offer, this.props.ad_type);
       const popup = L.popup({
         maxHeight: 250,
@@ -89,10 +103,14 @@ class OffersMap extends React.Component {
 
   render() {
     if (this.markerCluster) {
+      plog("enter render");
+
       this.markerCluster.clearLayers();
       this.markerCluster.addLayers(
         Array.from(this.props.offers.map(offer => this.markerForOffer(offer)))
       );
+
+      plog("finish render");
     }
 
     return <div />;

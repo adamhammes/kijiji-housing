@@ -3,7 +3,7 @@ import React from "react";
 import Layout from "../components/layout";
 import FilterBar from "../components/filter_bar";
 import OffersMap from "../components/offers_map";
-import { formatPrice, objectFromIterable } from "../lib/utils";
+import { formatPrice, objectFromIterable, plog } from "../lib/utils";
 
 import "./offers-display.scss";
 
@@ -35,12 +35,15 @@ export default class OffersDisplay extends React.Component {
       ad_type.id
     }-descriptions.json`;
 
+    plog("fetching apartment descriptions");
     fetch(descriptionsPath)
       .then(res => res.json())
       .then(descriptionsById => {
         if (!this.isMounted_) {
           return;
         }
+
+        plog("descriptions received");
 
         const offersWithDescription = Object.assign({}, this.state.allOffers);
 
@@ -62,7 +65,6 @@ export default class OffersDisplay extends React.Component {
   }
 
   onFilterUpdate(offers) {
-    console.log(offers.length);
     this.setState({ displayedOffers: offers });
   }
 
