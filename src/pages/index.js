@@ -89,7 +89,7 @@ class IndexPage extends React.Component {
 
   nextLink() {
     const language = this.props.pageContext.locale.language;
-    return `/${language}/${this.state.city}/${this.state.ad_type}`;
+    return `/${language}/${this.state.city}/${this.state.ad_type}/`;
   }
 
   onChange(e) {
