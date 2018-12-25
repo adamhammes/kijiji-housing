@@ -33,6 +33,7 @@ module.exports = {
       },
     },
     "gatsby-plugin-sass",
+    "gatsby-plugin-favicon",
     {
       resolve: `gatsby-plugin-netlify`,
       options: {
