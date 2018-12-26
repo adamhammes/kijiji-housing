@@ -3,7 +3,7 @@ import "leaflet.markercluster";
 import React from "react";
 import ReactDOM from "react-dom";
 
-import "leaflet/dist/leaflet.css";
+import "./leaflet.scss";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 
