@@ -119,6 +119,7 @@ $offers-display-desktop-down: (
   }
 
   > label {
+    cursor: pointer;
     padding: 6px 0;
     flex-basis: 33%;
     display: flex;
