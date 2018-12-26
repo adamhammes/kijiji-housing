@@ -108,7 +108,6 @@ class OffersMap extends React.Component {
   }
 
   render() {
-    plog("outside");
     if (this.state._mounted) {
       plog("enter render");
 
