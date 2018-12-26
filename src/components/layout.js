@@ -24,8 +24,10 @@ const Layout = ({ children, locale, renderHeader = true }) => {
           <Helmet
             title={data.site.siteMetadata.title}
             meta={[
-              { name: "description", content: "Sample" },
-              { name: "keywords", content: "sample, something" },
+              {
+                name: "description",
+                content: locale.messages.meta.description,
+              },
             ]}
           >
             <html lang={locale.language} />

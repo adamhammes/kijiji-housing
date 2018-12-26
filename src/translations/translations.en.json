@@ -1,6 +1,9 @@
 {
   "language": "en",
   "messages": {
+    "meta": {
+      "description": "Quebec Housing"
+    },
     "cities": {
       "quebec": "Quebec City",
       "montreal": "Montreal"
