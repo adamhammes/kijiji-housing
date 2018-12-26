@@ -306,10 +306,6 @@
   outline: 0;
 }
 
-.leaflet-container a {
-  color: #0078a8;
-}
-
 .leaflet-container a.leaflet-active {
   outline: 2px solid orange;
 }
@@ -317,11 +313,6 @@
 .leaflet-zoom-box {
   border: 2px dotted #38f;
   background: rgba(255, 255, 255, 0.5);
-}
-
-/* general typography */
-.leaflet-container {
-  font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
 /* general toolbar styles */
@@ -556,11 +547,6 @@
 
 .leaflet-popup-content {
   margin: 13px 19px;
-  line-height: 1.4;
-}
-
-.leaflet-popup-content p {
-  margin: 18px 0;
 }
 
 .leaflet-popup-tip-container {
@@ -615,8 +601,6 @@
 
 .leaflet-popup-scrolled {
   overflow: auto;
-  border-bottom: 1px solid #ddd;
-  border-top: 1px solid #ddd;
 }
 
 .leaflet-oldie .leaflet-popup-content-wrapper {
