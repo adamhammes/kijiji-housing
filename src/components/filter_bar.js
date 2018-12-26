@@ -1,6 +1,6 @@
 import React from "react";
 
-import { objectFromIterable, formatRooms } from "../lib/utils";
+import { objectFromIterable, formatRooms, plog } from "../lib/utils";
 import filterOffers from "../lib/filter";
 
 const filterIdPrefix = "filter-";
@@ -104,7 +104,9 @@ export default class FilterBar extends React.Component {
 
     const targetValue = getValueForInput(event.target);
 
+    plog("start filtering");
     this.setState({ [event.target.id]: targetValue }, () => {
+      plog("finished filtering");
       onUpdate(filterOffers(offers, removePrefixFromState(this.state)));
     });
   }
