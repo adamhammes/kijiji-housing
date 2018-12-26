@@ -4,7 +4,7 @@ import Helmet from "react-helmet";
 import { StaticQuery, graphql } from "gatsby";
 
 import Header from "./header";
-import "./layout.css";
+import "./layout.scss";
 import "./app.css";
 
 const Layout = ({ children, locale, renderHeader = true }) => {
