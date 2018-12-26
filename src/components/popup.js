@@ -5,6 +5,7 @@ const genPopupContent = (offer, ad_type) => `
     <h4>
       <a
         target="_blank"
+        rel="noopener noreferrer"
         href=${offer.url}
       >
         ${offer.headline}
