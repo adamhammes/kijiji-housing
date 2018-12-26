@@ -113,6 +113,10 @@ $offers-display-desktop-down: (
 .room-container {
   display: flex;
   flex-direction: column;
+
+  > label {
+    padding: 6px 0;
+  }
 }
 
 .room-container label {
