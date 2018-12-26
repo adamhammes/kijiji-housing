@@ -14,7 +14,7 @@ const accessToken =
   "pk.eyJ1IjoiYWRhbWhhbW1lcyIsImEiOiJjamQxczNrajQyd25kMndvNWR6cGdqYWl2In0.30k-mIhdJr0otiiSv8mQ-w";
 
 const attribution =
-  '&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors';
+  '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>';
 
 const mapUrl =
   "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}";
