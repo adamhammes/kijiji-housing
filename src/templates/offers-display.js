@@ -24,6 +24,8 @@ export default class OffersDisplay extends React.Component {
     };
 
     this.onFilterUpdate = this.onFilterUpdate.bind(this);
+    this.onExpandCollapse = this.onExpandCollapse.bind(this);
+    this.bindInvalidateBounds = this.bindInvalidateBounds.bind(this);
   }
 
   componentDidMount() {
@@ -68,6 +70,16 @@ export default class OffersDisplay extends React.Component {
     this.setState({ displayedOffers: offers });
   }
 
+  onExpandCollapse() {
+    if (this.invalidateBounds) {
+      this.invalidateBounds();
+    }
+  }
+
+  bindInvalidateBounds(func) {
+    this.invalidateBounds = func;
+  }
+
   render() {
     const { city, ad_type, locale } = this.props.pageContext;
 
@@ -79,12 +91,14 @@ export default class OffersDisplay extends React.Component {
             onUpdate={this.onFilterUpdate}
             ad_type={ad_type}
             locale={locale}
+            onExpandCollapse={this.onExpandCollapse}
           />
           <OffersMap
             city={city}
             offers={this.state.displayedOffers}
             ad_type={ad_type}
             descriptionsLoaded={this.state.descriptionsLoaded}
+            bindInvalidateBounds={this.bindInvalidateBounds}
           />
         </div>
       </Layout>

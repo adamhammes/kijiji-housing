@@ -45,6 +45,8 @@ export default class FilterBar extends React.Component {
 
   render() {
     const { messages } = this.props.locale;
+    const { onExpandCollapse } = this.props;
+
     return (
       <div className="filter-bar-container">
         <input
@@ -52,6 +54,7 @@ export default class FilterBar extends React.Component {
           id="collapse-expand"
           type="checkbox"
           defaultChecked={true}
+          onClick={onExpandCollapse}
         />
         <label className="collapse-expand-label" htmlFor="collapse-expand" />
         <form className="filter-bar">

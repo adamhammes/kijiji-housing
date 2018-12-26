@@ -48,7 +48,7 @@ class OffersMap extends React.Component {
   }
 
   componentDidMount() {
-    const { city } = this.props;
+    const { city, bindInvalidateBounds } = this.props;
     plog("enter componentDidMount");
 
     const parent = ReactDOM.findDOMNode(this);
@@ -70,6 +70,8 @@ class OffersMap extends React.Component {
     this.map.addLayer(this.markerCluster);
 
     this.props.offers.forEach(this.markerForOffer);
+
+    bindInvalidateBounds(() => this.map.invalidateSize());
 
     plog("finished componentDidMount");
 
