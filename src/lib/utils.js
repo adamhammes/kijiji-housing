@@ -50,7 +50,7 @@ const plog = message => {
     deltaMessage = ` (+${(time - _plogLast).toString().padStart(3, " ")})`;
   }
 
-  console.log(`[${formattedTime}${deltaMessage}] ${message}`);
+  console.debug(`[${formattedTime}${deltaMessage}] ${message}`);
   _plogLast = time;
 };
 
