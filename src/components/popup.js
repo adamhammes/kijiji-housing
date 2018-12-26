@@ -2,14 +2,14 @@ import { formatRooms } from "../lib/utils";
 
 const genPopupContent = (offer, ad_type) => `
   <div>
-    <h3>
+    <h4>
       <a
         target="_blank"
         href=${offer.url}
       >
         ${offer.headline}
       </a>
-    </h3>
+    </h4>
     <p>
       <strong>
         ${offer.formattedPrice}
