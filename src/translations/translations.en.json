@@ -4,6 +4,10 @@
     "meta": {
       "description": "Quebec Housing"
     },
+    "notFound": {
+      "doesNotExist": "This page does not exist",
+      "returnToHome": "Click here to return to the home page."
+    },
     "cities": {
       "quebec": "Quebec City",
       "montreal": "Montreal"

@@ -4,6 +4,10 @@
     "meta": {
       "description": "Logement au québec"
     },
+    "notFound": {
+      "doesNotExist": "Cette page n'existe pas",
+      "returnToHome": "Cliquez içi pour vous rendre à la page d'accueil."
+    },
     "cities": {
       "quebec": "Québec",
       "montreal": "Montréal"
