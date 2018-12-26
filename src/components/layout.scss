@@ -1,3 +1,6 @@
+$theme-color: #ea5500;
+$theme-color-text: #cc4b00;
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -38,6 +41,7 @@ template {
   display: none;
 }
 a {
+  color: $theme-color-text;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 }
