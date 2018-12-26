@@ -87,11 +87,15 @@ $offers-display-desktop-down: (
 }
 
 .filter-bar {
-  padding: 2em;
   overflow-y: scroll;
 
   @media #{$offers-display-desktop-down} {
-    max-height: 250px;
+    padding: 1em;
+    max-height: 230px;
+  }
+
+  @media #{$offers-display-desktop-plus} {
+    padding: 2em;
   }
 }
 
@@ -112,10 +116,21 @@ $offers-display-desktop-down: (
 
 .room-container {
   display: flex;
-  flex-direction: column;
+  flex-flow: row wrap;
+
+  @media #{$offers-display-desktop-plus} {
+    max-width: 15rem;
+  }
 
   > label {
     padding: 6px 0;
+    flex-basis: 33%;
+    display: flex;
+    align-items: center;
+
+    @media #{$offers-display-desktop-plus} {
+      flex-basis: 50%;
+    }
   }
 }
 
