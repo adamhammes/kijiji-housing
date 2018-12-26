@@ -255,6 +255,10 @@ h2 {
   text-rendering: optimizeLegibility;
   font-size: 1.62671rem;
   line-height: 1.1;
+
+  &:not(:first-child) {
+    margin-top: 1.45rem;
+  }
 }
 h3 {
   margin-left: 0;
@@ -272,6 +276,10 @@ h3 {
   text-rendering: optimizeLegibility;
   font-size: 1.38316rem;
   line-height: 1.1;
+
+  &:not(:first-child) {
+    margin-top: 1.45rem;
+  }
 }
 h4 {
   margin-left: 0;

@@ -88,14 +88,10 @@ $offers-display-desktop-down: (
 
 .filter-bar {
   overflow-y: scroll;
+  padding: 1.45rem;
 
   @media #{$offers-display-desktop-down} {
-    padding: 1em;
     max-height: 230px;
-  }
-
-  @media #{$offers-display-desktop-plus} {
-    padding: 2em;
   }
 }
 

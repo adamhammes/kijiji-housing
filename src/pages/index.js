@@ -75,7 +75,7 @@ class IndexPage extends React.Component {
                   </label>
                 ))}
               </div>
-              <Link to={this.nextLink()}>
+              <Link className="toOfferPage" to={this.nextLink()}>
                 {locale.messages.frontPage.letsGo}
               </Link>
             </form>
