@@ -11,13 +11,15 @@ import genPopupContent from "./popup";
 import { plog } from "../lib/utils";
 
 const accessToken =
-  "pk.eyJ1IjoiYWRhbWhhbW1lcyIsImEiOiJjamQxczNrajQyd25kMndvNWR6cGdqYWl2In0.30k-mIhdJr0otiiSv8mQ-w";
+  "pk.eyJ1IjoiYWRhbWhhbW1lcyIsImEiOiJjamQxczNrajQyd25kMndvNWR6cGdqYWl2In0" +
+  ".30k-mIhdJr0otiiSv8mQ-w";
 
 const attribution =
   '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>';
 
 const mapUrl =
-  "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}";
+  "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png" +
+  "?access_token={accessToken}";
 
 let L;
 if (typeof window !== "undefined") {
