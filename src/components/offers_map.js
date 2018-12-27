@@ -21,6 +21,8 @@ const mapUrl =
   "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png" +
   "?access_token={accessToken}";
 
+// Webpack doesn't play well with the default marker icons used by Leaflet
+// (https://github.com/Leaflet/Leaflet/issues/4968)
 let L;
 if (typeof window !== "undefined") {
   delete window.L.Icon.Default.prototype._getIconUrl;
