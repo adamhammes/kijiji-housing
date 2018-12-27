@@ -1,6 +1,6 @@
-import { formatRooms } from "../lib/utils";
+import { formatRooms, timeOnMarketFormatted } from "../lib/utils";
 
-const genPopupContent = (offer, ad_type) => `
+const genPopupContent = (offer, ad_type, locale) => `
   <div>
     <h4>
       <a
@@ -15,6 +15,7 @@ const genPopupContent = (offer, ad_type) => `
       <strong>
         ${offer.formattedPrice}
         ${ad_type.id === "rent" ? ` | ${formatRooms(offer.num_rooms)}` : ""}
+        | ${timeOnMarketFormatted(locale.language, offer.date)}
       </strong>
     </p>
     ${offer.description}

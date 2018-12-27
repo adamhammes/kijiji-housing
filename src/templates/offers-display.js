@@ -96,6 +96,7 @@ export default class OffersDisplay extends React.Component {
           <OffersMap
             city={city}
             offers={this.state.displayedOffers}
+            locale={locale}
             ad_type={ad_type}
             descriptionsLoaded={this.state.descriptionsLoaded}
             bindInvalidateBounds={this.bindInvalidateBounds}

@@ -1,3 +1,13 @@
+const distanceInWordsToNow = require("date-fns/distance_in_words_to_now");
+
+const fnsEn = require("date-fns/locale/en");
+const fnsFr = require("date-fns/locale/fr");
+
+const fnsLocales = {
+  en: fnsEn,
+  fr: fnsFr,
+};
+
 const objectFromIterable = pairs => {
   const toReturn = {};
 
@@ -34,6 +44,11 @@ const formatRooms = raw_rooms => {
   return `${integral}${fractional}`;
 };
 
+const timeOnMarketFormatted = (language, rawOfferTime) => {
+  const offerDate = new Date(rawOfferTime);
+  return distanceInWordsToNow(offerDate, { locale: fnsLocales[language] });
+};
+
 let _plogTime = -1;
 let _plogLast = -1;
 const plog = message => {
@@ -54,4 +69,10 @@ const plog = message => {
   _plogLast = time;
 };
 
-module.exports = { objectFromIterable, formatPrice, formatRooms, plog };
+module.exports = {
+  objectFromIterable,
+  formatPrice,
+  formatRooms,
+  timeOnMarketFormatted,
+  plog,
+};

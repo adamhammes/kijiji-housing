@@ -96,7 +96,11 @@ class OffersMap extends React.Component {
         plog("rendering last popup");
       }
 
-      const popupContent = genPopupContent(offer, this.props.ad_type);
+      const popupContent = genPopupContent(
+        offer,
+        this.props.ad_type,
+        this.props.locale
+      );
 
       const maxHeight = Math.min(250, window.innerHeight - 325 - 30);
       const maxWidth = Math.min(300, window.innerWidth - 50);
