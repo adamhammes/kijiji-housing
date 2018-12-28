@@ -69,7 +69,11 @@ exports.createPages = ({ actions }) => {
       const slug = `/${city.id}/${ad_type.id}`;
       const scrapeId = scraped_data.date_collected;
 
-      const { offers, descriptionMapping } = splitAndFilter(rawOffers, city);
+      const { offers, descriptionMapping } = splitAndFilter(
+        rawOffers,
+        city,
+        ad_type
+      );
 
       fs.writeFileSync(
         `${API_PATH}/${scrapeId}_${city.id}-${ad_type.id}-descriptions.json`,
