@@ -115,13 +115,10 @@ $offers-display-desktop-down: (
 
   > label {
     cursor: pointer;
+    user-select: none;
     display: flex;
     align-items: center;
   }
-}
-
-.room-container label {
-  user-select: none;
 }
 
 .filter-bar input[type="checkbox"] {
