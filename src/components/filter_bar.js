@@ -48,12 +48,6 @@ export default class FilterBar extends React.Component {
     const { onExpandCollapse } = this.props;
     const locale = this.context;
 
-    if (locale.messages === undefined) {
-      console.log("\nasdf");
-      console.log(locale);
-      console.log(Object.keys(locale));
-    }
-
     return (
       <div className="filter-bar-container">
         <input
@@ -65,27 +59,27 @@ export default class FilterBar extends React.Component {
         />
         <label className="collapse-expand-label" htmlFor="collapse-expand" />
         <form className="filter-bar">
-          <h3>{locale.messages.filters.priceRange}</h3>
+          <h3>{locale("filters.priceRange")}</h3>
           <section className="price-container">
             <input
               type="number"
               id={`${filterIdPrefix}minPrice`}
               value={this.state[`${filterIdPrefix}minPrice`]}
               onChange={this.onChange}
-              placeholder={locale.messages.filters.min}
+              placeholder={locale("filters.min")}
             />
-            <span>{locale.messages.filters.to}</span>
+            <span>{locale("filters.to")}</span>
             <input
               type="number"
               id={`${filterIdPrefix}maxPrice`}
               value={this.state[`${filterIdPrefix}maxPrice`]}
               onChange={this.onChange}
-              placeholder={locale.messages.filters.max}
+              placeholder={locale("filters.max")}
             />
           </section>
           {this.props.ad_type.id !== "rent" ? null : (
             <>
-              <h3>{locale.messages.filters.numberOfRooms}</h3>
+              <h3>{locale("filters.numberOfRooms")}</h3>
               <section className="room-container">
                 {roomSizes.map(numRooms => (
                   <label

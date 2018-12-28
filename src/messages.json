@@ -1,0 +1,38 @@
+{
+  "en": {
+    "meta.description": "Quebec Housing",
+    "notFound.doesNotExist": "This page does not exist",
+    "notFound.returnToHome": "Click here to return to the home page.",
+    "cities.quebec": "Quebec City",
+    "cities.montreal": "Montreal",
+    "frontPage.lookingFor": "I'm looking to",
+    "frontPage.rent": "rent",
+    "frontPage.buy": "buy",
+    "frontPage.colocation": "cohabitate",
+    "frontPage.in": "in",
+    "frontPage.letsGo": "Let's go!",
+    "filters.priceRange": "Price range",
+    "filters.min": "min",
+    "filters.to": "to",
+    "filters.max": "max",
+    "filters.numberOfRooms": "Number of rooms"
+  },
+  "fr": {
+    "meta.description": "Logement au québec",
+    "notFound.doesNotExist": "Cette page n'existe pas",
+    "notFound.returnToHome": "Cliquez içi pour vous rendre à la page d'accueil.",
+    "cities.quebec": "Québec",
+    "cities.montreal": "Montréal",
+    "frontPage.lookingFor": "Je veux",
+    "frontPage.rent": "louer",
+    "frontPage.buy": "acheter",
+    "frontPage.colocation": "cohabiter",
+    "frontPage.in": "à",
+    "frontPage.letsGo": "Allons-y!",
+    "filters.priceRange": "Gamme de prix",
+    "filters.min": "min",
+    "filters.to": "à",
+    "filters.max": "max",
+    "filters.numberOfRooms": "Nombre de pièces"
+  }
+}

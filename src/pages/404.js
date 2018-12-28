@@ -6,9 +6,9 @@ const NotFoundPage = () => (
   <LocaleConsumer>
     {locale => (
       <>
-        <h1>{locale.messages.notFound.doesNotExist}</h1>
+        <h1>{locale("notFound.doesNotExist")}</h1>
         <Link to={`/${locale.language}/`}>
-          {locale.messages.notFound.returnToHome}
+          {locale("notFound.returnToHome")}
         </Link>
       </>
     )}

@@ -27,7 +27,7 @@ const Layout = ({ children, renderHeader = true }) => (
               meta={[
                 {
                   name: "description",
-                  content: locale.messages.meta.description,
+                  content: locale("meta.description"),
                 },
               ]}
             >

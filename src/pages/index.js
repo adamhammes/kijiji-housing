@@ -41,7 +41,7 @@ class IndexPage extends React.Component {
         query={query}
         render={data => (
           <form onChange={this.onChange}>
-            <h2>{locale.messages.frontPage.lookingFor}</h2>
+            <h2>{locale("frontPage.lookingFor")}</h2>
             <div className="options-container">
               {data.apiJson.ad_types.map(a => (
                 <label key={a.id}>
@@ -52,11 +52,11 @@ class IndexPage extends React.Component {
                     value={a.id}
                     defaultChecked={this.state.ad_type === a.id}
                   />
-                  {locale.messages.frontPage[a.id]}
+                  {locale(`frontPage.${a.id}`)}
                 </label>
               ))}
             </div>
-            <h2>{locale.messages.frontPage.in}</h2>
+            <h2>{locale("frontPage.in")}</h2>
             <div className="options-container">
               {data.apiJson.cities.map(c => (
                 <label key={c.id}>
@@ -67,12 +67,12 @@ class IndexPage extends React.Component {
                     value={c.id}
                     defaultChecked={this.state.city === c.id}
                   />
-                  {locale.messages.cities[c.id]}
+                  {locale(`cities.${c.id}`)}
                 </label>
               ))}
             </div>
             <Link className="toOfferPage" to={this.nextLink()}>
-              {locale.messages.frontPage.letsGo}
+              {locale(`frontPage.letsGo`)}
             </Link>
           </form>
         )}

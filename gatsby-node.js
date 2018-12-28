@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require(`path`);
 
 const aws = require("aws-sdk");
-const { languages } = require("./src/translations/translations");
+const languages = ["fr", "en"];
 
 const { splitAndFilter } = require("./src/lib/build_helper");
 
@@ -21,6 +21,20 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
       },
     });
   }
+  actions.setWebpackConfig({
+    module: {
+      rules: [
+        {
+          test: /\bmessages\.json$/,
+          type: "javascript/auto",
+          loader: require.resolve("messageformat-loader"),
+          options: {
+            locale: languages,
+          },
+        },
+      ],
+    },
+  });
 };
 
 exports.onPreInit = (_, pluginOptions, cb) => {

@@ -1,12 +1,30 @@
 import React from "react";
-import frLocale from "../translations/translations.fr.json";
-import enLocale from "../translations/translations.en.json";
+import messages from "../messages.json";
 import { Layout } from "../components/layout";
+import { objectFromIterable } from "../lib/utils";
 
-const locales = {
-  en: enLocale,
-  fr: frLocale,
+const languages = Object.keys(messages);
+
+const createLocale = language => {
+  const messageFunction = (messageId, ...args) => {
+    if (messages[language][messageId] == null) {
+      throw new Error(
+        `Could not find message with id '${messageId}' in the ${language} locale.`
+      );
+    }
+
+    return messages[language][messageId](args);
+  };
+
+  messageFunction.language = language;
+  messageFunction.allLanguages = languages;
+
+  return messageFunction;
 };
+
+const locales = objectFromIterable(
+  languages.map(lang => [lang, createLocale(lang)])
+);
 
 const defaultLocale = locales.fr;
 const LocaleContext = React.createContext(defaultLocale);
@@ -27,4 +45,4 @@ const wrapPageElement = ({ element, props }) => {
   );
 };
 
-export { wrapPageElement, LocaleConsumer, LocaleContext };
+export { wrapPageElement, LocaleConsumer, LocaleContext, languages };
