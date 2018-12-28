@@ -3,12 +3,17 @@ import "leaflet.markercluster";
 import React from "react";
 import ReactDOM from "react-dom";
 
+import iconRetinaUrl from "leaflet/dist/images/marker-icon-2x.png";
+import iconUrl from "leaflet/dist/images/marker-icon.png";
+import shadowUrl from "leaflet/dist/images/marker-shadow.png";
+
 import "./leaflet.scss";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 
 import genPopupContent from "./popup";
 import { plog } from "../lib/utils";
+import { LocaleContext } from "./locale-context";
 
 const accessToken =
   "pk.eyJ1IjoiYWRhbWhhbW1lcyIsImEiOiJjamQxczNrajQyd25kMndvNWR6cGdqYWl2In0" +
@@ -29,9 +34,9 @@ if (typeof window !== "undefined") {
   L = window.L;
 
   window.L.Icon.Default.mergeOptions({
-    iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
-    iconUrl: require("leaflet/dist/images/marker-icon.png"),
-    shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
+    iconRetinaUrl,
+    iconUrl,
+    shadowUrl,
   });
 }
 
@@ -103,7 +108,7 @@ class OffersMap extends React.Component {
       const popupContent = genPopupContent(
         offer,
         this.props.ad_type,
-        this.props.locale
+        this.context
       );
 
       const maxHeight = Math.min(250, window.innerHeight - 325 - 30);
@@ -136,5 +141,7 @@ class OffersMap extends React.Component {
     return <div />;
   }
 }
+
+OffersMap.contextType = LocaleContext;
 
 export default OffersMap;

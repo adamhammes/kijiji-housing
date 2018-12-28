@@ -1,11 +1,11 @@
 import React from "react";
 
-import Layout from "../components/layout";
 import FilterBar from "../components/filter_bar";
 import OffersMap from "../components/offers_map";
 import { formatPrice, objectFromIterable, plog } from "../lib/utils";
 
 import "./offers-display.scss";
+import { LocaleContext } from "../components/locale-context";
 
 export default class OffersDisplay extends React.Component {
   constructor(props) {
@@ -31,7 +31,8 @@ export default class OffersDisplay extends React.Component {
   componentDidMount() {
     this.isMounted_ = true;
 
-    const { scrapeId, city, ad_type, locale } = this.props.pageContext;
+    const { scrapeId, city, ad_type } = this.props.pageContext;
+    const locale = this.context;
 
     const descriptionsPath = `/api/${scrapeId}_${city.id}-${
       ad_type.id
@@ -81,28 +82,28 @@ export default class OffersDisplay extends React.Component {
   }
 
   render() {
-    const { city, ad_type, locale } = this.props.pageContext;
+    const { city, ad_type } = this.props.pageContext;
 
     return (
-      <Layout locale={locale} renderHeader={false}>
+      <>
         <div className="offers-display">
           <FilterBar
             offers={Object.values(this.state.allOffers)}
             onUpdate={this.onFilterUpdate}
             ad_type={ad_type}
-            locale={locale}
             onExpandCollapse={this.onExpandCollapse}
           />
           <OffersMap
             city={city}
             offers={this.state.displayedOffers}
-            locale={locale}
             ad_type={ad_type}
             descriptionsLoaded={this.state.descriptionsLoaded}
             bindInvalidateBounds={this.bindInvalidateBounds}
           />
         </div>
-      </Layout>
+      </>
     );
   }
 }
+
+OffersDisplay.contextType = LocaleContext;

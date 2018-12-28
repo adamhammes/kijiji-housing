@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require(`path`);
 
 const aws = require("aws-sdk");
-const { languages, locales } = require("./src/translations/translations");
+const { languages } = require("./src/translations/translations");
 
 const { splitAndFilter } = require("./src/lib/build_helper");
 
@@ -81,11 +81,11 @@ exports.createPages = ({ actions }) => {
           path: `/${lang}${slug}`,
           component: path.resolve(`./src/templates/offers-display.js`),
           context: {
-            locale: locales[lang],
             scrapeId,
             city,
             ad_type,
             offers,
+            pageType: "offerDisplay",
           },
         });
 
@@ -103,10 +103,8 @@ exports.onCreatePage = ({ page, actions }) => {
   return new Promise(resolve => {
     for (const language of languages) {
       const newPage = Object.assign({}, page);
-      const locale = locales[language];
 
       newPage.path = `/${language}${page.path}`;
-      newPage.context = { ...page.context, language, locale };
 
       createPage(newPage);
 
@@ -117,8 +115,6 @@ exports.onCreatePage = ({ page, actions }) => {
 
     if (!page.path.startsWith("/404.html")) {
       deletePage(page);
-    } else {
-      page.context.locale = locales.fr;
     }
 
     resolve();

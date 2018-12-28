@@ -1,18 +1,18 @@
 import React from "react";
-import Layout from "../components/layout";
 import { Link } from "gatsby";
+import { LocaleConsumer } from "../components/locale-context";
 
-const NotFoundPage = ({ pageContext }) => {
-  const { locale } = pageContext;
-
-  const homePath = `/${locale.language}/`;
-
-  return (
-    <Layout locale={locale}>
-      <h1>{locale.messages.notFound.doesNotExist}</h1>
-      <Link to={homePath}>{locale.messages.notFound.returnToHome}</Link>
-    </Layout>
-  );
-};
+const NotFoundPage = () => (
+  <LocaleConsumer>
+    {locale => (
+      <>
+        <h1>{locale.messages.notFound.doesNotExist}</h1>
+        <Link to={`/${locale.language}/`}>
+          {locale.messages.notFound.returnToHome}
+        </Link>
+      </>
+    )}
+  </LocaleConsumer>
+);
 
 export default NotFoundPage;

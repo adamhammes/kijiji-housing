@@ -2,6 +2,7 @@ import React from "react";
 
 import { objectFromIterable, formatRooms, plog } from "../lib/utils";
 import filterOffers from "../lib/filter";
+import { LocaleContext } from "./locale-context";
 
 const filterIdPrefix = "filter-";
 
@@ -44,8 +45,14 @@ export default class FilterBar extends React.Component {
   }
 
   render() {
-    const { messages } = this.props.locale;
     const { onExpandCollapse } = this.props;
+    const locale = this.context;
+
+    if (locale.messages === undefined) {
+      console.log("\nasdf");
+      console.log(locale);
+      console.log(Object.keys(locale));
+    }
 
     return (
       <div className="filter-bar-container">
@@ -58,27 +65,27 @@ export default class FilterBar extends React.Component {
         />
         <label className="collapse-expand-label" htmlFor="collapse-expand" />
         <form className="filter-bar">
-          <h3>{messages.filters.priceRange}</h3>
+          <h3>{locale.messages.filters.priceRange}</h3>
           <section className="price-container">
             <input
               type="number"
               id={`${filterIdPrefix}minPrice`}
               value={this.state[`${filterIdPrefix}minPrice`]}
               onChange={this.onChange}
-              placeholder={messages.filters.min}
+              placeholder={locale.messages.filters.min}
             />
-            <span>{messages.filters.to}</span>
+            <span>{locale.messages.filters.to}</span>
             <input
               type="number"
               id={`${filterIdPrefix}maxPrice`}
               value={this.state[`${filterIdPrefix}maxPrice`]}
               onChange={this.onChange}
-              placeholder={messages.filters.max}
+              placeholder={locale.messages.filters.max}
             />
           </section>
           {this.props.ad_type.id !== "rent" ? null : (
             <>
-              <h3>{messages.filters.numberOfRooms}</h3>
+              <h3>{locale.messages.filters.numberOfRooms}</h3>
               <section className="room-container">
                 {roomSizes.map(numRooms => (
                   <label
@@ -114,3 +121,5 @@ export default class FilterBar extends React.Component {
     });
   }
 }
+
+FilterBar.contextType = LocaleContext;
