@@ -17,6 +17,9 @@
     "filters.min": "min",
     "filters.to": "to",
     "filters.max": "max",
+    "filters.timeOnMarket": "Time on the Market",
+    "filters.lessThan": "Less than",
+    "filters.daysOld": "days old",
     "filters.numberOfRooms": "Number of rooms"
   },
   "fr": {
@@ -37,6 +40,9 @@
     "filters.min": "min",
     "filters.to": "à",
     "filters.max": "max",
+    "filters.timeOnMarket": "Temps sur les marchés",
+    "filters.lessThan": "Moins de",
+    "filters.daysOld": "jours d'âge",
     "filters.numberOfRooms": "Nombre de pièces"
   }
 }

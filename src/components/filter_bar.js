@@ -33,6 +33,7 @@ export default class FilterBar extends React.Component {
     const defaultState = {
       [filterIdPrefix + "minPrice"]: "",
       [filterIdPrefix + "maxPrice"]: "",
+      [filterIdPrefix + "timeOnMarket"]: "",
     };
 
     if (this.props.ad_type.id === "rent") {
@@ -81,6 +82,17 @@ export default class FilterBar extends React.Component {
               onChange={this.onChange}
               placeholder={locale("filters.max")}
             />
+          </section>
+          <h3>{locale("filters.timeOnMarket")}</h3>
+          <section>
+            {locale("filters.lessThan")}&nbsp;&nbsp;
+            <input
+              type="number"
+              id={`${filterIdPrefix}timeOnMarket`}
+              value={this.state[`${filterIdPrefix}timeOnMarket`]}
+              onChange={this.onChange}
+            />
+            &nbsp;&nbsp;{locale("filters.daysOld")}
           </section>
           {this.props.ad_type.id !== "rent" ? null : (
             <>

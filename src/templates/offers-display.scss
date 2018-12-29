@@ -94,6 +94,13 @@ $offers-display-desktop-down: (
   @media #{$offers-display-desktop-down} {
     max-height: 230px;
   }
+
+  input[type="number"] {
+    max-width: 5.5em;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: lightslategrey;
+  }
 }
 
 .price-container {
@@ -102,13 +109,6 @@ $offers-display-desktop-down: (
 
 .price-container span {
   margin: 0 0.5em;
-}
-
-.price-container input {
-  max-width: 5.5em;
-  border-width: 0 0 1px 0;
-  border-style: solid;
-  border-color: lightslategrey;
 }
 
 .room-container {
