@@ -17,7 +17,7 @@
     "filters.min": "min",
     "filters.to": "to",
     "filters.max": "max",
-    "filters.timeOnMarket": "Time on the Market",
+    "filters.timeOnMarket": "Time on the market",
     "filters.lessThan": "Less than",
     "filters.daysOld": "days old",
     "filters.numberOfRooms": "Number of rooms"
