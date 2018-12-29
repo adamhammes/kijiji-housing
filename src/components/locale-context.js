@@ -6,14 +6,14 @@ import { objectFromIterable } from "../lib/utils";
 const languages = Object.keys(messages);
 
 const createLocale = language => {
-  const messageFunction = (messageId, ...args) => {
+  const messageFunction = (messageId, params) => {
     if (messages[language][messageId] == null) {
       throw new Error(
         `Could not find message with id '${messageId}' in the ${language} locale.`
       );
     }
 
-    return messages[language][messageId](args);
+    return messages[language][messageId](params);
   };
 
   messageFunction.language = language;

@@ -88,7 +88,8 @@ export default class OffersDisplay extends React.Component {
       <>
         <div className="offers-display">
           <FilterBar
-            offers={Object.values(this.state.allOffers)}
+            allOffers={Object.values(this.state.allOffers)}
+            displayedOffers={this.state.displayedOffers}
             onUpdate={this.onFilterUpdate}
             ad_type={ad_type}
             onExpandCollapse={this.onExpandCollapse}

@@ -45,7 +45,7 @@ export default class FilterBar extends React.Component {
   }
 
   render() {
-    const { onExpandCollapse } = this.props;
+    const { onExpandCollapse, displayedOffers, allOffers } = this.props;
     const locale = this.context;
 
     return (
@@ -59,6 +59,11 @@ export default class FilterBar extends React.Component {
         />
         <label className="collapse-expand-label" htmlFor="collapse-expand" />
         <form className="filter-bar">
+          <h2>{locale("filter.title")}</h2>
+          {locale("filter.apartmentsShown", {
+            numShown: displayedOffers.length,
+            numTotal: allOffers.length,
+          })}
           <h3>{locale("filters.priceRange")}</h3>
           <section className="price-container">
             <input
@@ -104,14 +109,14 @@ export default class FilterBar extends React.Component {
   }
 
   onChange(event) {
-    const { onUpdate, offers } = this.props;
+    const { onUpdate, allOffers } = this.props;
 
     const targetValue = getValueForInput(event.target);
 
     plog("start filtering");
     this.setState({ [event.target.id]: targetValue }, () => {
       plog("finished filtering");
-      onUpdate(filterOffers(offers, removePrefixFromState(this.state)));
+      onUpdate(filterOffers(allOffers, removePrefixFromState(this.state)));
     });
   }
 }

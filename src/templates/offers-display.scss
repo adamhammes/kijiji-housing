@@ -89,6 +89,7 @@ $offers-display-desktop-down: (
 .filter-bar {
   overflow-y: scroll;
   padding: 1.45rem;
+  min-width: 20rem;
 
   @media #{$offers-display-desktop-down} {
     max-height: 230px;
