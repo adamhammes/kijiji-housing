@@ -87,6 +87,10 @@ class OffersMap extends React.Component {
     this.setState({ _mounted: true });
   }
 
+  componentWillUnmount() {
+    this.map.remove();
+  }
+
   markerForOffer(offer) {
     let marker;
     if (!this.markerCache.has(offer.id)) {
