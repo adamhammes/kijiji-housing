@@ -69,6 +69,7 @@ export default class FilterBar extends React.Component {
           <section className="price-container">
             <input
               type="number"
+              min="0"
               id={`${filterIdPrefix}minPrice`}
               value={this.state[`${filterIdPrefix}minPrice`]}
               onChange={this.onChange}
@@ -77,6 +78,7 @@ export default class FilterBar extends React.Component {
             <span>{locale("filters.to")}</span>
             <input
               type="number"
+              min="0"
               id={`${filterIdPrefix}maxPrice`}
               value={this.state[`${filterIdPrefix}maxPrice`]}
               onChange={this.onChange}
@@ -88,6 +90,7 @@ export default class FilterBar extends React.Component {
             {locale("filters.lessThan")}&nbsp;&nbsp;
             <input
               type="number"
+              min="0"
               id={`${filterIdPrefix}timeOnMarket`}
               value={this.state[`${filterIdPrefix}timeOnMarket`]}
               onChange={this.onChange}
