@@ -165,6 +165,7 @@ textarea {
 [type="radio"] {
   box-sizing: border-box;
   padding: 0;
+  cursor: pointer;
 }
 [type="number"]::-webkit-inner-spin-button,
 [type="number"]::-webkit-outer-spin-button {
