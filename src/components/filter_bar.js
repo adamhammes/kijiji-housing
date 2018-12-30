@@ -6,6 +6,12 @@ import { LocaleContext } from "./locale-context";
 
 const filterIdPrefix = "filter-";
 
+const priceStepSize = {
+  colocation: 25,
+  rent: 50,
+  buy: 25000,
+};
+
 const removePrefixFromState = state =>
   objectFromIterable(
     Object.entries(state).map(([key, value]) => [
@@ -46,7 +52,12 @@ export default class FilterBar extends React.Component {
   }
 
   render() {
-    const { onExpandCollapse, displayedOffers, allOffers } = this.props;
+    const {
+      onExpandCollapse,
+      displayedOffers,
+      allOffers,
+      ad_type,
+    } = this.props;
     const locale = this.context;
 
     return (
@@ -70,6 +81,7 @@ export default class FilterBar extends React.Component {
             <input
               type="number"
               min="0"
+              step={priceStepSize[ad_type.id]}
               id={`${filterIdPrefix}minPrice`}
               value={this.state[`${filterIdPrefix}minPrice`]}
               onChange={this.onChange}
@@ -79,6 +91,7 @@ export default class FilterBar extends React.Component {
             <input
               type="number"
               min="0"
+              step={priceStepSize[ad_type.id]}
               id={`${filterIdPrefix}maxPrice`}
               value={this.state[`${filterIdPrefix}maxPrice`]}
               onChange={this.onChange}
@@ -97,7 +110,7 @@ export default class FilterBar extends React.Component {
             />
             &nbsp;&nbsp;{locale("filters.daysOld")}
           </section>
-          {this.props.ad_type.id !== "rent" ? null : (
+          {ad_type.id !== "rent" ? null : (
             <>
               <h3>{locale("filters.numberOfRooms")}</h3>
               <section className="room-container">
