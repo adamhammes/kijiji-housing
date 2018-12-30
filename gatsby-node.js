@@ -72,6 +72,21 @@ exports.onPreInit = (_, pluginOptions, cb) => {
   });
 };
 
+const createLocalizedPages = (page, createPage, createRedirect, deletePage) => {
+  languages.forEach(lang => {
+    const localizedPath = `/${lang}${page.path}`;
+    const localizedPage = { ...page, path: localizedPath };
+
+    createPage(localizedPage);
+
+    if (lang === "fr") {
+      createRedirect({ fromPath: page.path, toPath: localizedPath });
+    }
+  });
+
+  if (deletePage) deletePage(page);
+};
+
 exports.createPages = ({ actions }) => {
   const { createPage, createRedirect } = actions;
   const scraped_data = require(`${API_PATH}/all.json`);
@@ -94,9 +109,9 @@ exports.createPages = ({ actions }) => {
         JSON.stringify(descriptionMapping)
       );
 
-      for (const lang of languages) {
-        createPage({
-          path: `/${lang}${slug}`,
+      createLocalizedPages(
+        {
+          path: slug,
           component: path.resolve(`./src/templates/offers-display.js`),
           context: {
             scrapeId,
@@ -105,12 +120,10 @@ exports.createPages = ({ actions }) => {
             offers,
             pageType: "offerDisplay",
           },
-        });
-
-        if (lang === "fr") {
-          createRedirect({ fromPath: slug, toPath: `/${lang}${slug}` });
-        }
-      }
+        },
+        createPage,
+        createRedirect
+      );
     }
   }
 };
@@ -119,21 +132,9 @@ exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage, createRedirect } = actions;
 
   return new Promise(resolve => {
-    for (const language of languages) {
-      const newPage = Object.assign({}, page);
+    const _delete = page.path.startsWith("/404.html") ? null : deletePage;
 
-      newPage.path = `/${language}${page.path}`;
-
-      createPage(newPage);
-
-      if (language === "fr") {
-        createRedirect({ fromPath: page.path, toPath: newPage.path });
-      }
-    }
-
-    if (!page.path.startsWith("/404.html")) {
-      deletePage(page);
-    }
+    createLocalizedPages(page, createPage, createRedirect, _delete);
 
     resolve();
   });
