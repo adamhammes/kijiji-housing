@@ -31,7 +31,7 @@ const Header = ({ siteTitle }) => {
             {siteTitle}
           </Link>
         </h1>
-        <LanguageSwitcher />
+        <LanguageSwitcher className="header-language-switcher" />
       </div>
     </header>
   );

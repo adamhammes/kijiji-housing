@@ -18,9 +18,9 @@ header {
     justify-content: space-between;
     align-items: center;
   }
+}
 
-  a {
-    color: white;
-    font-family: $sans-serif-family;
-  }
+header .header-language-switcher {
+  color: white;
+  font-family: $sans-serif-family;
 }

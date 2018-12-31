@@ -72,8 +72,10 @@ export default class FilterBar extends React.Component {
         />
         <label className="collapse-expand-label" htmlFor="collapse-expand" />
         <form className="filter-bar">
-          <h2>{locale("filter.title")}</h2>
-          <LanguageSwitcher className="language-switcher" />
+          <header>
+            <h2>{locale("filter.title")}</h2>
+            <LanguageSwitcher className="language-switcher" />
+          </header>
           {locale("filter.apartmentsShown", {
             numShown: displayedOffers.length,
             numTotal: allOffers.length,

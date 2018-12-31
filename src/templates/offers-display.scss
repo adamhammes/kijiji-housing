@@ -101,13 +101,11 @@ $offers-display-desktop-down: (
     border-style: solid;
     border-color: lightslategrey;
   }
-}
 
-.language-switcher {
-  position: absolute;
-  top: 1.45rem * 1.5;
-  right: 1.45rem;
-  transform: translateY(-50%);
+  header {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .price-container {
