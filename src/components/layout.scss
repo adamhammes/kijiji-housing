@@ -1,8 +1,10 @@
-$theme-color: #ea5500;
-$theme-color-text: #cc4b00;
+$theme-color: #ea5500 !default;
+$theme-color-text: #cc4b00 !default;
 
 $sans-serif-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
   Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+$serif-family: georgia, serif;
 
 html {
   font-family: sans-serif;
