@@ -1,16 +1,15 @@
-import React, { useContext } from "react";
-import { Link } from "gatsby";
-import { LocaleContext } from "../components/locale-context";
+import React from "react";
+import { Message, LocalizedLink } from "../components/lib";
 
-const NotFoundPage = () => {
-  const locale = useContext(LocaleContext);
-
-  return (
-    <>
-      <h1>{locale("notFound.doesNotExist")}</h1>
-      <Link to={`/${locale.language}/`}>{locale("notFound.returnToHome")}</Link>
-    </>
-  );
-};
+const NotFoundPage = () => (
+  <>
+    <h1>
+      <Message>notFound.doesNotExist</Message>
+    </h1>
+    <LocalizedLink to="/">
+      <Message>notFound.returnToHome</Message>
+    </LocalizedLink>
+  </>
+);
 
 export default NotFoundPage;

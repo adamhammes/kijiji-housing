@@ -1,8 +1,8 @@
 import React from "react";
-import { StaticQuery, graphql, Link } from "gatsby";
+import { StaticQuery, graphql } from "gatsby";
 
 import "./front-page.scss";
-import { LocaleContext } from "../components/locale-context";
+import { LocalizedLink, Message } from "../components/lib";
 
 const query = graphql`
   {
@@ -34,14 +34,14 @@ class IndexPage extends React.Component {
   }
 
   render() {
-    const locale = this.context;
-
     return (
       <StaticQuery
         query={query}
         render={data => (
           <form onChange={this.onChange}>
-            <h2>{locale("frontPage.lookingFor")}</h2>
+            <h2>
+              <Message>frontPage.lookingFor</Message>
+            </h2>
             <div className="options-container">
               {data.apiJson.ad_types.map(a => (
                 <label key={a.id}>
@@ -52,11 +52,13 @@ class IndexPage extends React.Component {
                     value={a.id}
                     defaultChecked={this.state.ad_type === a.id}
                   />
-                  {locale(`frontPage.${a.id}`)}
+                  <Message>{`frontPage.${a.id}`}</Message>
                 </label>
               ))}
             </div>
-            <h2>{locale("frontPage.in")}</h2>
+            <h2>
+              <Message>frontPage.in</Message>
+            </h2>
             <div className="options-container">
               {data.apiJson.cities.map(c => (
                 <label key={c.id}>
@@ -67,13 +69,13 @@ class IndexPage extends React.Component {
                     value={c.id}
                     defaultChecked={this.state.city === c.id}
                   />
-                  {locale(`cities.${c.id}`)}
+                  <Message>{`cities.${c.id}`}</Message>
                 </label>
               ))}
             </div>
-            <Link className="toOfferPage" to={this.nextLink()}>
-              {locale(`frontPage.letsGo`)}
-            </Link>
+            <LocalizedLink className="toOfferPage" to={this.nextLink()}>
+              <Message>frontPage.letsGo</Message>
+            </LocalizedLink>
           </form>
         )}
       />
@@ -81,15 +83,12 @@ class IndexPage extends React.Component {
   }
 
   nextLink() {
-    const language = this.context.language;
-    return `/${language}/${this.state.city}/${this.state.ad_type}/`;
+    return `/${this.state.city}/${this.state.ad_type}/`;
   }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 }
-
-IndexPage.contextType = LocaleContext;
 
 export default IndexPage;
