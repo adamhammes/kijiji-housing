@@ -6,8 +6,6 @@ const whitelistedKeys = [
   "id",
   "date",
   "price",
-  "is_furnished",
-  "allows_animals",
   "latitude",
   "longitude",
   "num_rooms",
