@@ -15,7 +15,7 @@ const LanguageSwitcher = linkProps => {
   const alternativePath = `/${otherLang}${location.pathname.substring(3)}`;
 
   return (
-    <Link {...linkProps} to={alternativePath}>
+    <Link to={alternativePath} hrefLang={otherLang} {...linkProps}>
       {locale("alternateLang")}
     </Link>
   );
