@@ -2,7 +2,7 @@ import React from "react";
 
 import FilterBar from "../components/filter_bar";
 import OffersMap from "../components/offers_map";
-import { formatPrice, objectFromIterable, plog } from "../lib/utils";
+import { formatPrice, plog } from "../lib/utils";
 
 import "./offers-display.scss";
 import { LocaleContext } from "../components/locale-context";
@@ -13,13 +13,9 @@ export default class OffersDisplay extends React.Component {
 
     const { offers } = this.props.pageContext;
 
-    const allOffers = objectFromIterable(
-      offers.map(offer => [offer.id, offer])
-    );
-
     this.state = {
-      allOffers,
-      displayedOffers: Object.values(allOffers),
+      allOffers: offers,
+      displayedOffers: offers,
       descriptionsLoaded: false,
     };
 
@@ -41,17 +37,17 @@ export default class OffersDisplay extends React.Component {
     plog("fetching apartment descriptions");
     fetch(descriptionsPath)
       .then(res => res.json())
-      .then(descriptionsById => {
+      .then(descriptions => {
         if (!this.isMounted_) {
           return;
         }
 
         plog("descriptions received");
 
-        const offersWithDescription = Object.assign({}, this.state.allOffers);
+        const offersWithDescription = this.state.allOffers.slice();
 
-        Object.entries(descriptionsById).forEach(([id, description]) => {
-          const offer = offersWithDescription[id];
+        descriptions.forEach((description, index) => {
+          const offer = offersWithDescription[index];
           offer.description = description;
           offer.formattedPrice = formatPrice(locale.language, offer.price);
         });
@@ -88,7 +84,7 @@ export default class OffersDisplay extends React.Component {
       <>
         <div className="offers-display">
           <FilterBar
-            allOffers={Object.values(this.state.allOffers)}
+            allOffers={this.state.allOffers}
             displayedOffers={this.state.displayedOffers}
             onUpdate={this.onFilterUpdate}
             ad_type={ad_type}

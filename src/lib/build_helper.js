@@ -52,12 +52,10 @@ const splitAndFilter = (rawOffers, city, ad_type) => {
 
   console.log(`${offers.length} offers exported for ${city.id}/${ad_type.id}`);
 
-  const descriptionMapping = objectFromIterable(
-    offers.map(offer => [offer.id, offer.description])
-  );
+  const descriptions = offers.map(offer => offer.description);
 
   offers = offers.map(whitelistOffer);
-  return { descriptionMapping, offers };
+  return { descriptions, offers };
 };
 
 module.exports = {

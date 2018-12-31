@@ -98,15 +98,11 @@ exports.createPages = ({ actions }) => {
       const slug = `/${city.id}/${ad_type.id}`;
       const scrapeId = scraped_data.date_collected;
 
-      const { offers, descriptionMapping } = splitAndFilter(
-        rawOffers,
-        city,
-        ad_type
-      );
+      const { offers, descriptions } = splitAndFilter(rawOffers, city, ad_type);
 
       fs.writeFileSync(
         `${API_PATH}/${scrapeId}_${city.id}-${ad_type.id}-descriptions.json`,
-        JSON.stringify(descriptionMapping)
+        JSON.stringify(descriptions)
       );
 
       createLocalizedPages(
