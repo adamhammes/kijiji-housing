@@ -1,0 +1,26 @@
+@import "./layout.scss";
+
+html,
+body {
+  margin: 0;
+}
+html,
+body,
+#___gatsby,
+#___gatsby > [role="group"],
+.leaflet-container {
+  height: 100%;
+}
+
+header {
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  a {
+    color: white;
+    font-family: $sans-serif-family;
+  }
+}

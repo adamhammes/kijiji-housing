@@ -1,6 +1,9 @@
 $theme-color: #ea5500;
 $theme-color-text: #cc4b00;
 
+$sans-serif-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;

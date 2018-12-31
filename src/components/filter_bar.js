@@ -3,6 +3,7 @@ import React from "react";
 import { objectFromIterable, formatRooms, plog } from "../lib/utils";
 import filterOffers from "../lib/filter";
 import { LocaleContext } from "./locale-context";
+import LanguageSwitcher from "./language-switcher";
 
 const filterIdPrefix = "filter-";
 
@@ -72,6 +73,7 @@ export default class FilterBar extends React.Component {
         <label className="collapse-expand-label" htmlFor="collapse-expand" />
         <form className="filter-bar">
           <h2>{locale("filter.title")}</h2>
+          <LanguageSwitcher className="language-switcher" />
           {locale("filter.apartmentsShown", {
             numShown: displayedOffers.length,
             numTotal: allOffers.length,

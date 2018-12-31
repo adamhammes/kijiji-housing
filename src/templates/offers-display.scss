@@ -103,6 +103,13 @@ $offers-display-desktop-down: (
   }
 }
 
+.language-switcher {
+  position: absolute;
+  top: 1.45rem * 1.5;
+  right: 1.45rem;
+  transform: translateY(-50%);
+}
+
 .price-container {
   display: flex;
 }

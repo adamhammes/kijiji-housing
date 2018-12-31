@@ -30,6 +30,10 @@ const defaultLocale = locales.fr;
 const LocaleContext = React.createContext(defaultLocale);
 const LocaleConsumer = LocaleContext.Consumer;
 
+const defaultLocation = {};
+const LocationContext = React.createContext(defaultLocation);
+const LocationConsumer = LocationContext.Consumer;
+
 const wrapPageElement = ({ element, props }) => {
   const { pathname } = props.location;
   const language = pathname.startsWith("/en/") ? "en" : "fr";
@@ -39,10 +43,19 @@ const wrapPageElement = ({ element, props }) => {
   const renderHeader = props.pageContext.pageType !== "offerDisplay";
 
   return (
-    <LocaleContext.Provider value={contextValue}>
-      <Layout renderHeader={renderHeader}>{element}</Layout>
-    </LocaleContext.Provider>
+    <LocationContext.Provider value={props.location}>
+      <LocaleContext.Provider value={contextValue}>
+        <Layout renderHeader={renderHeader}>{element}</Layout>
+      </LocaleContext.Provider>
+    </LocationContext.Provider>
   );
 };
 
-export { wrapPageElement, LocaleConsumer, LocaleContext, languages };
+export {
+  wrapPageElement,
+  LocaleConsumer,
+  LocaleContext,
+  languages,
+  LocationContext,
+  LocationConsumer,
+};

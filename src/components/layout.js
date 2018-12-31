@@ -5,7 +5,7 @@ import { StaticQuery, graphql } from "gatsby";
 import { LocaleContext } from "./locale-context";
 import Header from "./header";
 import "./layout.scss";
-import "./app.css";
+import "./app.scss";
 
 const Layout = ({ children, renderHeader = true }) => {
   const locale = useContext(LocaleContext);
