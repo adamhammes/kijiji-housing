@@ -9,7 +9,6 @@ const query = graphql`
     apiJson {
       cities {
         id
-        name_french
       }
       ad_types {
         id
