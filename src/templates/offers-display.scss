@@ -21,6 +21,11 @@ $offers-display-desktop-down: (
   flex: 1;
 }
 
+.leaflet-popup-content > :last-child {
+  white-space: pre-line;
+  overflow-wrap: break-word;
+}
+
 .filter-bar-container {
   position: relative;
 }
