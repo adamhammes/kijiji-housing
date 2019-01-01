@@ -29,7 +29,6 @@ class IndexPage extends React.Component {
 
     this.state = defaultState;
 
-    this.nextLink = this.nextLink.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
@@ -73,17 +72,16 @@ class IndexPage extends React.Component {
                 </label>
               ))}
             </div>
-            <LocalizedLink className="toOfferPage" to={this.nextLink()}>
+            <LocalizedLink
+              className="toOfferPage"
+              to={`/${this.state.city}/${this.state.ad_type}/`}
+            >
               <Message>frontPage.letsGo</Message>
             </LocalizedLink>
           </form>
         )}
       />
     );
-  }
-
-  nextLink() {
-    return `/${this.state.city}/${this.state.ad_type}/`;
   }
 
   onChange(e) {
