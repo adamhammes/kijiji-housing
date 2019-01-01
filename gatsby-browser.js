@@ -5,5 +5,10 @@ const onClientEntry = () => {
   galite("send", "pageview");
 };
 
-export { onClientEntry };
+const onRouteUpdate = ({ location }) => {
+  galite("set", "page", location.pathname + location.search + location.hash);
+  galite("send", "pageview");
+};
+
+export { onClientEntry, onRouteUpdate };
 export { wrapPageElement } from "./src/components/locale-context";
