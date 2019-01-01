@@ -22,3 +22,4 @@ const Message = ({ children, ...args }) => {
 };
 
 export { LocalizedLink, Message };
+export { LocaleContext, LocationContext } from "./locale-context";

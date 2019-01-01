@@ -92,10 +92,22 @@ exports.createPages = ({ actions }) => {
   const scraped_data = require(`${API_PATH}/all.json`);
 
   for (const city of scraped_data.cities) {
+    createLocalizedPages(
+      {
+        path: `/${city.id}/`,
+        component: path.resolve(`./src/templates/city-display.js`),
+        context: {
+          city,
+        },
+      },
+      createPage,
+      createRedirect
+    );
+
     for (const ad_type of scraped_data.ad_types) {
       const rawOffers = scraped_data.offers[city.id][ad_type.id];
 
-      const slug = `/${city.id}/${ad_type.id}`;
+      const slug = `/${city.id}/${ad_type.id}/`;
       const scrapeId = scraped_data.date_collected;
 
       const { offers, descriptions } = splitAndFilter(rawOffers, city, ad_type);
