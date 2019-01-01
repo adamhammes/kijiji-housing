@@ -27,12 +27,8 @@ export default class OffersDisplay extends React.Component {
   componentDidMount() {
     this.isMounted_ = true;
 
-    const { scrapeId, city, ad_type } = this.props.pageContext;
+    const { descriptionsPath } = this.props.pageContext;
     const locale = this.context;
-
-    const descriptionsPath = `/api/${scrapeId}_${city.id}-${
-      ad_type.id
-    }-descriptions.json`;
 
     plog("fetching apartment descriptions");
     fetch(descriptionsPath)

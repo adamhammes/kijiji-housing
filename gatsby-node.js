@@ -89,7 +89,7 @@ const createLocalizedPages = (page, createPage, createRedirect, deletePage) => {
   if (deletePage) deletePage(page);
 };
 
-exports.createPages = ({ actions }) => {
+exports.createPages = ({ actions, createContentDigest }) => {
   const { createPage, createRedirect } = actions;
   const scraped_data = require(`${API_PATH}/all.json`);
 
@@ -114,10 +114,13 @@ exports.createPages = ({ actions }) => {
 
       const { offers, descriptions } = splitAndFilter(rawOffers, city, ad_type);
 
-      fs.writeFileSync(
-        `${API_PATH}/${scrapeId}_${city.id}-${ad_type.id}-descriptions.json`,
-        JSON.stringify(descriptions)
+      const hash = createContentDigest(descriptions);
+      const descriptionsPath = path.join(
+        API_PATH,
+        `/${city.id}-${ad_type.id}-descriptions-${hash}.json`
       );
+
+      fs.writeFileSync(descriptionsPath, JSON.stringify(descriptions));
 
       createLocalizedPages(
         {
@@ -128,6 +131,7 @@ exports.createPages = ({ actions }) => {
             city,
             ad_type,
             offers,
+            descriptionsPath: descriptionsPath.substring("static".length),
             pageType: "offerDisplay",
           },
         },
