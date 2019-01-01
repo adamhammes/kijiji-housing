@@ -1,6 +1,6 @@
 import React from "react";
 import LanguageSwitcher from "./language-switcher";
-import { LocalizedLink } from "./lib";
+import { LocalizeLink } from "./lib";
 
 const Header = ({ siteTitle }) => (
   <header
@@ -17,7 +17,7 @@ const Header = ({ siteTitle }) => (
       }}
     >
       <h1 style={{ margin: 0 }}>
-        <LocalizedLink
+        <LocalizeLink
           to="/"
           style={{
             color: "white",
@@ -25,7 +25,7 @@ const Header = ({ siteTitle }) => (
           }}
         >
           {siteTitle}
-        </LocalizedLink>
+        </LocalizeLink>
       </h1>
       <LanguageSwitcher className="header-language-switcher" />
     </div>

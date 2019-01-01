@@ -1,14 +1,14 @@
 import React from "react";
-import { Message, LocalizedLink } from "../components/lib";
+import { Localize, LocalizeLink } from "../components/lib";
 
 const NotFoundPage = () => (
   <>
     <h1>
-      <Message>notFound.doesNotExist</Message>
+      <Localize>notFound.doesNotExist</Localize>
     </h1>
-    <LocalizedLink to="/">
-      <Message>notFound.returnToHome</Message>
-    </LocalizedLink>
+    <LocalizeLink to="/">
+      <Localize>notFound.returnToHome</Localize>
+    </LocalizeLink>
   </>
 );
 

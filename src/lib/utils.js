@@ -60,12 +60,12 @@ const plog = message => {
 
   const time = Math.round(performance.now());
   const formattedTime = time.toString().padStart(3, " ");
-  let deltaMessage = "";
+  let deltaLocalize = "";
   if (_plogLast !== -1) {
-    deltaMessage = ` (+${(time - _plogLast).toString().padStart(3, " ")})`;
+    deltaLocalize = ` (+${(time - _plogLast).toString().padStart(3, " ")})`;
   }
 
-  console.debug(`[${formattedTime}${deltaMessage}] ${message}`);
+  console.debug(`[${formattedTime}${deltaLocalize}] ${message}`);
   _plogLast = time;
 };
 

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { graphql } from "gatsby";
-import { Message, LocalizedLink, LocaleContext } from "../components/lib";
+import { Localize, LocalizeLink, LocaleContext } from "../components/lib";
 import "../pages/front-page.scss";
 
 export const query = graphql`
@@ -25,7 +25,7 @@ const CityDisplay = ({ data, pageContext }) => {
   return (
     <form>
       <h2>
-        <Message>frontPage.lookingFor</Message>
+        <Localize>frontPage.lookingFor</Localize>
       </h2>
       <div className="options-container">
         {ad_types.map(ad_type => (
@@ -37,16 +37,16 @@ const CityDisplay = ({ data, pageContext }) => {
               checked={selectedAdType.id === ad_type.id}
               onChange={() => setSelectedAdType(ad_type)}
             />
-            <Message>{`frontPage.${ad_type.id}`}</Message>
+            <Localize>{`frontPage.${ad_type.id}`}</Localize>
           </label>
         ))}
       </div>
       <h2>
-        <Message city={cityName}>cityDisplay.inCity</Message>
+        <Localize city={cityName}>cityDisplay.inCity</Localize>
       </h2>
-      <LocalizedLink to={`/${city.id}/${selectedAdType.id}`}>
-        <Message>frontPage.letsGo</Message>
-      </LocalizedLink>
+      <LocalizeLink to={`/${city.id}/${selectedAdType.id}`}>
+        <Localize>frontPage.letsGo</Localize>
+      </LocalizeLink>
     </form>
   );
 };

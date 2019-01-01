@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { graphql } from "gatsby";
 
 import "./front-page.scss";
-import { LocalizedLink, Message } from "../components/lib";
+import { LocalizeLink, Localize } from "../components/lib";
 
 export const query = graphql`
   {
@@ -26,7 +26,7 @@ const IndexPage = ({ data }) => {
   return (
     <form>
       <h2>
-        <Message>frontPage.lookingFor</Message>
+        <Localize>frontPage.lookingFor</Localize>
       </h2>
       <div className="options-container">
         {ad_types.map(a => (
@@ -39,12 +39,12 @@ const IndexPage = ({ data }) => {
               defaultChecked={currentAdType.id === a.id}
               onChange={() => setAdType(a)}
             />
-            <Message>{`frontPage.${a.id}`}</Message>
+            <Localize>{`frontPage.${a.id}`}</Localize>
           </label>
         ))}
       </div>
       <h2>
-        <Message>frontPage.in</Message>
+        <Localize>frontPage.in</Localize>
       </h2>
       <div className="options-container">
         {cities.map(c => (
@@ -57,16 +57,16 @@ const IndexPage = ({ data }) => {
               checked={currentCity.id === c.id}
               onChange={() => setCity(c)}
             />
-            <Message>{`cities.${c.id}`}</Message>
+            <Localize>{`cities.${c.id}`}</Localize>
           </label>
         ))}
       </div>
-      <LocalizedLink
+      <LocalizeLink
         className="toOfferPage"
         to={`/${currentCity.id}/${currentAdType.id}/`}
       >
-        <Message>frontPage.letsGo</Message>
-      </LocalizedLink>
+        <Localize>frontPage.letsGo</Localize>
+      </LocalizeLink>
     </form>
   );
 };
