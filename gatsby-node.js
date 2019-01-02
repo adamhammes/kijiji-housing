@@ -3,6 +3,7 @@ const path = require(`path`);
 
 const aws = require("aws-sdk");
 const languages = ["fr", "en"];
+const defaultLang = "en";
 
 const { splitAndFilter } = require("./src/lib/build_helper");
 
@@ -78,11 +79,12 @@ const createLocalizedPages = (page, createPage, createRedirect, deletePage) => {
     const localizedPage = { ...page, path: localizedPath };
 
     createPage(localizedPage);
+    const options = lang === defaultLang ? {} : { Language: lang };
 
     createRedirect({
       fromPath: page.path,
       toPath: localizedPath,
-      Language: lang,
+      ...options,
     });
   });
 
