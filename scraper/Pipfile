@@ -2,6 +2,7 @@
 name = "pypi"
 url = "https://pypi.python.org/simple"
 verify_ssl = true
+python_version = ">=3.6.0"
 
 [packages]
 scrapy = "==1.5.0"
