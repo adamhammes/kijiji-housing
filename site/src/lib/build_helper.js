@@ -1,6 +1,6 @@
 const { objectFromIterable } = require("./utils");
 
-const whitelistedCities = ["montreal", "quebec"];
+const whitelistedCities = ["montreal", "quebec", "sherbrooke"];
 
 const whitelistedKeys = [
   "url",
