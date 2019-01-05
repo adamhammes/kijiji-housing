@@ -20,6 +20,16 @@ latitude = 45.5017
 longitude = -73.5673
 radius = 30
 
+[[cities]]
+
+id = "sherbrooke"
+name_french = "Sherbrooke"
+name_english = "Sherbrooke"
+kijiji_id = "sherbrooke-qc"
+kijiji_name = "l1700156"
+latitude = 45.4042
+longitude = -71.8929
+radius = 30
 
 [[ad_types]]
 
