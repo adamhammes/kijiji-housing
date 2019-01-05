@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 
 import "./front-page.scss";
 import { LocalizeLink, Localize } from "../components/lib";
+import { whitelistedCities } from "../lib/build_helper";
 
 export const query = graphql`
   {
@@ -18,7 +19,9 @@ export const query = graphql`
 `;
 
 const IndexPage = ({ data }) => {
-  const { cities, ad_types } = data.apiJson;
+  let { cities, ad_types } = data.apiJson;
+
+  cities = cities.filter(({ id }) => whitelistedCities.includes(id));
 
   const [currentCity, setCity] = useState(cities[0]);
   const [currentAdType, setAdType] = useState(ad_types[0]);

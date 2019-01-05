@@ -5,7 +5,7 @@ const aws = require("aws-sdk");
 const languages = ["fr", "en"];
 const defaultLang = "en";
 
-const { splitAndFilter } = require("./src/lib/build_helper");
+const { splitAndFilter, whitelistedCities } = require("./src/lib/build_helper");
 
 const API_PATH = "./static/api";
 
@@ -94,6 +94,10 @@ const createLocalizedPages = (page, createPage, createRedirect, deletePage) => {
 exports.createPages = ({ actions, createContentDigest }) => {
   const { createPage, createRedirect } = actions;
   const scraped_data = require(`${API_PATH}/all.json`);
+
+  scraped_data.cities = scraped_data.cities.filter(city =>
+    whitelistedCities.includes(city.id)
+  );
 
   for (const city of scraped_data.cities) {
     createLocalizedPages(

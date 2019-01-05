@@ -1,5 +1,7 @@
 const { objectFromIterable } = require("./utils");
 
+const whitelistedCities = ["montreal", "quebec"];
+
 const whitelistedKeys = [
   "url",
   "headline",
@@ -58,4 +60,5 @@ const splitAndFilter = (rawOffers, city, ad_type) => {
 
 module.exports = {
   splitAndFilter,
+  whitelistedCities,
 };
