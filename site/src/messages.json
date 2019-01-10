@@ -48,7 +48,7 @@
     "filters.max": "max",
     "filters.timeOnMarket": "Temps sur les marchés",
     "filters.lessThan": "Moins de",
-    "filters.daysOld": "jours d'âge",
+    "filters.daysOld": "jours",
     "filters.numberOfRooms": "Nombre de pièces"
   }
 }
