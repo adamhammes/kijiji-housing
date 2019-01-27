@@ -31,6 +31,18 @@ latitude = 45.4042
 longitude = -71.8929
 radius = 30
 
+[[cities]]
+
+id="trois-rivieres"
+name_french = "Trois Rivières"
+name_english = "Three Rivers"
+kijiji_id = "l1700150"
+kijiji_name =  "trois-rivieres"
+latitude = 46.3430
+longitude = -72.5421
+radius = 25
+
+
 [[ad_types]]
 
 id = "rent"
