@@ -1,4 +1,3 @@
-from collections import defaultdict
 import csv
 from datetime import date, datetime, timezone
 import io
@@ -7,19 +6,30 @@ import logging
 import os
 
 import boto3
+from twilio.rest import Client as TwilioClient
 
 from scraper.items import Apartment
 from ..cities import load_start_config, AdType, City, StartingPoint
-from .makes_the_cut import makes_the_cut, RETAINED_KEYS
 
 
 EXPORT_TIME = None
 FIELD_NAMES = list(Apartment.fields.keys())
 OUTPUT_DIRECTORY = os.environ["KIJIJI_OUTPUT_DIRECTORY"]
 LATEST_DIRECTORY = os.path.join(OUTPUT_DIRECTORY, "latest")
+TWILIO_SID = os.environ["TWILIO_SID"]
+TWILIO_AUTH_TOKEN = os.environ["TWILIO_AUTH_TOKEN"]
+TWILIO_FROM = os.environ["TWILIO_NUMBER"]
+TWILIO_TO = os.environ["PHONE_NUMBER"]
 
 
 class ItemCollector:
+    def __init__(self, stats):
+        self.stats = stats
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(crawler.stats)
+
     def open_spider(self, spider):
         self.version = spider.version
         self.full_scrape = spider.full_scrape
@@ -59,6 +69,21 @@ class ItemCollector:
 
     def close_spider(self, _):
         data = to_json(self.export_data)
+
+        num_scraped = self.stats.get_value('item_scraped_count') or 1
+        num_dropped = self.stats.get_value('item_dropped_count') or 0
+        num_errors = self.stats.get_value('log_count/ERROR') or 0
+
+        if problem_with_scrape(
+            self.full_scrape, num_scraped, num_dropped, num_errors
+        ):
+            logging.info(
+                "Detecting problem with scrape, sending text message"
+            )
+            client = TwilioClient(TWILIO_SID, TWILIO_AUTH_TOKEN)
+            body = "Problem with Kijiji scrape"
+            client.messages.create(to=TWILIO_TO, from_=TWILIO_FROM, body=body)
+
         export(data, "out.json", self.full_scrape, self.version)
 
 
@@ -154,3 +179,16 @@ def _json_serial(obj):
     pdb.set_trace()
 
     raise TypeError("Type {} is not serializable".format(type(obj)))
+
+
+def problem_with_scrape(full_scrape, num_scraped, drop_count, num_errors):
+    if full_scrape and num_scraped < 10000:
+        return True
+
+    if drop_count / num_scraped > .01:
+        return True
+
+    if num_errors / num_scraped > .01:
+        return True
+
+    return False
