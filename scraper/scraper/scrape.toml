@@ -20,28 +20,28 @@ latitude = 45.5017
 longitude = -73.5673
 radius = 30
 
-[[cities]]
-
-id = "sherbrooke"
-name_french = "Sherbrooke"
-name_english = "Sherbrooke"
-kijiji_id = "l1700156"
-kijiji_name = "sherbrooke-qc"
-latitude = 45.4042
-longitude = -71.8929
-radius = 30
-
-[[cities]]
-
-id="trois-rivieres"
-name_french = "Trois Rivières"
-name_english = "Three Rivers"
-kijiji_id = "l1700150"
-kijiji_name =  "trois-rivieres"
-latitude = 46.3430
-longitude = -72.5421
-radius = 15
-
+# [[cities]]
+# 
+# id = "sherbrooke"
+# name_french = "Sherbrooke"
+# name_english = "Sherbrooke"
+# kijiji_id = "l1700156"
+# kijiji_name = "sherbrooke-qc"
+# latitude = 45.4042
+# longitude = -71.8929
+# radius = 30
+# 
+# [[cities]]
+# 
+# id="trois-rivieres"
+# name_french = "Trois Rivières"
+# name_english = "Three Rivers"
+# kijiji_id = "l1700150"
+# kijiji_name =  "trois-rivieres"
+# latitude = 46.3430
+# longitude = -72.5421
+# radius = 15
+# 
 
 [[ad_types]]
 
@@ -49,14 +49,14 @@ id = "rent"
 kijiji_id = "c37"
 kijiji_name = "b-appartement-condo"
 
-[[ad_types]]
-
-id = "buy"
-kijiji_id = "c35"
-kijiji_name = "b-maison-a-vendre"
-
-[[ad_types]]
-
-id = "colocation"
-kijiji_id = "c36"
-kijiji_name = "b-chambres-a-louer-colocataire"
+# [[ad_types]]
+# 
+# id = "buy"
+# kijiji_id = "c35"
+# kijiji_name = "b-maison-a-vendre"
+# 
+# [[ad_types]]
+# 
+# id = "colocation"
+# kijiji_id = "c36"
+# kijiji_name = "b-chambres-a-louer-colocataire"
