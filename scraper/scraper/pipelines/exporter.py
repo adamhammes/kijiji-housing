@@ -85,6 +85,7 @@ class ItemCollector:
             client = TwilioClient(TWILIO_SID, TWILIO_AUTH_TOKEN)
             body = "Problem with Kijiji scrape: " + bad_scrape
             client.messages.create(to=TWILIO_TO, from_=TWILIO_FROM, body=body)
+            return
 
         export(data, "out.json", self.full_scrape, self.version)
 
