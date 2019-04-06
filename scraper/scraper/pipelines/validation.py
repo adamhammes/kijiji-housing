@@ -9,12 +9,18 @@ from scraper.items import Apartment
 
 FIELD_NAMES = Apartment.fields.keys()
 
+REQUIRED_FIELDS = ['raw_id', 'raw_address', 'raw_price']
+
 
 class ValidationPipeline(object):
     def open_spider(self, spider):
         self.cache = set()
 
     def process_item(self, item, spider):
+        for field in REQUIRED_FIELDS:
+            if not field in item:
+                raise DropItem(f"Missing required field {field}")
+
         if item["raw_id"] in self.cache:
             raise DropItem("Already seen item (link: {})".format(item["url"]))
 
