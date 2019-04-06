@@ -74,14 +74,16 @@ class ItemCollector:
         num_dropped = self.stats.get_value('item_dropped_count') or 0
         num_errors = self.stats.get_value('log_count/ERROR') or 0
 
-        if problem_with_scrape(
+        bad_scrape = problem_with_scrape(
             self.full_scrape, num_scraped, num_dropped, num_errors
-        ):
+        )
+
+        if bad_scrape:
             logging.info(
                 "Detecting problem with scrape, sending text message"
             )
             client = TwilioClient(TWILIO_SID, TWILIO_AUTH_TOKEN)
-            body = "Problem with Kijiji scrape"
+            body = "Problem with Kijiji scrape: " + bad_scrape
             client.messages.create(to=TWILIO_TO, from_=TWILIO_FROM, body=body)
 
         export(data, "out.json", self.full_scrape, self.version)
@@ -183,12 +185,12 @@ def _json_serial(obj):
 
 def problem_with_scrape(full_scrape, num_scraped, drop_count, num_errors):
     if full_scrape and num_scraped < 10000:
-        return True
+        return "Scraped less than 10,000 offers"
 
     if drop_count / num_scraped > .01:
-        return True
+        return "Drop rate is too high"
 
     if num_errors / num_scraped > .01:
-        return True
+        return "Error rate is too high"
 
-    return False
+    return ''
