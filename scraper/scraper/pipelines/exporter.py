@@ -185,8 +185,9 @@ def _json_serial(obj):
 
 
 def problem_with_scrape(full_scrape, num_scraped, drop_count, num_errors):
-    if full_scrape and num_scraped < 1000:
-        return "Scraped less than 10,000 offers"
+    min_num_offers = 1000
+    if full_scrape and num_scraped < min_num_offers:
+        return "Scraped less than {} offers".format(min_num_offers)
 
     if drop_count / num_scraped > .01:
         return "Drop rate is too high"
