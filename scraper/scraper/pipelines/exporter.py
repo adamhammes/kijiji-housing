@@ -189,10 +189,10 @@ def problem_with_scrape(full_scrape, num_scraped, drop_count, num_errors):
     if full_scrape and num_scraped < min_num_offers:
         return "Scraped less than {} offers".format(min_num_offers)
 
-    if drop_count / num_scraped > .01:
+    if drop_count / num_scraped > .2:
         return "Drop rate is too high"
 
-    if num_errors / num_scraped > .01:
+    if num_errors / num_scraped > .2:
         return "Error rate is too high"
 
     return ''
