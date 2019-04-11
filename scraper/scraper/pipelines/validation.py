@@ -9,7 +9,7 @@ from scraper.items import Apartment
 
 FIELD_NAMES = Apartment.fields.keys()
 
-REQUIRED_FIELDS = ['raw_id', 'raw_address', 'raw_price']
+REQUIRED_FIELDS = ['raw_id', 'raw_address']
 
 
 class ValidationPipeline(object):
