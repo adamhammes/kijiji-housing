@@ -19,7 +19,7 @@ class ValidationPipeline(object):
     def process_item(self, item, spider):
         for field in REQUIRED_FIELDS:
             if not field in item:
-                raise DropItem(f"Missing required field {field}")
+                raise DropItem(f"Missing required field {field} in {item['url']}")
 
         if item["raw_id"] in self.cache:
             raise DropItem("Already seen item (link: {})".format(item["url"]))
