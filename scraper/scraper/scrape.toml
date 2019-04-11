@@ -31,16 +31,16 @@ latitude = 45.4042
 longitude = -71.8929
 radius = 30
 
-[[cities]]
+#[[cities]]
 
-id="trois-rivieres"
-name_french = "Trois Rivières"
-name_english = "Three Rivers"
-kijiji_id = "l1700150"
-kijiji_name =  "trois-rivieres"
-latitude = 46.3430
-longitude = -72.5421
-radius = 15
+#id="trois-rivieres"
+#name_french = "Trois Rivières"
+#name_english = "Three Rivers"
+#kijiji_id = "l1700150"
+#kijiji_name =  "trois-rivieres"
+#latitude = 46.3430
+#longitude = -72.5421
+#radius = 15
 
 
 [[ad_types]]
@@ -55,8 +55,8 @@ id = "buy"
 kijiji_id = "c35"
 kijiji_name = "b-maison-a-vendre"
 
-[[ad_types]]
+#[[ad_types]]
 
-id = "colocation"
-kijiji_id = "c36"
-kijiji_name = "b-chambres-a-louer-colocataire"
+#id = "colocation"
+#kijiji_id = "c36"
+#kijiji_name = "b-chambres-a-louer-colocataire"
