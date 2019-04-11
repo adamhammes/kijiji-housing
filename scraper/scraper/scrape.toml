@@ -49,11 +49,11 @@ id = "rent"
 kijiji_id = "c37"
 kijiji_name = "b-appartement-condo"
 
-[[ad_types]]
+#[[ad_types]]
 
-id = "buy"
-kijiji_id = "c35"
-kijiji_name = "b-maison-a-vendre"
+#id = "buy"
+#kijiji_id = "c35"
+#kijiji_name = "b-maison-a-vendre"
 
 #[[ad_types]]
 
