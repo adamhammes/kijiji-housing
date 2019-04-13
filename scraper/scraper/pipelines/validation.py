@@ -24,7 +24,7 @@ class ValidationPipeline(object):
         if item["raw_id"] in self.cache:
             raise DropItem("Already seen item (link: {})".format(item["url"]))
 
-        if raw_address.startswith(','):
+        if item['raw_address'].startswith(','):
             logging.info(f"Address for {item['url']} is not precise")
 
         self.cache.add(item["raw_id"])
