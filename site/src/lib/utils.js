@@ -29,8 +29,12 @@ const formatter = {
   }),
 };
 
-const formatPrice = (language, rawPrice) => {
-  return formatter[language].format(rawPrice / 100);
+const formatPrice = (locale, rawPrice) => {
+  if (rawPrice == null) {
+    return locale("utils.priceOnRequest");
+  }
+
+  return formatter[locale.language].format(rawPrice / 100);
 };
 
 const formatRooms = raw_rooms => {

@@ -45,7 +45,7 @@ export default class OffersDisplay extends React.Component {
         descriptions.forEach((description, index) => {
           const offer = offersWithDescription[index];
           offer.description = description;
-          offer.formattedPrice = formatPrice(locale.language, offer.price);
+          offer.formattedPrice = formatPrice(locale, offer.price);
         });
 
         console.log(

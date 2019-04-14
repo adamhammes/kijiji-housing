@@ -1,6 +1,7 @@
 {
   "en": {
     "alternateLang": "Français",
+    "utils.priceOnRequest": "Price on request",
     "meta.description": "Quebec Housing",
     "notFound.doesNotExist": "This page does not exist",
     "notFound.returnToHome": "Click here to return to the home page.",
@@ -29,6 +30,7 @@
   },
   "fr": {
     "alternateLang": "English",
+    "utils.priceOnRequest": "Prix sur demande",
     "meta.description": "Logement au québec",
     "notFound.doesNotExist": "Cette page n'existe pas",
     "notFound.returnToHome": "Cliquez içi pour vous rendre à la page d'accueil.",
