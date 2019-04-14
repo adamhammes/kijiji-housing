@@ -50,6 +50,9 @@ export default class FilterBar extends React.Component {
     }
 
     this.state = defaultState;
+
+    this.updateOffers = this.updateOffers.bind(this);
+    this.updateOffers();
   }
 
   render() {
@@ -141,15 +144,18 @@ export default class FilterBar extends React.Component {
   }
 
   onChange(event) {
-    const { onUpdate, allOffers } = this.props;
-
     const targetValue = getValueForInput(event.target);
 
     plog("start filtering");
     this.setState({ [event.target.id]: targetValue }, () => {
       plog("finished filtering");
-      onUpdate(filterOffers(allOffers, removePrefixFromState(this.state)));
+      this.updateOffers();
     });
+  }
+
+  updateOffers() {
+    const filterState = removePrefixFromState(this.state);
+    this.props.onUpdate(filterOffers(this.props.allOffers, filterState));
   }
 }
 
