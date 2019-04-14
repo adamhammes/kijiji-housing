@@ -1,12 +1,16 @@
 const minPriceFilter = (offer, filterState) => {
   const minPrice = parseInt(filterState.minPrice) || 0;
 
-  return offer.price >= minPrice * 100;
+  return offer.price >= minPrice * 100 || offer.price == null;
 };
 
 const maxPriceFilter = (offer, filterState) => {
   const maxPrice = parseInt(filterState.maxPrice) || 1000000000;
-  return offer.price <= maxPrice * 100;
+  return offer.price <= maxPrice * 100 || offer.price == null;
+};
+
+const nullPriceFilter = (offer, filterState) => {
+  return offer.price != null || filterState.includeNullPrice;
 };
 
 const msInDay = 24 * 60 * 60 * 1000;
@@ -42,6 +46,7 @@ const allFilters = [
   ["maxPrice", maxPriceFilter],
   ["1.5rooms", roomsFilter],
   ["timeOnMarket", timeOnMarketFilter],
+  ["includeNullPrice", nullPriceFilter],
 ];
 
 const filterOffers = (offers, filterState) => {

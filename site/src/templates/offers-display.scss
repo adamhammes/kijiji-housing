@@ -7,6 +7,13 @@ $offers-display-desktop-down: (
   max-width: $offers-display-desktop-min-size - 1,
 );
 
+@mixin checkbox-label {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+}
+
 .offers-display {
   height: 100%;
   display: flex;
@@ -113,8 +120,9 @@ $offers-display-desktop-down: (
   }
 }
 
-.price-container {
-  display: flex;
+.price-container label {
+  margin-top: 1.45em;
+  @include checkbox-label();
 }
 
 .price-container span {
@@ -125,10 +133,7 @@ $offers-display-desktop-down: (
   column-count: 3;
 
   > label {
-    cursor: pointer;
-    user-select: none;
-    display: flex;
-    align-items: center;
+    @include checkbox-label();
   }
 }
 

@@ -4,6 +4,7 @@ import { objectFromIterable, formatRooms, plog } from "../lib/utils";
 import filterOffers from "../lib/filter";
 import { LocaleContext } from "./locale-context";
 import LanguageSwitcher from "./language-switcher";
+import { Localize } from "./lib";
 
 const filterIdPrefix = "filter-";
 
@@ -40,6 +41,7 @@ export default class FilterBar extends React.Component {
     const defaultState = {
       [filterIdPrefix + "minPrice"]: "",
       [filterIdPrefix + "maxPrice"]: "",
+      [filterIdPrefix + "includeNullPrice"]: true,
       [filterIdPrefix + "timeOnMarket"]: "",
     };
 
@@ -104,6 +106,15 @@ export default class FilterBar extends React.Component {
               onChange={this.onChange}
               placeholder={locale("filters.max")}
             />
+            <label>
+              <input
+                type="checkbox"
+                id={`${filterIdPrefix}includeNullPrice`}
+                value={this.state[`${filterIdPrefix}includeNullPrice`]}
+                onChange={this.onChange}
+              />
+              <Localize>filters.includeNullPrice</Localize>
+            </label>
           </section>
           <h3>{locale("filters.timeOnMarket")}</h3>
           <section>
