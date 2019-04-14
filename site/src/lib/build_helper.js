@@ -1,5 +1,7 @@
 const { objectFromIterable } = require("./utils");
 
+const requiredFields = ["date", "id", "url", "headline"];
+
 const whitelistedCities = [
   "montreal",
   "quebec",
@@ -51,9 +53,12 @@ const addressIsAccurate = offer =>
   parseInt(offer.address_confidence) >= 9 &&
   offer.address_accuracy === "ROOFTOP";
 
+const hasRequiredFields = offer =>
+  requiredFields.every(field => field in offer && offer[field] != null);
+
 const splitAndFilter = (rawOffers, city, ad_type) => {
   let offers = rawOffers.filter(offer => withinDistance(offer, city));
-  offers = offers.filter(addressIsAccurate);
+  offers = offers.filter(addressIsAccurate).filter(hasRequiredFields);
 
   console.log(`${offers.length} offers exported for ${city.id}/${ad_type.id}`);
 
