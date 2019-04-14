@@ -48,6 +48,12 @@ export default class OffersDisplay extends React.Component {
           offer.formattedPrice = formatPrice(locale.language, offer.price);
         });
 
+        console.log(
+          "Developer note: All the offers on this page are stored in " +
+            "`window.offers`. Cheers!"
+        );
+        window.offers = offersWithDescription;
+
         this.setState({
           allOffers: offersWithDescription,
           descriptionsLoaded: true,
