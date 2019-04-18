@@ -46,7 +46,7 @@
     "frontPage.letsGo": "Allons-y!",
     "cityDisplay.inCity": "à {city}.",
     "filter.title": "Filtrer",
-    "filter.offersShown": "({numShown} de {numTotal} offres indiquées)",
+    "filter.offersShown": "({numShown} de {numTotal} offres affichées)",
     "filters.priceRange": "Gamme de prix",
     "filters.min": "min",
     "filters.to": "à",
