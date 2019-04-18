@@ -99,7 +99,8 @@ $offers-display-desktop-down: (
 }
 
 .filter-bar {
-  overflow-y: scroll;
+  overflow: auto;
+  height: 100%;
   padding: 1.45rem;
   min-width: 20rem;
 
