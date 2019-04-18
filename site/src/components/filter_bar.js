@@ -41,7 +41,7 @@ export default class FilterBar extends React.Component {
     const defaultState = {
       [filterIdPrefix + "minPrice"]: "",
       [filterIdPrefix + "maxPrice"]: "",
-      [filterIdPrefix + "includeNullPrice"]: true,
+      [filterIdPrefix + "includeNullPrice"]: false,
       [filterIdPrefix + "timeOnMarket"]: "",
     };
 
