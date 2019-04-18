@@ -81,7 +81,7 @@ export default class FilterBar extends React.Component {
             <h2>{locale("filter.title")}</h2>
             <LanguageSwitcher className="language-switcher" />
           </header>
-          {locale("filter.apartmentsShown", {
+          {locale("filter.offersShown", {
             numShown: displayedOffers.length,
             numTotal: allOffers.length,
           })}
