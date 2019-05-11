@@ -45,11 +45,11 @@ export default class FilterBar extends React.Component {
       [filterIdPrefix + "timeOnMarket"]: "",
     };
 
-    if (this.props.ad_type.id === "rent") {
-      roomSizes.forEach(
-        numRooms => (defaultState[`${filterIdPrefix}${numRooms}rooms`] = true)
-      );
-    }
+    // if (this.props.ad_type.id === "rent") {
+    // roomSizes.forEach(
+    //    numRooms => (defaultState[`${filterIdPrefix}${numRooms}rooms`] = true)
+    //  );
+    // }
 
     this.state = defaultState;
 
@@ -128,7 +128,7 @@ export default class FilterBar extends React.Component {
             />
             &nbsp;&nbsp;{locale("filters.daysOld")}
           </section>
-          {ad_type.id !== "rent" ? null : (
+          {true ? null : (
             <>
               <h3>{locale("filters.numberOfRooms")}</h3>
               <section className="room-container">
