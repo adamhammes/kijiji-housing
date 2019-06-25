@@ -1,4 +1,5 @@
 import galite from "ga-lite";
+import "./src/tailwind.css";
 
 const onClientEntry = () => {
   galite("create", "UA-113910402-1", "auto");
