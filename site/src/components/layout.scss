@@ -47,6 +47,7 @@ template {
 }
 a {
   color: $theme-color-text;
+  text-decoration: underline;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 }
