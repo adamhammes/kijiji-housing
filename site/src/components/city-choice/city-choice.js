@@ -8,7 +8,7 @@ const CityChoice = ({ city }) => {
   const locale = useContext(LocaleContext);
   const imageAlt = locale(`cities.${city.id}`);
   return (
-    <li className="max-w-md sm:max-w-none mx-auto sm:mx-0 sm:w-1/2 px-2 lg:px-3 mb-8">
+    <li className="max-w-md sm:max-w-none mx-auto sm:mx-0 w-full sm:w-1/2 px-2 lg:px-3 mb-8">
       <LocalizeLink
         to={`/${city.id}/rent`}
         className="cityChoice block no-underline cursor-pointer"
