@@ -9,24 +9,13 @@ const Header = ({ siteTitle }) => (
       marginBottom: "1.45rem",
     }}
   >
-    <div
-      style={{
-        margin: "0 auto",
-        maxWidth: 960,
-        padding: "1.45rem 1.0875rem",
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <LocalizeLink
-          to="/"
-          style={{
-            color: "white",
-            textDecoration: "none",
-          }}
-        >
-          {siteTitle}
-        </LocalizeLink>
-      </h1>
+    <div className="max-w-4xl mx-auto p-8">
+      <LocalizeLink
+        to="/"
+        className="text-white font-sans no-underline font-bold text-3xl"
+      >
+        {siteTitle}
+      </LocalizeLink>
       <LanguageSwitcher className="header-language-switcher" />
     </div>
   </header>

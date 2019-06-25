@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { graphql } from "gatsby";
 
 import "./front-page.scss";
-import { LocalizeLink, Localize } from "../components/lib";
+import { Localize } from "../components/lib";
 import { whitelistedCities } from "../lib/build_helper";
+import CityChoice from "../components/city-choice/city-choice";
 
 export const query = graphql`
   {
@@ -11,66 +12,26 @@ export const query = graphql`
       cities {
         id
       }
-      ad_types {
-        id
-      }
     }
   }
 `;
 
 const IndexPage = ({ data }) => {
-  let { cities, ad_types } = data.apiJson;
+  let { cities } = data.apiJson;
 
   cities = cities.filter(({ id }) => whitelistedCities.includes(id));
 
-  const [currentCity, setCity] = useState(cities[0]);
-  const [currentAdType, setAdType] = useState(ad_types[0]);
-
   return (
-    <form>
-      <h2>
-        <Localize>frontPage.lookingFor</Localize>
-      </h2>
-      <div className="options-container">
-        {ad_types.map(a => (
-          <label key={a.id}>
-            <input
-              key={a.id}
-              type="radio"
-              name="ad_type"
-              value={a.id}
-              defaultChecked={currentAdType.id === a.id}
-              onChange={() => setAdType(a)}
-            />
-            <Localize>{`frontPage.${a.id}`}</Localize>
-          </label>
+    <>
+      <h1 className="my-12">
+        <Localize>frontPage.lookingForApartment</Localize>
+      </h1>
+      <ul className="list-reset flex flex-col sm:flex-row align-center align-start flex-wrap -mx-2 lg:-mx-3">
+        {cities.map(city => (
+          <CityChoice key={city.id} city={city} />
         ))}
-      </div>
-      <h2>
-        <Localize>frontPage.in</Localize>
-      </h2>
-      <div className="options-container">
-        {cities.map(c => (
-          <label key={c.id}>
-            <input
-              key={c.id}
-              type="radio"
-              name="city"
-              value={c.id}
-              checked={currentCity.id === c.id}
-              onChange={() => setCity(c)}
-            />
-            <Localize>{`cities.${c.id}`}</Localize>
-          </label>
-        ))}
-      </div>
-      <LocalizeLink
-        className="toOfferPage"
-        to={`/${currentCity.id}/${currentAdType.id}/`}
-      >
-        <Localize>frontPage.letsGo</Localize>
-      </LocalizeLink>
-    </form>
+      </ul>
+    </>
   );
 };
 

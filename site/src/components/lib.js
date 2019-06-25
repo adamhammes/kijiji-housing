@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { LocaleContext } from "./locale-context";
-import { Link } from "gatsby";
+import { useStaticQuery, graphql, Link } from "gatsby";
+import Img from "gatsby-image";
 
 const LocalizeLink = ({ to, children, ...linkProps }) => {
   const locale = useContext(LocaleContext);
@@ -21,5 +22,34 @@ const Localize = ({ children, ...args }) => {
   return locale(messageId, args);
 };
 
-export { LocalizeLink, Localize };
+const Image = ({ filename, alt }) => {
+  const { images } = useStaticQuery(graphql`
+    query {
+      images: allFile {
+        edges {
+          node {
+            relativePath
+            name
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const image = images.edges.find(n => n.node.relativePath.includes(filename));
+
+  if (!image) {
+    console.log(`No image found for path ${filename}`);
+    return null;
+  }
+
+  return <Img alt={alt} fluid={image.node.childImageSharp.fluid} />;
+};
+
+export { LocalizeLink, Localize, Image };
 export { LocaleContext, LocationContext } from "./locale-context";

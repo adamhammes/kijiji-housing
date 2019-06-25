@@ -1,0 +1,7 @@
+.cityChoice-icon {
+  transition: transform 0.3s ease-in-out;
+
+  .cityChoice:hover & {
+    transform: translateX(0.25rem);
+  }
+}

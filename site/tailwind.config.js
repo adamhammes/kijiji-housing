@@ -1,7 +1,12 @@
 module.exports = {
   theme: {
-    extend: {}
+    colors: {
+      primary: "#ea5500",
+      primaryText: "#cc4b00",
+      white: "#fff",
+    },
+    extend: {},
   },
   variants: {},
-  plugins: []
-}
+  plugins: [],
+};
