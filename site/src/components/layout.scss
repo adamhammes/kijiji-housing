@@ -47,7 +47,8 @@ template {
 }
 a {
   color: $theme-color-text;
-  text-decoration: underline;
+  text-decoration: none;
+  box-shadow: 0 1px 0 0 currentColor;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 }

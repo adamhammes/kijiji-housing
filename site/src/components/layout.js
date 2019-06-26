@@ -37,7 +37,9 @@ const Layout = ({ children, renderHeader = true }) => {
           {renderHeader ? (
             <>
               <Header siteTitle={data.site.siteMetadata.title} />
-              <div className="max-w-4xl px-8 mx-auto">{children}</div>
+              <div className="leading-snug max-w-4xl px-8 mx-auto">
+                {children}
+              </div>
             </>
           ) : (
             children
