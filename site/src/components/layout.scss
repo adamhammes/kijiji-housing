@@ -48,7 +48,13 @@ template {
 a {
   color: $theme-color-text;
   text-decoration: none;
+  transition: box-shadow 0.3s ease-in-out;
   box-shadow: 0 1px 0 0 currentColor;
+
+  &:hover {
+    box-shadow: 0 1px 0 0 transparent;
+  }
+
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 }
