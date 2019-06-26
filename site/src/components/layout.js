@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Helmet from "react-helmet";
-import { StaticQuery, graphql } from "gatsby";
+import { useStaticQuery, StaticQuery, graphql } from "gatsby";
 
 import { LocaleContext } from "./locale-context";
 import Header from "./header";
@@ -9,44 +9,38 @@ import "./app.scss";
 
 const Layout = ({ children, renderHeader = true }) => {
   const locale = useContext(LocaleContext);
+  const data = useStaticQuery(graphql`
+    query SiteTitleQuery {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `);
 
   return (
-    <StaticQuery
-      query={graphql`
-        query SiteTitleQuery {
-          site {
-            siteMetadata {
-              title
-            }
-          }
-        }
-      `}
-      render={data => (
+    <>
+      <Helmet
+        title={data.site.siteMetadata.title}
+        meta={[
+          {
+            name: "description",
+            content: locale("meta.description"),
+          },
+        ]}
+      >
+        <html lang={locale.language} />
+      </Helmet>
+      {renderHeader ? (
         <>
-          <Helmet
-            title={data.site.siteMetadata.title}
-            meta={[
-              {
-                name: "description",
-                content: locale("meta.description"),
-              },
-            ]}
-          >
-            <html lang={locale.language} />
-          </Helmet>
-          {renderHeader ? (
-            <>
-              <Header siteTitle={data.site.siteMetadata.title} />
-              <div className="leading-snug max-w-4xl px-8 mx-auto">
-                {children}
-              </div>
-            </>
-          ) : (
-            children
-          )}
+          <Header siteTitle={data.site.siteMetadata.title} />
+          <div className="leading-snug max-w-4xl px-8 mx-auto">{children}</div>
         </>
+      ) : (
+        children
       )}
-    />
+    </>
   );
 };
 
