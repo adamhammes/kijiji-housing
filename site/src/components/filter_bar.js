@@ -77,8 +77,8 @@ export default class FilterBar extends React.Component {
         />
         <label className="collapse-expand-label" htmlFor="collapse-expand" />
         <form className="filter-bar">
-          <header>
-            <h2>{locale("filter.title")}</h2>
+          <header className="mb-6 flex justify-between items-center">
+            <h2 className="m-0">{locale("filter.title")}</h2>
             <LanguageSwitcher className="language-switcher" />
           </header>
           {locale("filter.offersShown", {
