@@ -8,17 +8,17 @@ const CityChoice = ({ city }) => {
   const locale = useContext(LocaleContext);
   const imageAlt = locale(`cities.${city.id}`);
   return (
-    <li className="max-w-md sm:max-w-none mx-auto sm:mx-0 w-full sm:w-1/2 px-2 lg:px-3 mb-8">
+    <li className="max-w-md sm:max-w-none mx-auto sm:mx-0 w-full sm:w-1/2 px-2 lg:px-3 mb-8 flex flex-col">
+      <Image filename={`${city.id}-cover-16:9.jpg`} alt={imageAlt} />
       <LocalizeLink
         to={`/${city.id}/rent`}
-        className="cityChoice block no-underline cursor-pointer"
+        className="cityChoice inline-block mx-auto mt-6"
       >
-        <Image filename={`${city.id}-cover-16:9.jpg`} alt={imageAlt} />
-        <h2 className="flex justify-center items-center">
+        <h2 className="flex items-center">
           <span className="mr-2">
             <Localize>{`cities.${city.id}`}</Localize>
           </span>
-          <IconArrowRight className="cityChoice-icon inline h-8 w-8 fill-current stroke-current" />
+          <IconArrowRight className="cityChoice-icon inline h-6 w-6 fill-current stroke-current" />
         </h2>
       </LocalizeLink>
     </li>
