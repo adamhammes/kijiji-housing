@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Helmet from "react-helmet";
-import { useStaticQuery, StaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby";
 
 import { LocaleContext } from "./locale-context";
 import Header from "./header";
