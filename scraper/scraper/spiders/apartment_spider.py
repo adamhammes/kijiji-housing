@@ -86,7 +86,7 @@ class ApartmentSpider(scrapy.Spider):
         l.add_css("title", "title::text")
         l.add_value("date_accessed", datetime.datetime.now())
 
-        l.add_css("raw_id", 'li[class^="currentCrumb"] > span::text')
+        l.add_css("raw_id", '[class^="adId"]::text')
         l.add_css("date", 'div[class^="datePosted"] > time::attr(datetime)')
         l.add_css("raw_address", "span[class^='address']::text")
         l.add_css("raw_price", 'span[class^="currentPrice"] > span::text')
