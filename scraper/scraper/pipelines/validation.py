@@ -103,6 +103,7 @@ def _read_animals(raw_animals):
 
 @nullable
 def _read_num_rooms(raw_fraction):
+    raw_fraction = raw_fraction.replace("½", "1/2")
     parts = raw_fraction.split(" ")[:2]
 
     return float(sum(fractions.Fraction(part) for part in parts))
