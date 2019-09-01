@@ -74,4 +74,3 @@ class GeocoderPipeline(object):
     def close_spider(self, _):
         with open(self.cache_location, "w") as f:
             f.write(json.dumps(self.cache))
-

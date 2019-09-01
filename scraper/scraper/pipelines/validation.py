@@ -9,7 +9,7 @@ from scraper.items import Apartment
 
 FIELD_NAMES = Apartment.fields.keys()
 
-REQUIRED_FIELDS = ['raw_id', 'raw_address']
+REQUIRED_FIELDS = ["raw_id", "raw_address"]
 
 
 class ValidationPipeline(object):
@@ -24,7 +24,7 @@ class ValidationPipeline(object):
         if item["raw_id"] in self.cache:
             raise DropItem("Already seen item (link: {})".format(item["url"]))
 
-        if item['raw_address'].startswith(','):
+        if item["raw_address"].startswith(","):
             logging.info(f"Address for {item['url']} is not precise")
 
         self.cache.add(item["raw_id"])
@@ -106,4 +106,3 @@ def _read_num_rooms(raw_fraction):
     parts = raw_fraction.split(" ")[:2]
 
     return float(sum(fractions.Fraction(part) for part in parts))
-
