@@ -30,7 +30,7 @@ const getValueForInput = inputElem => {
   return inputElem.value;
 };
 
-const roomSizes = [1.5, 2.5, 3.5, 4.5, 5.5, 6.5];
+const roomSizes = [1.5, 3.5, 4.5, 5.5, 6.5];
 
 export default class FilterBar extends React.Component {
   constructor(props) {
@@ -143,7 +143,7 @@ export default class FilterBar extends React.Component {
                       checked={this.state[`${filterIdPrefix}${numRooms}rooms`]}
                       onChange={this.onChange}
                     />
-                    {formatRooms(numRooms)}
+                    {formatRooms(locale, numRooms)}
                   </label>
                 ))}
               </section>

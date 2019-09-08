@@ -37,13 +37,17 @@ const formatPrice = (locale, rawPrice) => {
   return formatter[locale.language].format(rawPrice / 100);
 };
 
-const formatRooms = raw_rooms => {
+const formatRooms = (locale, raw_rooms) => {
+  if (raw_rooms === 1.5 || raw_rooms === 2.5) {
+    return locale("filters.oneOrTwoAndAHalf");
+  }
+
   if (raw_rooms === 6.5) {
-    return "6 1/2 +";
+    return "6 ½ +";
   }
 
   const integral = Math.floor(raw_rooms);
-  const fractional = raw_rooms - integral === 0 ? "" : " 1/2";
+  const fractional = raw_rooms - integral === 0 ? "" : " ½";
 
   return `${integral}${fractional}`;
 };

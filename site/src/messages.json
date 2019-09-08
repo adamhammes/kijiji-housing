@@ -27,7 +27,8 @@
     "filters.timeOnMarket": "Time on the market",
     "filters.lessThan": "Less than",
     "filters.daysOld": "days old",
-    "filters.numberOfRooms": "Number of rooms"
+    "filters.numberOfRooms": "Number of rooms",
+    "filters.oneOrTwoAndAHalf": "1 + 2 ½"
   },
   "fr": {
     "alternateLang": "English",
@@ -57,6 +58,7 @@
     "filters.timeOnMarket": "Sur les marchés depuis...",
     "filters.lessThan": "Moins de",
     "filters.daysOld": "jours",
-    "filters.numberOfRooms": "Nombre de pièces"
+    "filters.numberOfRooms": "Nombre de pièces",
+    "filters.oneOrTwoAndAHalf": "1 et 2 et demie"
   }
 }

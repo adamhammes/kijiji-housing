@@ -15,7 +15,7 @@ const genPopupContent = (offer, ad_type, locale) => `
       ${offer.formattedPrice}
       ${
         ad_type.id === "rent" && offer.num_rooms != null
-          ? ` | ${formatRooms(offer.num_rooms)}`
+          ? ` | ${formatRooms(locale, offer.num_rooms)}`
           : ""
       }
       | ${timeOnMarketFormatted(locale.language, offer.date)}
