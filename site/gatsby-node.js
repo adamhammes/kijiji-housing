@@ -44,11 +44,13 @@ exports.onPreInit = (_, pluginOptions, cb) => {
     return;
   }
 
-  const { _AWS_ACCESS_KEY_ID, _AWS_SECRET_ACCESS_KEY } = process.env;
-
-  if (!_AWS_ACCESS_KEY_ID || !_AWS_SECRET_ACCESS_KEY) {
+  if (
+    !"_AWS_ACCESS_KEY_ID" in process.env ||
+    !"_AWS_SECRET_ACCESS_KEY" in process.env
+  ) {
     throw new Error("Missing environment variables");
   }
+  const { _AWS_ACCESS_KEY_ID, _AWS_SECRET_ACCESS_KEY } = process.env;
 
   aws.config.update({
     accessKeyId: _AWS_ACCESS_KEY_ID,
@@ -118,7 +120,11 @@ exports.createPages = ({ actions, createContentDigest }) => {
       const slug = `/${city.id}/${ad_type.id}/`;
       const scrapeId = scraped_data.date_collected;
 
-      const { offers, descriptions } = splitAndFilter(rawOffers, city, ad_type);
+      const { offers, descriptions, roomsEnabled } = splitAndFilter(
+        rawOffers,
+        city,
+        ad_type
+      );
 
       const hash = createContentDigest(descriptions);
       const descriptionsPath = path.join(
@@ -137,6 +143,7 @@ exports.createPages = ({ actions, createContentDigest }) => {
             city,
             ad_type,
             offers,
+            roomsEnabled,
             descriptionsPath: descriptionsPath.substring("static".length),
             pageType: "offerDisplay",
           },

@@ -65,7 +65,17 @@ const splitAndFilter = (rawOffers, city, ad_type) => {
   const descriptions = offers.map(offer => offer.description);
 
   offers = offers.map(whitelistOffer);
-  return { descriptions, offers };
+  const offersWithRooms = offers.filter(offer => Boolean(offer.num_rooms));
+  const roomsEnabled = offersWithRooms.length / offers.length > 0.8;
+  roomsEnabled
+    ? console.log("Enabling rooms filter")
+    : console.log(
+        `Disabling rooms filter, only ${offersWithRooms.length} of ${
+          offers.length
+        } have rooms`
+      );
+
+  return { descriptions, offers, roomsEnabled };
 };
 
 module.exports = {

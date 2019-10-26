@@ -80,7 +80,7 @@ export default class OffersDisplay extends React.Component {
   }
 
   render() {
-    const { city, ad_type } = this.props.pageContext;
+    const { city, ad_type, roomsEnabled } = this.props.pageContext;
 
     return (
       <>
@@ -91,6 +91,7 @@ export default class OffersDisplay extends React.Component {
             onUpdate={this.onFilterUpdate}
             ad_type={ad_type}
             onExpandCollapse={this.onExpandCollapse}
+            roomsEnabled={roomsEnabled}
           />
           <OffersMap
             city={city}
