@@ -45,8 +45,6 @@ export default class FilterBar extends React.Component {
       [filterIdPrefix + "timeOnMarket"]: "",
     };
 
-    console.log(this.props);
-
     if (this.props.roomsEnabled && this.props.ad_type.id === "rent") {
       roomSizes.forEach(
         numRooms => (defaultState[`${filterIdPrefix}${numRooms}rooms`] = true)
