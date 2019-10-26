@@ -81,13 +81,12 @@ const createLocalizedPages = (page, createPage, createRedirect, deletePage) => {
     const localizedPage = { ...page, path: localizedPath };
 
     createPage(localizedPage);
-    const options = lang === defaultLang ? {} : { Language: lang };
-
-    createRedirect({
-      fromPath: page.path,
-      toPath: localizedPath,
-      ...options,
-    });
+    if (lang === defaultLang) {
+      createRedirect({
+        fromPath: page.path,
+        toPath: localizedPath,
+      });
+    }
   });
 
   if (deletePage) deletePage(page);
