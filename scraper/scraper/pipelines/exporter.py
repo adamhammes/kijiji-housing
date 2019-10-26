@@ -78,7 +78,7 @@ class ItemCollector:
             self.full_scrape, num_scraped, num_dropped, num_errors
         )
 
-        if bad_scrape:
+        if self.full_scrape and bad_scrape:
             logging.info("Detecting problem with scrape, sending text message")
             client = TwilioClient(TWILIO_SID, TWILIO_AUTH_TOKEN)
             body = "Problem with Kijiji scrape: " + bad_scrape

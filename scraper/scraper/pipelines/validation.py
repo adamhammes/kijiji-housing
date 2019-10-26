@@ -61,6 +61,9 @@ def nullable(func, *args, **kw):
 
 @nullable
 def _read_price(raw_price):
+    if "demande" in raw_price.lower():
+        return None
+
     valid_chars = "0123456789,"
     valid_price = "".join(c for c in raw_price if c in valid_chars)
 

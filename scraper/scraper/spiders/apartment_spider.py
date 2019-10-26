@@ -91,10 +91,10 @@ class ApartmentSpider(scrapy.Spider):
         l.add_css("raw_address", "span[class^='address']::text")
         l.add_css("raw_price", 'span[class^="currentPrice"] > span::text')
 
-        attribute_query = "//h4[contains(text(), '{}')]/following-sibling::div/text()"
-        l.add_xpath("raw_rooms", attribute_query.format("Pièces"))
-        l.add_xpath("raw_bathrooms", attribute_query.format("Salles de bain"))
-        l.add_xpath("raw_animals", attribute_query.format("Animaux"))
-        l.add_xpath("raw_furnished", attribute_query.format("Meublé"))
+        attribute_query = "dt:contains('{}') + dd::text"
+        l.add_css("raw_rooms", attribute_query.format("Pièces"))
+        l.add_css("raw_bathrooms", attribute_query.format("Salles de bain"))
+        l.add_css("raw_animals", attribute_query.format("Animaux"))
+        l.add_css("raw_furnished", attribute_query.format("Meublé"))
 
         return l.load_item()
