@@ -1,7 +1,17 @@
 .cityChoice-icon {
   transition: transform 0.3s ease-in-out;
+}
 
-  .cityChoice:hover & {
+.cityChoice-link {
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.cityChoice:hover {
+  .cityChoice-icon {
     transform: translateX(0.25rem);
+  }
+
+  .cityChoice-link {
+    box-shadow: none;
   }
 }

@@ -45,7 +45,8 @@ progress {
 template {
   display: none;
 }
-a {
+a,
+.link {
   color: $theme-color-text;
   text-decoration: none;
   transition: box-shadow 0.3s ease-in-out;

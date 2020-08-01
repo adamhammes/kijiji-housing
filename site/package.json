@@ -43,9 +43,11 @@
   },
   "devDependencies": {
     "aws-sdk": "^2.375.0",
+    "better-sqlite3": "^7.1.0",
     "gatsby-plugin-netlify": "^2.0.6",
     "gatsby-plugin-purgecss": "^4.0.0",
     "gatsby-plugin-sass": "^2.0.7",
+    "gunzip-file": "^0.1.1",
     "node-sass": "^4.11.0",
     "prettier": "^1.15.2"
   },

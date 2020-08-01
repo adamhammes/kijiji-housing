@@ -17,7 +17,7 @@ const msInDay = 24 * 60 * 60 * 1000;
 const timeOnMarketFilter = (offer, filterState) => {
   const maxTimeOnMarket = parseFloat(filterState.timeOnMarket) || 1000;
 
-  const offerDate = new Date(offer.date);
+  const offerDate = new Date(offer.date_posted);
   const offerAgeInDays = (new Date() - offerDate) / msInDay;
 
   return offerAgeInDays < maxTimeOnMarket;

@@ -36,12 +36,6 @@ module.exports = {
       },
     },
     "gatsby-transformer-json",
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        path: "./static/api/all.json",
-      },
-    },
     "gatsby-plugin-sass",
     // "gatsby-plugin-favicon",
     "gatsby-plugin-postcss",

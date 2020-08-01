@@ -1,13 +1,51 @@
 const fs = require("fs");
 const path = require(`path`);
+const Database = require("better-sqlite3");
+const gunzip = require("gunzip-file");
 
 const aws = require("aws-sdk");
 const languages = ["fr", "en"];
 const defaultLang = "en";
 
+const loadData = () => {
+  const db = new Database("frontend.sqlite3");
+
+  return {
+    cities: db.prepare("SELECT * FROM ScrapeOrigin").all(),
+    apartments: db.prepare("SELECT * FROM Apartment").all(),
+  };
+};
+
 const { splitAndFilter, whitelistedCities } = require("./src/lib/build_helper");
+const { gunzipSync } = require("zlib");
 
 const API_PATH = "./static/api";
+
+exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
+  const { createNode } = actions;
+
+  const data = loadData();
+
+  data.cities.forEach(city => {
+    const nodeContent = JSON.stringify(city);
+    console.log(`creating node for ${city.short_code}`);
+
+    const nodeMeta = {
+      id: createNodeId(`kijiji-data-origin-${city.short_code}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: `kijijiCity`,
+        mediaType: `application/json`,
+        content: nodeContent,
+        contentDigest: createContentDigest(city),
+      },
+    };
+
+    const node = Object.assign({}, city, nodeMeta);
+    createNode(node);
+  });
+};
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   if (stage === "build-html") {
@@ -39,10 +77,12 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
 };
 
 exports.onPreInit = (_, pluginOptions, cb) => {
-  if (fs.existsSync(`${API_PATH}/all.json`)) {
+  if (fs.existsSync(`frontend.sqlite3`)) {
     cb();
     return;
   }
+
+  console.log("No local database found, downloading from s3");
 
   if (
     !"_AWS_ACCESS_KEY_ID" in process.env ||
@@ -60,19 +100,35 @@ exports.onPreInit = (_, pluginOptions, cb) => {
 
   const s3 = new aws.S3();
 
-  const downloadOptions = {
-    Bucket: "kijiji-apartments",
-    Key: "v2/latest/out.json",
-  };
+  console.log("Attempt");
+  s3.listObjectsV2(
+    { Bucket: "kijiji-apartments", Prefix: "v3/" },
+    (err, data) => {
+      if (err) {
+        console.error(err);
+      }
 
-  console.log("Downloading latest scraped data...");
-  s3.getObject(downloadOptions, (err, data) => {
-    if (err) {
-      console.error(err);
+      const objectNames = data.Contents.map(d => d.Key).filter(name =>
+        name.includes("frontend")
+      );
+      objectNames.sort();
+      const newestData = objectNames[objectNames.length - 1];
+
+      const downloadOptions = {
+        Bucket: "kijiji-apartments",
+        Key: newestData,
+      };
+
+      console.log("Downloading latest scraped data...");
+      s3.getObject(downloadOptions, (err, data) => {
+        if (err) {
+          console.error(err);
+        }
+        fs.writeFileSync("frontend.sqlite3.gz", data.Body);
+        gunzip("frontend.sqlite3.gz", "frontend.sqlite3", () => cb());
+      });
     }
-    fs.writeFileSync("static/api/all.json", data.Body);
-    cb();
-  });
+  );
 };
 
 const createLocalizedPages = (page, createPage, createRedirect, deletePage) => {
@@ -93,64 +149,66 @@ const createLocalizedPages = (page, createPage, createRedirect, deletePage) => {
 };
 
 exports.createPages = ({ actions, createContentDigest }) => {
+  console.log("create pages");
   const { createPage, createRedirect } = actions;
-  const scraped_data = require(`${API_PATH}/all.json`);
+  const scraped_data = loadData();
 
-  scraped_data.cities = scraped_data.cities.filter(city =>
-    whitelistedCities.includes(city.id)
+  const cities = scraped_data.cities.filter(city =>
+    whitelistedCities.includes(city.short_code)
   );
 
-  for (const city of scraped_data.cities) {
+  const ad_type = { id: "rent" };
+  for (const city of cities) {
+    // createLocalizedPages(
+    //   {
+    //     path: `/${city.short_code}/`,
+    //     component: path.resolve(`./src/templates/city-display.js`),
+    //     context: {
+    //       city,
+    //     },
+    //   },
+    //   createPage,
+    //   createRedirect
+    // );
+
+    const rawOffers = scraped_data.apartments.filter(
+      apartment => apartment.origin === city.short_code
+    );
+
+    const slug = `/${city.short_code}/rent/`;
+    const scrapeId = new Date().toISOString();
+
+    const { offers, descriptions, roomsEnabled } = splitAndFilter(
+      rawOffers,
+      city,
+      ad_type
+    );
+
+    const hash = createContentDigest(descriptions);
+    const descriptionsPath = path.join(
+      API_PATH,
+      `/${city.short_code}-${ad_type.id}-descriptions-${hash}.json`
+    );
+
+    fs.writeFileSync(descriptionsPath, JSON.stringify(descriptions));
+
     createLocalizedPages(
       {
-        path: `/${city.id}/`,
-        component: path.resolve(`./src/templates/city-display.js`),
+        path: slug,
+        component: path.resolve(`./src/templates/offers-display.js`),
         context: {
+          scrapeId,
           city,
+          ad_type,
+          offers,
+          roomsEnabled,
+          descriptionsPath: descriptionsPath.substring("static".length),
+          pageType: "offerDisplay",
         },
       },
       createPage,
       createRedirect
     );
-
-    for (const ad_type of scraped_data.ad_types) {
-      const rawOffers = scraped_data.offers[city.id][ad_type.id];
-
-      const slug = `/${city.id}/${ad_type.id}/`;
-      const scrapeId = scraped_data.date_collected;
-
-      const { offers, descriptions, roomsEnabled } = splitAndFilter(
-        rawOffers,
-        city,
-        ad_type
-      );
-
-      const hash = createContentDigest(descriptions);
-      const descriptionsPath = path.join(
-        API_PATH,
-        `/${city.id}-${ad_type.id}-descriptions-${hash}.json`
-      );
-
-      fs.writeFileSync(descriptionsPath, JSON.stringify(descriptions));
-
-      createLocalizedPages(
-        {
-          path: slug,
-          component: path.resolve(`./src/templates/offers-display.js`),
-          context: {
-            scrapeId,
-            city,
-            ad_type,
-            offers,
-            roomsEnabled,
-            descriptionsPath: descriptionsPath.substring("static".length),
-            pageType: "offerDisplay",
-          },
-        },
-        createPage,
-        createRedirect
-      );
-    }
   }
 };
 

@@ -8,18 +8,22 @@ import CityChoice from "../components/city-choice/city-choice";
 
 export const query = graphql`
   {
-    apiJson {
-      cities {
-        id
+    allKijijiCity {
+      nodes {
+        latitude
+        longitude
+        short_code
       }
     }
   }
 `;
 
 const IndexPage = ({ data }) => {
-  let { cities } = data.apiJson;
+  let cities = data.allKijijiCity.nodes;
 
-  cities = cities.filter(({ id }) => whitelistedCities.includes(id));
+  cities = cities.filter(({ short_code }) =>
+    whitelistedCities.includes(short_code)
+  );
 
   return (
     <>
@@ -28,7 +32,7 @@ const IndexPage = ({ data }) => {
       </h1>
       <ul className="list-reset flex flex-col sm:flex-row align-center align-start flex-wrap -mx-2 lg:-mx-3">
         {cities.map(city => (
-          <CityChoice key={city.id} city={city} />
+          <CityChoice key={city.short_code} city={city} />
         ))}
       </ul>
     </>

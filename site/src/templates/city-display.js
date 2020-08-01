@@ -3,20 +3,9 @@ import { graphql } from "gatsby";
 import { Localize, LocalizeLink, LocaleContext } from "../components/lib";
 import "../pages/front-page.scss";
 
-export const query = graphql`
-  {
-    apiJson {
-      ad_types {
-        id
-      }
-    }
-  }
-`;
-
 const CityDisplay = ({ data, pageContext }) => {
   const { city } = pageContext;
 
-  const { ad_types } = data.apiJson;
   const [selectedAdType, setSelectedAdType] = useState(ad_types[0]);
 
   const locale = useContext(LocaleContext);

@@ -1,6 +1,6 @@
 const { objectFromIterable } = require("./utils");
 
-const requiredFields = ["date", "id", "url", "headline"];
+const requiredFields = ["date_posted", "id", "url", "headline"];
 
 const whitelistedCities = [
   "montreal",
@@ -13,7 +13,7 @@ const whitelistedKeys = [
   "url",
   "headline",
   "id",
-  "date",
+  "date_posted",
   "price",
   "latitude",
   "longitude",
@@ -49,18 +49,17 @@ const whitelistOffer = offer => {
   return objectFromIterable(whitelistedKeys.map(key => [key, offer[key]]));
 };
 
-const addressIsAccurate = offer =>
-  parseInt(offer.address_confidence) >= 9 &&
-  offer.address_accuracy === "ROOFTOP";
-
 const hasRequiredFields = offer =>
   requiredFields.every(field => field in offer && offer[field] != null);
 
 const splitAndFilter = (rawOffers, city, ad_type) => {
-  let offers = rawOffers.filter(offer => withinDistance(offer, city));
-  offers = offers.filter(addressIsAccurate).filter(hasRequiredFields);
+  let offers = rawOffers
+    .filter(offer => withinDistance(offer, city))
+    .filter(hasRequiredFields);
 
-  console.log(`${offers.length} offers exported for ${city.id}/${ad_type.id}`);
+  console.log(
+    `${offers.length} offers exported for ${city.short_code}/${ad_type.id}`
+  );
 
   const descriptions = offers.map(offer => offer.description);
 
@@ -70,9 +69,7 @@ const splitAndFilter = (rawOffers, city, ad_type) => {
   roomsEnabled
     ? console.log("Enabling rooms filter")
     : console.log(
-        `Disabling rooms filter, only ${offersWithRooms.length} of ${
-          offers.length
-        } have rooms`
+        `Disabling rooms filter, only ${offersWithRooms.length} of ${offers.length} have rooms`
       );
 
   return { descriptions, offers, roomsEnabled };
