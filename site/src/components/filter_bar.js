@@ -143,7 +143,7 @@ export default class FilterBar extends React.Component {
                       checked={this.state[`${filterIdPrefix}${numRooms}rooms`]}
                       onChange={this.onChange}
                     />
-                    {formatRooms(locale, numRooms)}
+                    <span>{formatRooms(locale, numRooms)}</span>
                   </label>
                 ))}
               </section>
