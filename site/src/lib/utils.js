@@ -1,7 +1,7 @@
-const distanceInWordsToNow = require("date-fns/distance_in_words_to_now");
+const { formatDistanceToNow } = require("date-fns");
 
-const fnsEn = require("date-fns/locale/en");
-const fnsFr = require("date-fns/locale/fr");
+const fnsEn = require("date-fns/locale").en;
+const fnsFr = require("date-fns/locale").fr;
 
 const fnsLocales = {
   en: fnsEn,
@@ -54,7 +54,7 @@ const formatRooms = (locale, raw_rooms) => {
 
 const timeOnMarketFormatted = (language, rawOfferTime) => {
   const offerDate = new Date(rawOfferTime);
-  return distanceInWordsToNow(offerDate, { locale: fnsLocales[language] });
+  return formatDistanceToNow(offerDate, { locale: fnsLocales[language] });
 };
 
 let _plogTime = -1;
