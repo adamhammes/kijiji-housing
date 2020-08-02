@@ -18,7 +18,7 @@
     "gatsby-transformer-json": "^2.1.6",
     "gatsby-transformer-sharp": "^2.1.8",
     "heroicons-ui": "^1.0.0",
-    "leaflet": "^1.4.0",
+    "leaflet": "^1.6.0",
     "leaflet.markercluster": "^1.4.1",
     "messageformat": "^2.0.5",
     "messageformat-loader": "^0.7.0",
