@@ -5,7 +5,7 @@
   "author": "Adam Hammes <adam@hammes.io>",
   "dependencies": {
     "date-fns": "^2.15.0",
-    "ga-lite": "^2.0.1",
+    "ga-lite": "^2.0.5",
     "gatsby": "^2.10.5",
     "gatsby-image": "^2.0.20",
     "gatsby-plugin-favicon": "^3.1.5",
