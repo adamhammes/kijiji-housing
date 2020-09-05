@@ -132,6 +132,7 @@ exports.onPreInit = (_, pluginOptions, cb) => {
 };
 
 const createLocalizedPages = (page, createPage, createRedirect, deletePage) => {
+  return;
   languages.forEach(lang => {
     const localizedPath = `/${lang}${page.path}`;
     const localizedPage = { ...page, path: localizedPath };

@@ -27,14 +27,20 @@ const IndexPage = ({ data }) => {
 
   return (
     <>
-      <h1 className="my-12">
-        <Localize>frontPage.lookingForApartment</Localize>
-      </h1>
-      <ul className="list-reset flex flex-col sm:flex-row align-center align-start flex-wrap -mx-2 lg:-mx-3">
-        {cities.map(city => (
-          <CityChoice key={city.short_code} city={city} />
-        ))}
-      </ul>
+      <h1 style={{ marginTop: "3rem" }}>À la carte is no longer maintained.</h1>
+      <p>
+        Unfortunately, kijiji has put measures in place to prevent me from
+        collecting their data. As such, I can no longer update this site with
+        new offers. I apologize for the inconvenience, and wish you the best of
+        luck in your apartment search.
+      </p>
+      <p>
+        Should you wish to use the data on this site for non-profit purposes,
+        you can contact me at <a href="mailto:adam@hammes.io">adam@hammes.io</a>
+        . I have a large amount of data collected, dating back to January of
+        2018.
+      </p>
+      <p>- Adam</p>
     </>
   );
 };
