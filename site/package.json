@@ -6,8 +6,8 @@
   "dependencies": {
     "date-fns": "^2.15.0",
     "ga-lite": "^2.0.5",
-    "gatsby": "^2.10.5",
-    "gatsby-image": "^2.0.20",
+    "gatsby": "^2.31.0",
+    "gatsby-image": "^2.10.0",
     "gatsby-plugin-favicon": "^3.1.5",
     "gatsby-plugin-manifest": "^2.0.9",
     "gatsby-plugin-postcss": "^2.1.0",
@@ -23,8 +23,8 @@
     "messageformat": "^2.0.5",
     "messageformat-loader": "^0.7.0",
     "prop-types": "^15.6.2",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-helmet": "^5.2.0",
     "tailwindcss": "^1.0.4"
   },

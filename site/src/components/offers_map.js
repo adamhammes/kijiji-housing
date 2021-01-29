@@ -22,9 +22,7 @@ const accessToken =
 const attribution =
   '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>';
 
-const mapUrl =
-  "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png" +
-  "?access_token={accessToken}";
+const mapUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 // Webpack doesn't play well with the default marker icons used by Leaflet
 // (https://github.com/Leaflet/Leaflet/issues/4968)
