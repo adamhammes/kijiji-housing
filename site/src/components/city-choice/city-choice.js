@@ -10,7 +10,7 @@ const CityChoice = ({ city }) => {
 
   return (
     <LocalizeLink
-      to={`/${city.short_code}/rent`}
+      to={`${city.short_code}/rent`}
       className="max-w-md sm:max-w-none mx-auto sm:mx-0 w-full sm:w-1/2 px-2 lg:px-3 mb-8 flex flex-col shadow-none cityChoice"
     >
       <Image filename={`${city.short_code}-cover-16:9.jpg`} alt={imageAlt} />
